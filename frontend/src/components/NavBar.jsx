@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 function NavBar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -18,7 +20,7 @@ function NavBar() {
     <header className="site-header">
       <div className="header-inner">
         <Link to="/" className="brand">
-          <img src="/img/MetexSab.png" alt="Metexsab" />
+          <img src={`${BASE}img/MetexSab.png`} alt="Metexsab" />
         </Link>
 
         <nav className={`site-nav${open ? ' open' : ''}`} aria-label="Navegación principal">

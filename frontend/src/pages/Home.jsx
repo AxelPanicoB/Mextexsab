@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 function Home() {
   const [ctaForm, setCtaForm] = useState({ name: '', email: '', phone: '' });
   const [ctaStatus, setCtaStatus] = useState(null);
@@ -55,8 +57,8 @@ function Home() {
             </div>
           </div>
           <div className="hero-logo-group" aria-hidden="true">
-            <img src="/img/logo.png" alt="" className="hero-logo-img" />
-            <img src="/img/MetexsabL.png" alt="" className="hero-logo-static" />
+            <img src={`${BASE}img/logo.png`} alt="" className="hero-logo-img" />
+            <img src={`${BASE}img/MetexsabL.png`} alt="" className="hero-logo-static" />
           </div>
         </div>
       </section>
@@ -138,7 +140,7 @@ function Home() {
           <div className="info-cards">
             <div className="info-card">
               <div className="info-card-img">
-                <img src="/img/quesos-cremas.png" alt="Formulaciones Especializadas" />
+                <img src={`${BASE}img/quesos-cremas.png`} alt="Formulaciones Especializadas" />
               </div>
               <div className="info-card-body">
                 <h3>Formulaciones Especializadas</h3>
@@ -147,7 +149,7 @@ function Home() {
             </div>
             <div className="info-card">
               <div className="info-card-img">
-                <img src="/img/yogurt-bebidas.png" alt="Laboratorio de Control" />
+                <img src={`${BASE}img/yogurt-bebidas.png`} alt="Laboratorio de Control" />
               </div>
               <div className="info-card-body">
                 <h3>Laboratorio de Control</h3>
@@ -156,7 +158,7 @@ function Home() {
             </div>
             <div className="info-card">
               <div className="info-card-img">
-                <img src="/img/helados-cremas.png" alt="Asesoría Técnica" />
+                <img src={`${BASE}img/helados-cremas.png`} alt="Asesoría Técnica" />
               </div>
               <div className="info-card-body">
                 <h3>Asesoría Técnica</h3>
@@ -217,7 +219,7 @@ function Home() {
           <div className="applications-content">
             <div className="aplicacion-card">
               <div className="card-icon">
-                <img src="/img/quesos-cremas.png" alt="Quesos y Cremas" />
+                <img src={`${BASE}img/quesos-cremas.png`} alt="Quesos y Cremas" />
               </div>
               <h3>Gomas y Texturizantes para Quesos</h3>
               <p>Cuajos, texturizantes y estabilizantes para quesos frescos, análogos y cremas.</p>
@@ -228,7 +230,7 @@ function Home() {
 
             <div className="aplicacion-card">
               <div className="card-icon">
-                <img src="/img/yogurt-bebidas.png" alt="Yogurt y Bebidas" />
+                <img src={`${BASE}img/yogurt-bebidas.png`} alt="Yogurt y Bebidas" />
               </div>
               <h3>Estabilizantes para Yogurt</h3>
               <p>Complejos estabilizantes para yogures naturales, con frutas, bebidas lácteas y postres.</p>
@@ -239,7 +241,7 @@ function Home() {
 
             <div className="aplicacion-card">
               <div className="card-icon">
-                <img src="/img/helados-cremas.png" alt="Helados y Cremas" />
+                <img src={`${BASE}img/helados-cremas.png`} alt="Helados y Cremas" />
               </div>
               <h3>Estabilizantes para Helados</h3>
               <p>Formulaciones especializadas para helados, paletas, nieves y productos congelados.</p>
@@ -250,7 +252,7 @@ function Home() {
 
             <div className="aplicacion-card">
               <div className="card-icon">
-                <img src="/img/colorantes.png" alt="Saborizantes y Colorantes" />
+                <img src={`${BASE}img/colorantes.png`} alt="Saborizantes y Colorantes" />
               </div>
               <h3>Saborizantes y Colorantes</h3>
               <p>Amplia gama de sabores naturales y artificiales, además de colorantes alimentarios estables.</p>
@@ -261,7 +263,7 @@ function Home() {
 
             <div className="aplicacion-card">
               <div className="card-icon">
-                <img src="/img/auxiliares-procesos.png" alt="Auxiliares de Procesos" />
+                <img src={`${BASE}img/auxiliares-procesos.png`} alt="Auxiliares de Procesos" />
               </div>
               <h3>Auxiliares de Proceso</h3>
               <p>Aditivos funcionales para optimizar producción, conservación y shelf-life del producto.</p>

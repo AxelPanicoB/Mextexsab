@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 const HERO_FACTS = [
   { icon: 'fa-solid fa-flask-vial', title: 'Experiencia', text: 'desde 2007' },
   { icon: 'fa-solid fa-location-dot', title: 'Querétaro,', text: 'México' },
@@ -41,12 +43,12 @@ const VALUES = [
 ];
 
 const SOLUTIONS = [
-  { image: '/img/about-reference/solution-quesos.png', icon: 'fa-solid fa-cheese', label: 'Quesos y cremas', path: '/aplicaciones?tab=quesos' },
-  { image: '/img/about-reference/solution-yogurt.png', icon: 'fa-solid fa-bottle-droplet', label: 'Yogurt y lácteos', path: '/aplicaciones?tab=yogurt' },
-  { image: '/img/about-reference/solution-helados.png', icon: 'fa-solid fa-ice-cream', label: 'Helados y postres', path: '/aplicaciones?tab=helados' },
-  { image: '/img/about-reference/solution-bebidas.png', icon: 'fa-solid fa-glass-water', label: 'Bebidas y concentrados', path: '/aplicaciones?tab=yogurt' },
-  { image: '/img/about-reference/solution-colorantes.png', icon: 'fa-solid fa-palette', label: 'Colorantes', path: '/aplicaciones?tab=colorantes' },
-  { image: '/img/about-reference/solution-auxiliares.png', icon: 'fa-solid fa-box-open', label: 'Auxiliares de proceso', path: '/aplicaciones?tab=auxiliares' },
+  { image: `${BASE}img/about-reference/solution-quesos.png`, icon: 'fa-solid fa-cheese', label: 'Quesos y cremas', path: '/aplicaciones?tab=quesos' },
+  { image: `${BASE}img/about-reference/solution-yogurt.png`, icon: 'fa-solid fa-bottle-droplet', label: 'Yogurt y lácteos', path: '/aplicaciones?tab=yogurt' },
+  { image: `${BASE}img/about-reference/solution-helados.png`, icon: 'fa-solid fa-ice-cream', label: 'Helados y postres', path: '/aplicaciones?tab=helados' },
+  { image: `${BASE}img/about-reference/solution-bebidas.png`, icon: 'fa-solid fa-glass-water', label: 'Bebidas y concentrados', path: '/aplicaciones?tab=yogurt' },
+  { image: `${BASE}img/about-reference/solution-colorantes.png`, icon: 'fa-solid fa-palette', label: 'Colorantes', path: '/aplicaciones?tab=colorantes' },
+  { image: `${BASE}img/about-reference/solution-auxiliares.png`, icon: 'fa-solid fa-box-open', label: 'Auxiliares de proceso', path: '/aplicaciones?tab=auxiliares' },
 ];
 
 const PROOF_POINTS = [
@@ -97,8 +99,8 @@ function About() {
           </div>
 
           <div className="about-hero-photo">
-            <img src="/img/acueducto.png" alt="Acueducto de Querétaro" />
-            <img src="/img/MetexSab.png" className="about-hero-logo-bg" aria-hidden="true" />
+            <img src={`${BASE}img/acueducto.png`} alt="Acueducto de Querétaro" />
+            <img src={`${BASE}img/MetexSab.png`} className="about-hero-logo-bg" aria-hidden="true" />
             <div className="about-hero-caption">
               <i className="fa-solid fa-archway"></i>
               <p>
@@ -114,7 +116,7 @@ function About() {
           <div className="about-story-grid">
             <article className="about-story-card">
               <div className="about-story-illustration" aria-hidden="true">
-                <img src="/img/acueductod.png" alt="" />
+                <img src={`${BASE}img/acueductod.png`} alt="" />
               </div>
               <div className="about-story-copy">
                 <span className="about-mini-pill">Nuestra historia</span>
@@ -224,7 +226,7 @@ function About() {
           </div>
 
           <div className="about-proof-image" aria-hidden="true">
-            <img src="/img/about-reference/proof-lab.png" alt="" />
+            <img src={`${BASE}img/about-reference/proof-lab.png`} alt="" />
           </div>
         </div>
       </section>

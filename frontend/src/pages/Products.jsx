@@ -57,7 +57,7 @@ function Products() {
   }, [location.search]);
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch(`${import.meta.env.BASE_URL}products.json`)
       .then((res) => {
         if (!res.ok) throw new Error('No se pudo cargar el catálogo.');
         return res.json();

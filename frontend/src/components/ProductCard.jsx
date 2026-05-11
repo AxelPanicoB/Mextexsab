@@ -106,6 +106,8 @@ function FlavorsModal({ product, onClose }) {
   );
 }
 
+const BASE = import.meta.env.BASE_URL;
+
 function ProductCard({ product }) {
   const { add, remove, inCart } = useCart();
   const selected = inCart(product.id);
@@ -116,7 +118,7 @@ function ProductCard({ product }) {
       <article className={`solution-card${selected ? ' solution-card--selected' : ''}`}>
         <div className="solution-card-img">
           {product.image && (
-            <img src={product.image} alt={product.name} loading="lazy" />
+            <img src={`${BASE}${product.image}`} alt={product.name} loading="lazy" />
           )}
           <span className="solution-badge">{product.functional || product.category}</span>
         </div>

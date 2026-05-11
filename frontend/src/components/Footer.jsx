@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+const BASE = import.meta.env.BASE_URL;
+
 function Footer() {
   return (
     <footer>
@@ -8,7 +10,7 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-section">
             <div className="logo-footer-wrap">
-              <img src="/img/MetexSab(2).png" alt="Metexsab" className="logo-footer" />
+              <img src={`${BASE}img/MetexSab(2).png`} alt="Metexsab" className="logo-footer" />
             </div>
             <p className="footer-description">
               Soluciones especializadas en aditivos alimentarios de calidad
