@@ -34,7 +34,7 @@ function RevealObserver() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Mextexsab">
       <CartProvider>
         <div className="app-shell">
           <RevealObserver />
