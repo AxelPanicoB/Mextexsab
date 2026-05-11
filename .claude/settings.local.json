@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\AxelPánico\\\\Documents\\\\GitHub\\\\Mextexsab\" -Force | Where-Object { $_.Name -ne \".git\" } | Format-Table Name, PSIsContainer -AutoSize)"
+    ]
+  }
+}

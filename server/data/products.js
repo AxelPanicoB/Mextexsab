@@ -1,0 +1,424 @@
+const products = [
+
+  // ── AUXILIARES DE PROCESO ─────────────────────────────────
+  {
+    id: 'aux-01',
+    name: 'Sistema conservador natural de acidez para lácteos',
+    category: 'Auxiliares de proceso',
+    functional: 'Auxiliar',
+    applications: ['Quesos', 'Cremas', 'Yogurt'],
+    image: '/img/Productos/Auxiliares de proceso/conservador natural láctico.png',
+    summary: 'Conservador natural en presentación líquida. Estabiliza pH y prolonga vida de anaquel en lácteos y dulces suaves.',
+    tags: ['conservador', 'acidez', 'natural'],
+    highlights: ['Estabiliza pH', 'Prolonga vida de anaquel', 'De origen natural'],
+    metrics: [
+      { label: 'Estabilidad de pH', level: 5 },
+      { label: 'Vida de anaquel', level: 4 },
+      { label: 'Naturalidad', level: 5 }
+    ]
+  },
+  {
+    id: 'aux-02',
+    name: 'Agente emulsificante concentrado para textura en lácteos',
+    category: 'Auxiliares de proceso',
+    functional: 'Auxiliar',
+    applications: ['Quesos', 'Cremas', 'Bebidas'],
+    image: '/img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg',
+    summary: 'Emulsificante destilado de alta concentración. Mejora textura y consistencia en lácteos sin sabor graso residual.',
+    tags: ['emulsificante', 'textura', 'concentrado'],
+    highlights: ['Sin sabor graso', 'Alta concentración', 'Versátil en proceso'],
+    metrics: [
+      { label: 'Emulsificación', level: 5 },
+      { label: 'Textura', level: 4 },
+      { label: 'Concentración activa', level: 5 }
+    ]
+  },
+
+  // ── TEXTURIZANTES Y ESTABILIZANTES ────────────────────────
+  {
+    id: 'tex-01',
+    name: 'Sistema de retención de humedad para quesos frescos',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Texturizante',
+    applications: ['Quesos'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Retenedores de Humedad.jpg',
+    summary: 'Reduce el desuerado y mejora el rendimiento en quesos frescos tipo Panela, Ranchero, Morral y Canasto.',
+    tags: ['quesos', 'humedad', 'textura'],
+    highlights: ['Ideal para Panela, Ranchero, Morral y Canasto', 'Reduce desuerado', 'Mejora rendimiento'],
+    metrics: [
+      { label: 'Retención de humedad', level: 4 },
+      { label: 'Anti-sinéresis', level: 5 },
+      { label: 'Rendimiento', level: 4 }
+    ]
+  },
+  {
+    id: 'tex-02',
+    name: 'Sistema de texturización para análogos de queso pizzero',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Texturizante',
+    applications: ['Quesos'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Texturizanteafirmante.jpg',
+    summary: 'Gel termo-resistente para quesos pizzeros análogos. Fundición uniforme, sin requemado y sin pérdida de agua.',
+    tags: ['quesos', 'pizza', 'análogo'],
+    highlights: ['Reduce pérdida de agua', 'Evita el requemado', 'Fundición uniforme'],
+    metrics: [
+      { label: 'Fundido uniforme', level: 5 },
+      { label: 'Termorresistencia', level: 4 },
+      { label: 'Elasticidad de gel', level: 4 }
+    ]
+  },
+  {
+    id: 'tex-03',
+    name: 'Sistema estabilizante para cremas naturales y análogas',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Cremas'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para cremas.jpg',
+    summary: 'Para cremas naturales, análogas o semianálogas, con o sin homogeneizado. Evita sinéresis y mantiene consistencia.',
+    tags: ['cremas', 'espesante', 'estabilizante'],
+    highlights: ['Evita sinéresis', 'Con o sin homogeneizado', 'Para cremas naturales y análogas'],
+    metrics: [
+      { label: 'Anti-sinéresis', level: 5 },
+      { label: 'Estabilidad térmica', level: 4 },
+      { label: 'Viscosidad', level: 4 }
+    ]
+  },
+  {
+    id: 'tex-04',
+    name: 'Sistema de estabilización para yogurt batido y bebible',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Yogurt'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.jpg',
+    summary: 'Texturizante para yogurt natural, análogo o semianálogo. Consistencia estable en almacenamiento y sin sinéresis.',
+    tags: ['yogurt', 'texturizante', 'estabilizante'],
+    highlights: ['Para yogurt natural y análogo', 'Consistencia en almacenamiento', 'Evita sinéresis'],
+    metrics: [
+      { label: 'Estabilidad en almac.', level: 5 },
+      { label: 'Anti-sinéresis', level: 5 },
+      { label: 'Cremosidad', level: 4 }
+    ]
+  },
+  {
+    id: 'tex-05',
+    name: 'Sistema estabilizante para queso fundido tipo Cheddar',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Quesos'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.png',
+    summary: 'Estabilizante para queso cheddar fundido en frío o caliente. Consistencia uniforme para nachos y aplicaciones industriales.',
+    tags: ['quesos', 'cheddar', 'nachos'],
+    highlights: ['Para venta en frío o caliente', 'Consistencia uniforme', 'Fácil dosificación'],
+    metrics: [
+      { label: 'Viscosidad', level: 4 },
+      { label: 'Fundido uniforme', level: 5 },
+      { label: 'Estabilidad térmica', level: 3 }
+    ]
+  },
+  {
+    id: 'tex-06',
+    name: 'Sistema de retención de humedad para tortillas de anaquel',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Texturizante',
+    applications: ['Tortillas'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/etenedores de Humedad para tortillas de anaquel.jpg',
+    summary: 'Para tortillas de anaquel embolsadas. Mantiene suavidad y frescura durante toda la vida útil del producto.',
+    tags: ['tortillas', 'humedad', 'anaquel'],
+    highlights: ['Tortillas de anaquel embolsadas', 'Mantiene suavidad', 'Extiende vida útil'],
+    metrics: [
+      { label: 'Retención de humedad', level: 5 },
+      { label: 'Vida de anaquel', level: 4 },
+      { label: 'Suavidad', level: 4 }
+    ]
+  },
+  {
+    id: 'tex-07',
+    name: 'Sistema gelificante para postres lácteos y flanes',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Gelificante',
+    applications: ['Postres'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Gelificantesestabilizantes.jpg',
+    summary: 'Para flanes, budines, gelatinas, mousses y natillas. Gelificación uniforme y estable en temperatura.',
+    tags: ['gelificante', 'postres', 'flanes'],
+    highlights: ['Para flanes y budines', 'Gelatinas y mousses', 'Natillas y postres fríos'],
+    metrics: [
+      { label: 'Gelificación', level: 5 },
+      { label: 'Cremosidad', level: 4 },
+      { label: 'Estabilidad de gel', level: 5 }
+    ]
+  },
+  {
+    id: 'tex-08',
+    name: 'Sistema estabilizante y aireante para helados y nieves',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Helados'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizanteemulsificante.jpg',
+    summary: 'Proporciona cuerpo y previene cristalización y sinéresis en helados, nieves, paletas y bolis congelados.',
+    tags: ['helados', 'paletas', 'congelados'],
+    highlights: ['Previene cristalización', 'Evita sinéresis', 'Para helados, nieves y paletas'],
+    metrics: [
+      { label: 'Anti-cristalización', level: 5 },
+      { label: 'Anti-sinéresis', level: 4 },
+      { label: 'Cremosidad', level: 5 }
+    ]
+  },
+  {
+    id: 'tex-09',
+    name: 'Sistema estabilizante para leches formuladas UHT y HTST',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Bebidas'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizante  espesante para leches.png',
+    summary: 'Estabilizante para leches formuladas UHT y HTST. Aporta cuerpo y evita precipitación de proteínas en proceso.',
+    tags: ['leche', 'UHT', 'HTST'],
+    highlights: ['Aporta cuerpo', 'Evita precipitación de proteínas', 'Compatible con UHT/HTST'],
+    metrics: [
+      { label: 'Estabilidad proteica', level: 5 },
+      { label: 'Suspensión', level: 4 },
+      { label: 'Viscosidad', level: 3 }
+    ]
+  },
+  {
+    id: 'tex-10',
+    name: 'Sistema texturizante para bebidas lácteas con pulpa',
+    category: 'Texturizantes y Estabilizantes',
+    functional: 'Estabilizante',
+    applications: ['Bebidas'],
+    image: '/img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para bebidas.jpeg',
+    summary: 'Para bebidas con sólidos o pulpa, preparadas o instantáneas. Mejora suspensión y sensación en boca.',
+    tags: ['bebidas', 'suspensión', 'instantáneas'],
+    highlights: ['Con sólidos o pulpa', 'Preparadas o instantáneas', 'Mejora sensación en boca'],
+    metrics: [
+      { label: 'Suspensión de partículas', level: 4 },
+      { label: 'Viscosidad', level: 4 },
+      { label: 'Sensación en boca', level: 5 }
+    ]
+  },
+
+  // ── COLORANTES ────────────────────────────────────────────
+  {
+    id: 'col-01',
+    name: 'Colorante blanco estable en suspensión para lácteos',
+    category: 'Colorantes',
+    functional: 'Colorante',
+    applications: ['Quesos', 'Cremas', 'Bebidas'],
+    image: '/img/Productos/Colorantes/Dioxido-de-titanio.png',
+    summary: 'Suspensión estable de dióxido de titanio para productos lácteos. Resiste pasteurización sin decoloración.',
+    tags: ['colorante', 'blanco', 'lácteos'],
+    highlights: ['Estable en proceso térmico', 'Soporta pasteurización', 'Sin decoloración'],
+    metrics: [
+      { label: 'Cobertura cromática', level: 5 },
+      { label: 'Estabilidad térmica', level: 5 },
+      { label: 'Uniformidad', level: 5 }
+    ]
+  },
+  {
+    id: 'col-02',
+    name: 'Colorante natural Annatto liposoluble para quesos y cremas',
+    category: 'Colorantes',
+    functional: 'Colorante',
+    applications: ['Quesos', 'Cremas'],
+    image: '/img/Productos/Colorantes/Rojo_Annatto_liposoluble.png',
+    summary: 'Colorante natural Annatto en aceite vegetal. Tonos de amarillo a anaranjado-rojo para lácteos y confitería.',
+    tags: ['colorante', 'natural', 'annatto'],
+    highlights: ['Natural en aceite vegetal', 'Tonos amarillo a anaranjado', 'Para lácteos y confitería'],
+    metrics: [
+      { label: 'Intensidad de color', level: 4 },
+      { label: 'Estabilidad', level: 4 },
+      { label: 'Naturalidad', level: 5 }
+    ]
+  },
+
+  // ── SABORIZANTES ──────────────────────────────────────────
+  {
+    id: 'sab-01',
+    name: 'Perfiles de sabor para cremas ácidas y especiales',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Cremas'],
+    image: '/img/Productos/Saborizantes/cremas/crema.jpeg',
+    summary: 'Aromas y sabores para cremas ácidas, dulces y especiales. Disponibles en polvo y líquido con fácil dosificación.',
+    tags: ['cremas', 'sabores', 'aromas'],
+    highlights: ['Aromas fieles', 'Fácil dosificación', 'Disponibles en polvo y líquido'],
+    flavors: ['Crema Ácida', 'Crema Dulce', 'Crema para café'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Estabilidad', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-02',
+    name: 'Perfiles de sabor mantequilla para margarinas y cremas',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Cremas'],
+    image: '/img/Productos/Saborizantes/mantequilla/Mantequilla.jpeg',
+    summary: 'Saborizantes de mantequilla para margarinas, cremas y productos horneados. Aroma intenso y natural.',
+    tags: ['mantequilla', 'sabores', 'margarinas'],
+    highlights: ['Aroma intenso y natural', 'Disponibles en polvo y líquido', 'Fácil dosificación'],
+    flavors: ['Mantequilla Industrial', 'Mantequilla de Mesa', 'Mantequilla Holandesa'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 5 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Estabilidad térmica', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-03',
+    name: 'Perfiles de sabor lácteo para bebidas y postres',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Bebidas', 'Postres'],
+    image: '/img/Productos/Saborizantes/leches/leche.png',
+    summary: 'Sabores de leche para bebidas, postres y productos lácteos. Perfil lácteo auténtico para fácil mezcla.',
+    tags: ['leche', 'sabores', 'bebidas'],
+    highlights: ['Perfil lácteo auténtico', 'Para bebidas y postres', 'Fácil mezcla'],
+    flavors: ['Leche Fresca', 'Leche Bronca', 'Leche Condensada'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Solubilidad', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-04',
+    name: 'Perfiles aromáticos para helados, nieves y paletas',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Helados'],
+    image: '/img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png',
+    summary: 'Amplia gama de sabores estables en frío para helados, nieves y paletas industriales.',
+    tags: ['helados', 'sabores', 'paletas'],
+    highlights: ['Estables en frío', 'Aromas intensos', 'Gran variedad de frutas'],
+    flavors: ['Chocolate', 'Vainilla', 'Mango', 'Durazno', 'Piña-Coco', 'Plátano', 'Nuez', 'Fresa', 'Manzana', 'Uva'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 5 },
+      { label: 'Estabilidad en frío', level: 5 },
+      { label: 'Variedad de perfiles', level: 5 }
+    ]
+  },
+  {
+    id: 'sab-05',
+    name: 'Perfiles de sabor para yogurt natural y frutado',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Yogurt'],
+    image: '/img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png',
+    summary: 'Sabores para yogurts naturales, frutados y especiales. Perfil fresco y frutal, estables en almacenamiento.',
+    tags: ['yogurt', 'sabores', 'frutas'],
+    highlights: ['Perfil fresco y frutal', 'Estables en almacenamiento', 'Para yogurt natural y análogo'],
+    flavors: ['Yogurt Natural', 'Vainilla', 'Mango', 'Durazno', 'Piña-Coco', 'Plátano', 'Nuez', 'Manzana', 'Fresa'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Fidelidad de perfil', level: 4 },
+      { label: 'Estabilidad', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-06',
+    name: 'Perfiles de sabor cajeta y dulce de leche',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Postres'],
+    image: '/img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/cajeta.png',
+    summary: 'Sabores de cajeta y leche condensada para dulces y postres. Aroma acaramelado de alta fidelidad.',
+    tags: ['cajeta', 'dulces', 'sabores'],
+    highlights: ['Aroma acaramelado', 'Para dulces y postres', 'Alta fidelidad de sabor'],
+    flavors: ['Cajeta de Cabra', 'Leche Condensada'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 5 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Estabilidad térmica', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-07',
+    name: 'Perfiles de sabor para natillas y postres de cuchareo',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Postres'],
+    image: '/img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg',
+    summary: 'Sabores para natillas y postres de cuchareo. Perfil suave y cremoso con fácil integración al proceso.',
+    tags: ['natilla', 'postres', 'sabores'],
+    highlights: ['Para postres fríos', 'Perfil suave y cremoso', 'Fácil integración'],
+    flavors: ['Chocolate', 'Vainilla'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Suavidad de perfil', level: 4 },
+      { label: 'Integración', level: 4 }
+    ]
+  },
+  {
+    id: 'sab-08',
+    name: 'Perfiles aromáticos para bebidas lácteas y acuosas',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Bebidas'],
+    image: '/img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/mango.jpeg',
+    summary: 'Sabores para bebidas lácteas, acuosas, con sólidos o pulpa. Estables en frío y con gran variedad de perfiles.',
+    tags: ['bebidas', 'sabores', 'frutas'],
+    highlights: ['Estables en frío', 'Aromas intensos', 'Para bebidas lácteas y acuosas'],
+    flavors: ['Chocolate', 'Vainilla', 'Mango', 'Durazno', 'Piña-Coco', 'Plátano', 'Nuez', 'Fresa', 'Manzana', 'Uva'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 5 },
+      { label: 'Estabilidad', level: 4 },
+      { label: 'Variedad de perfiles', level: 5 }
+    ]
+  },
+  {
+    id: 'sab-09',
+    name: 'Perfiles de sabor en polvo para quesos análogos',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Quesos'],
+    image: '/img/Productos/Saborizantes/quesos/polvo/quesos.png',
+    summary: 'Saborizantes en polvo para quesos tipos gouda, manchego, cheddar y análogos. Amplia variedad de perfiles.',
+    tags: ['quesos', 'polvo', 'sabores'],
+    highlights: ['Disponibles en polvo', 'Amplia variedad de tipos de queso', 'Fácil dosificación'],
+    flavors: ['Leche Fresca', 'Crema Ácida', 'Gouda', 'Manchego', 'Romano', 'Cheddar', 'Queso Crema', 'Adobera'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Dosificación', level: 5 }
+    ]
+  },
+  {
+    id: 'sab-10',
+    name: 'Perfiles de sabor líquidos para quesos análogos y naturales',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Quesos'],
+    image: '/img/Productos/Saborizantes/quesos/Liquidos/quesos.png',
+    summary: 'Saborizantes líquidos en todas las variedades de queso. Ideal para análogos con perfiles auténticos y precisos.',
+    tags: ['quesos', 'líquido', 'sabores'],
+    highlights: ['Presentación líquida', 'Gran variedad de perfiles', 'Ideal para quesos análogos'],
+    flavors: ['Leche Fresca', 'Gouda', 'Manchego', 'Romano', 'Cheddar', 'Queso Crema', 'Provolone / Ahumado', 'Queso Azul / Blue Cheese', 'Panela / Ranchero', 'Cotija', 'Maduro', 'Canasto', 'Asadero', 'Mozzarella', 'Parmesano', 'Oaxaca Ácido', 'Oaxaca Suave', 'Queso de Cabra', 'Chihuahua'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 5 },
+      { label: 'Fidelidad de perfil', level: 5 },
+      { label: 'Variedad de perfiles', level: 5 }
+    ]
+  },
+  {
+    id: 'sab-11',
+    name: 'Perfiles de sabor especiales para aplicaciones únicas',
+    category: 'Saborizantes',
+    functional: 'Saborizante',
+    applications: ['Quesos', 'Bebidas', 'Postres'],
+    image: '/img/Productos/Saborizantes/otros/otros.png',
+    summary: 'Sabores especiales y únicos para productos diferenciados: humo, chamoy, jerez, miel y más.',
+    tags: ['sabores', 'especiales', 'diferenciados'],
+    highlights: ['Sabores únicos y diferenciados', 'Disponibles en polvo y líquido', 'Para aplicaciones especiales'],
+    flavors: ['Humo', 'Pollo', 'Huevo', 'Chamoy', 'Cheddar', 'Jerez', 'Miel'],
+    metrics: [
+      { label: 'Intensidad aromática', level: 4 },
+      { label: 'Diferenciación', level: 5 },
+      { label: 'Versatilidad', level: 4 }
+    ]
+  }
+
+];
+
+export default products;
