@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard.jsx';
+import allProducts from '../data/products.js';
 
 const TECH_LINES = [
   'Todo',
@@ -38,12 +39,9 @@ function CountUp({ to, suffix = '' }) {
 
 function Products() {
   const location = useLocation();
-  const [products, setProducts] = useState([]);
   const [techLine, setTechLine] = useState('Todo');
   const [application, setApplication] = useState('Todas');
   const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -56,18 +54,8 @@ function Products() {
     }
   }, [location.search]);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}products.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error('No se pudo cargar el catálogo.');
-        return res.json();
-      })
-      .then((data) => { setProducts(data); setLoading(false); })
-      .catch((err) => { setError(err.message); setLoading(false); });
-  }, []);
-
   const filtered = useMemo(() => {
-    return products.filter((p) => {
+    return allProducts.filter((p) => {
       const matchLine = techLine === 'Todo' || p.category === techLine;
       const matchApp =
         application === 'Todas' ||
@@ -78,7 +66,7 @@ function Products() {
         .includes(search.toLowerCase());
       return matchLine && matchApp && matchSearch;
     });
-  }, [products, techLine, application, search]);
+  }, [techLine, application, search]);
 
   return (
     <>
@@ -331,18 +319,7 @@ function Products() {
       {/* ── SOLUTIONS GRID ───────────────────────────────────── */}
       <section className="catalog-grid-section reveal-section">
         <div className="contenedor">
-          {loading && (
-            <p className="status-message">
-              <i className="fa-solid fa-spinner fa-spin"></i> Cargando catálogo...
-            </p>
-          )}
-          {error && (
-            <p className="status-message status-error">
-              <i className="fa-solid fa-circle-exclamation"></i> {error}
-            </p>
-          )}
-          {!loading && !error && (
-            filtered.length === 0 ? (
+          {filtered.length === 0 ? (
               <div className="catalog-empty">
                 <i className="fa-solid fa-flask-vial"></i>
                 <p>No se encontraron soluciones con esos filtros.</p>
@@ -353,11 +330,10 @@ function Products() {
                   Limpiar filtros
                 </button>
               </div>
-            ) : (
-              <div className="solution-grid">
-                {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
-              </div>
-            )
+          ) : (
+            <div className="solution-grid">
+              {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
+            </div>
           )}
         </div>
       </section>
