@@ -1,424 +1,409 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useContactModal } from '../context/ContactModalContext';
 
-const APPLICATIONS = [
+const BASE = import.meta.env.BASE_URL;
+
+const CATEGORIES = [
   {
     id: 'quesos',
     icon: 'fa-cheese',
-    label: 'Quesos y Cremas',
-    description: 'Texturizantes y estabilizantes para retención de humedad, cuerpo y control de sinéresis en quesos frescos, análogos y cremas ácidas.',
-    subcategories: [
+    label: 'Quesos',
+    heroImg: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+    headline: 'Textura, rendimiento y estabilidad',
+    objective: 'Maximizar el rendimiento y garantizar la textura, estabilidad y vida de anaquel del producto final.',
+    description:
+      'Sistemas funcionales que reducen el desuerado, mejoran la estructura y aumentan el rendimiento en quesos frescos, análogos y pizzeros.',
+    types: [
       {
-        name: 'Quesos Frescos',
-        note: 'Panela, Ranchero, Morral, Canasto',
-        products: [
-          { code: 'QRH-40-004', desc: 'Retenedor de humedad y texturizante. Aumenta rendimiento y reduce desuerado en quesos frescos y análogos.' },
-          { code: 'FLA-20-005', desc: 'Carragenina refinada. Mejora textura, cuerpo y reduce pérdida de finos en corte.' },
-        ],
+        name: 'Quesos frescos',
+        note: 'Panela · Ranchero · Morral',
+        img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+        desc: 'Reduce el desuerado, mejora la textura y aumenta el rendimiento en quesos tipo panela, ranchero y morral.',
       },
       {
-        name: 'Quesos Análogos y Pizzeros',
-        products: [
-          { code: 'QRH-50-064', desc: 'Forma gel termorresistente. Previene excesiva fluidez en queso para pizza y evita requemado.' },
-        ],
+        name: 'Quesos análogos y pizzero',
+        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.png`,
+        desc: 'Mejora elasticidad, fundido y estabilidad en quesos para pizza y análogos a altas temperaturas de proceso.',
       },
       {
-        name: 'Cremas Ácidas y Aderezos',
-        products: [
-          { code: 'CRE-40-023', desc: 'Estabilizante/emulsionante de bajo contenido graso. Aporta cuerpo, cremosidad y brillo.' },
-          { code: 'CRE-40-020', desc: 'Espesante para cremas ácidas y aderezos. Textura uniforme y estable.' },
-        ],
+        name: 'Cremas y aderezos',
+        img: `${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`,
+        desc: 'Aporta cuerpo, cremosidad y brillo en cremas ácidas, aderezos y productos de alto contenido de agua.',
       },
     ],
+    benefits: [
+      { icon: 'fa-solid fa-droplet-slash', title: 'Menor desuerado', desc: 'Reduce la sinéresis y pérdida de suero durante el proceso y almacenamiento.' },
+      { icon: 'fa-solid fa-star',           title: 'Mejor textura',   desc: 'Estructura firme y homogénea, mejor corte y presentación final del producto.' },
+      { icon: 'fa-solid fa-calendar-check', title: 'Mayor vida útil', desc: 'Estabilidad microbiológica y fisicoquímica extendida en anaquel.' },
+    ],
+    solutions: [
+      { code: 'QRH-40-004',  name: 'Retenedor de humedad y texturizante', desc: 'Aumenta rendimiento y reduce desuerado en quesos frescos y análogos.' },
+      { code: 'FLA-20-005',  name: 'Carragenina refinada',                desc: 'Mejora textura, cuerpo y reduce pérdida de finos en corte.' },
+      { code: 'CRE-40-023',  name: 'Estabilizante / emulsionante',        desc: 'Cuerpo, cremosidad y brillo en cremas ácidas.' },
+      { code: 'CRE-40-020',  name: 'Espesante para cremas',               desc: 'Textura uniforme y estable en aderezos y cremas ácidas.' },
+    ],
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.png`,
   },
   {
     id: 'helados',
     icon: 'fa-ice-cream',
-    label: 'Helados y Postres',
-    description: 'Soluciones para controlar textura, retención de aire y cristales de hielo en helados, cremas montadas y postres congelados.',
-    subcategories: [
+    label: 'Helados',
+    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+    headline: 'Textura perfecta y resistencia al derretimiento',
+    objective: 'Controlar la cristalización, mejorar el overrun y garantizar estabilidad en toda la cadena de frío.',
+    description:
+      'Formulaciones que optimizan la textura, retención de aire y resistencia a cambios de temperatura en helados, cremas montadas y postres congelados.',
+    types: [
       {
-        name: 'Cremas Montadas y Helados Aireados',
-        products: [
-          { code: 'CREB-0265', desc: 'Agente aireante y estabilizante. Hidratación a temperatura ambiente, sin necesidad de pasteurización.' },
-          { code: 'EBH-40-033', desc: 'Estabilizante/emulsificante para bases vegetales y de mantequilla. Controla cristalización.' },
-        ],
+        name: 'Helados y cremas montadas',
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+        desc: 'Mejora el overrun, controla la cristalización y aporta suavidad al paladar sin alterar el perfil de sabor.',
       },
       {
-        name: 'Productos Congelados y Paletas',
-        products: [
-          { code: 'NPB-10-023', desc: 'Mezcla de gomas naturales. Controla tamaño de cristales de hielo y mejora resistencia al derretimiento.' },
-        ],
+        name: 'Postres y paletas congeladas',
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`,
+        desc: 'Controla el tamaño de cristales de hielo y mejora la resistencia al derretimiento en paletas y postres.',
       },
     ],
+    benefits: [
+      { icon: 'fa-solid fa-snowflake',      title: 'Control de cristales', desc: 'Cristales de hielo más pequeños para textura suave y homogénea.' },
+      { icon: 'fa-solid fa-wind',            title: 'Mayor overrun',        desc: 'Incorporación óptima de aire para mejor rendimiento y textura cremosa.' },
+      { icon: 'fa-solid fa-temperature-low', title: 'Estabilidad en frío',  desc: 'Resistencia al choque térmico y ciclos de congelación-descongelación.' },
+    ],
+    solutions: [
+      { code: 'CREB-0265',    name: 'Agente aireante y estabilizante',        desc: 'Hidratación a temperatura ambiente, sin necesidad de pasteurización.' },
+      { code: 'EBH-40-033',   name: 'Estabilizante / emulsificante vegetal',  desc: 'Controla cristalización en bases vegetales y de mantequilla.' },
+      { code: 'NPB-10-023',   name: 'Mezcla de gomas naturales',              desc: 'Controla cristales de hielo y mejora resistencia al derretimiento.' },
+    ],
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizanteemulsificante.jpg`,
   },
   {
     id: 'yogurt',
     icon: 'fa-bottle-droplet',
-    label: 'Yogurt y Bebidas',
-    description: 'Sistemas que evitan sinéresis y aportan cuerpo en yogures, bebidas con pulpa, concentrados lácteos y mezclas UHT/HTST.',
-    subcategories: [
+    label: 'Yogurt',
+    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    headline: 'Consistencia y estabilidad en yogures y bebidas',
+    objective: 'Evitar la sinéresis, aportar cuerpo y garantizar estabilidad durante toda la vida de anaquel del producto.',
+    description:
+      'Sistemas funcionales que previenen la sinéresis, aportan viscosidad y estabilizan sólidos en yogures batidos, bebibles, concentrados y fórmulas UHT.',
+    types: [
       {
-        name: 'Yogurt',
-        products: [
-          { code: 'Serie EYGR', desc: 'Proporciona consistencia y previene sinéresis durante almacenamiento, con y sin homogeneizado.' },
-        ],
+        name: 'Yogurt batido y bebible',
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+        desc: 'Proporciona consistencia, previene sinéresis y mantiene estabilidad durante el almacenamiento refrigerado.',
       },
       {
-        name: 'Bebidas Lácteas y Concentrados',
-        products: [
-          { code: 'BCP-20-029', desc: 'Desarrollo inmediato de viscosidad para bebidas instantáneas. Estabilización de sólidos en suspensión.' },
-          { code: 'BCP-20-030', desc: 'Texturizante para concentrados con pulpa. Aporta cuerpo y viscosidad sin afectar el sabor.' },
-        ],
+        name: 'Bebidas lácteas y concentrados',
+        img: `${BASE}img/Productos/Saborizantes/leches/leche.png`,
+        desc: 'Desarrolla viscosidad inmediata y estabiliza sólidos en suspensión sin afectar el perfil de sabor.',
       },
       {
-        name: 'Fórmulas Lácteas (UHT / HTST)',
-        products: [
-          { code: 'LEF-40-022', desc: 'Estabilizante UHT/HTST. Previene precipitación de proteínas bajo tratamiento térmico severo.' },
-        ],
+        name: 'Fórmulas UHT / HTST',
+        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizante  espesante para leches.png`,
+        desc: 'Previene precipitación de proteínas bajo tratamiento térmico severo en productos de larga vida.',
       },
     ],
+    benefits: [
+      { icon: 'fa-solid fa-layer-group',      title: 'Sin sinéresis',     desc: 'Eliminación de la separación de suero durante el almacenamiento.' },
+      { icon: 'fa-solid fa-glass-water',       title: 'Cuerpo y viscosidad', desc: 'Textura fluida y consistente, ideal para bebibles y batidos.' },
+      { icon: 'fa-solid fa-fire-flame-curved', title: 'Estabilidad térmica', desc: 'Resistencia a tratamientos UHT y HTST sin precipitación de proteínas.' },
+    ],
+    solutions: [
+      { code: 'Serie EYGR',  name: 'Sistema estabilizante para yogurt',       desc: 'Consistencia y prevención de sinéresis con y sin homogeneizado.' },
+      { code: 'BCP-20-029',  name: 'Texturizante para bebidas instantáneas',  desc: 'Viscosidad inmediata y estabilización de sólidos en suspensión.' },
+      { code: 'BCP-20-030',  name: 'Texturizante para concentrados con pulpa', desc: 'Cuerpo y viscosidad sin afectar el perfil de sabor.' },
+      { code: 'LEF-40-022',  name: 'Estabilizante UHT / HTST',               desc: 'Previene precipitación de proteínas bajo tratamiento térmico severo.' },
+    ],
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.jpg`,
   },
   {
     id: 'colorantes',
     icon: 'fa-palette',
     label: 'Colorantes',
-    description: 'Colorantes naturales y estabilizados de alta resistencia a pasteurización, pH y tratamiento térmico para la industria alimentaria.',
-    subcategories: [
+    heroImg: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+    headline: 'Color natural, uniforme y estable en proceso',
+    objective: 'Lograr tonalidades uniformes y estables que resistan el proceso térmico y mantengan su intensidad durante la vida de anaquel.',
+    description:
+      'Colorantes naturales y suspensiones estabilizadas de alta resistencia a pasteurización, tratamiento térmico y variaciones de pH.',
+    types: [
       {
-        name: 'Colorantes Naturales (Achiote)',
-        products: [
-          { code: 'MTXX-8020', desc: 'Suspensión en aceite de achiote. Tonos de amarillo a naranja. Resistente a pasteurización.' },
-          { code: 'MTXX-8040', desc: 'Versión concentrada de mayor intensidad de color para lácteos y confitería.' },
-        ],
+        name: 'Colorantes naturales de achiote',
+        img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+        desc: 'Tonos de amarillo a naranja intenso para quesos, mantequillas, productos grasos y confitería.',
       },
       {
-        name: 'Colorantes Inorgánicos',
-        products: [
-          { code: 'DTI-4022', desc: 'Suspensión de dióxido de titanio blanco. Resistente a pasteurización y tratamiento térmico.' },
-        ],
+        name: 'Colorantes inorgánicos',
+        img: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.png`,
+        desc: 'Blanqueamiento intenso y uniforme resistente a pasteurización y altas temperaturas de proceso.',
       },
     ],
+    benefits: [
+      { icon: 'fa-solid fa-circle-half-stroke', title: 'Tono uniforme',     desc: 'Distribución homogénea del color en toda la masa del producto.' },
+      { icon: 'fa-solid fa-fire',               title: 'Resistencia térmica', desc: 'Color estable bajo pasteurización, HTST y otros tratamientos térmicos.' },
+      { icon: 'fa-solid fa-leaf',               title: 'Origen natural',    desc: 'Basados en achiote (bixina / norbixina) para uso alimentario seguro.' },
+    ],
+    solutions: [
+      { code: 'MTXX-8020', name: 'Achiote en suspensión oleosa',        desc: 'Tonos amarillo a naranja. Resistente a pasteurización para lácteos.' },
+      { code: 'MTXX-8040', name: 'Achiote concentrado alta intensidad', desc: 'Mayor concentración para lácteos, confitería y productos grasos.' },
+      { code: 'DTI-4022',  name: 'Dióxido de titanio en suspensión',    desc: 'Blanco intenso resistente a pasteurización y tratamiento térmico.' },
+    ],
+    solutionImg: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.png`,
   },
   {
     id: 'auxiliares',
     icon: 'fa-gear',
-    label: 'Auxiliares de Proceso',
-    description: 'Aditivos funcionales para optimizar la producción, estabilizar pH y mejorar la vida de anaquel del producto terminado.',
-    subcategories: [
+    label: 'Auxiliares',
+    heroImg: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+    headline: 'Optimización funcional del proceso productivo',
+    objective: 'Mejorar la eficiencia del proceso, estabilizar el pH y extender la vida de anaquel del producto terminado.',
+    description:
+      'Aditivos funcionales para controlar la emulsificación, regular el pH y mejorar la conservación en todo tipo de productos lácteos.',
+    types: [
       {
-        name: 'Emulsionantes',
-        products: [
-          { code: 'EML-30-010', desc: 'Concentrado de emulsionante natural. Mínimo 90% de concentración. Mejora textura sin aportar sabor graso.' },
-        ],
+        name: 'Emulsionantes de proceso',
+        img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+        desc: 'Mejora textura y estabilidad emulsificando grasas sin aportar sabor ni color al producto final.',
       },
       {
-        name: 'Reguladores de pH y Conservadores',
-        products: [
-          { code: 'MTS-LACTO-70-003', desc: 'Sal sódica de ácido láctico al 60%. Buffer de pH y conservador natural para lácteos y dulces.' },
-        ],
+        name: 'Conservadores y reguladores de pH',
+        img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.png`,
+        desc: 'Buffer natural de pH y conservador para lácteos, dulces y productos de alta humedad.',
       },
     ],
+    benefits: [
+      { icon: 'fa-solid fa-arrows-spin',    title: 'Mejor emulsificación', desc: 'Distribución uniforme de grasas y estabilidad de emulsión en el producto.' },
+      { icon: 'fa-solid fa-flask',          title: 'Control de pH',       desc: 'Regulación del pH para mayor estabilidad y seguridad microbiológica.' },
+      { icon: 'fa-solid fa-shield-halved',  title: 'Mayor vida útil',     desc: 'Conservación natural que extiende la vida de anaquel sin alterar el sabor.' },
+    ],
+    solutions: [
+      { code: 'EML-30-010',        name: 'Emulsionante natural concentrado', desc: 'Mínimo 90% de concentración. Mejora textura sin sabor graso.' },
+      { code: 'MTS-LACTO-70-003',  name: 'Lactato de sodio 60%',            desc: 'Buffer de pH y conservador natural para lácteos y dulces.' },
+    ],
+    solutionImg: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.png`,
   },
 ];
 
 const FEATURES = [
-  { icon: 'fa-solid fa-flask',           title: 'Desarrollo a la medida',  desc: 'Formulaciones personalizadas según tus necesidades de proceso y producto.' },
-  { icon: 'fa-solid fa-clipboard-check', title: 'Respaldo técnico',        desc: 'Acompañamiento en pruebas, escalamiento e implementación en planta.' },
-  { icon: 'fa-solid fa-chart-line',      title: 'Resultados medibles',     desc: 'Mejora de rendimiento, calidad, estabilidad y vida de anaquel.' },
-  { icon: 'fa-solid fa-shield-halved',   title: 'Calidad garantizada',     desc: 'Cumplimos con los más altos estándares de inocuidad y calidad alimentaria.' },
+  { icon: 'fa-solid fa-flask',           title: 'Desarrollo a la medida', desc: 'Formulaciones personalizadas para tu proceso y producto.' },
+  { icon: 'fa-solid fa-clipboard-check', title: 'Respaldo técnico',       desc: 'Acompañamiento en pruebas, escalamiento e implementación.' },
+  { icon: 'fa-solid fa-chart-line',      title: 'Resultados medibles',    desc: 'Mejora de rendimiento, calidad y vida de anaquel.' },
+  { icon: 'fa-solid fa-shield-halved',   title: 'Calidad garantizada',    desc: 'Estándares de inocuidad y calidad alimentaria.' },
 ];
 
-function CountUp({ to, suffix = '' }) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    const frames = 52;
-    let n = 0;
-    const id = setInterval(() => {
-      n++;
-      setVal(Math.min(Math.round((to / frames) * n), to));
-      if (n >= frames) clearInterval(id);
-    }, 28);
-    return () => clearInterval(id);
-  }, [to]);
-  return <>{val}{suffix}</>;
-}
-
 function Applications() {
+  const { openContactModal } = useContactModal();
   const [searchParams] = useSearchParams();
   const [active, setActive] = useState(() => {
     const t = searchParams.get('tab');
-    return APPLICATIONS.some(a => a.id === t) ? t : 'quesos';
+    return CATEGORIES.some(a => a.id === t) ? t : 'quesos';
   });
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  const cat = CATEGORIES.find(a => a.id === active);
 
   useEffect(() => {
     const t = searchParams.get('tab');
-    if (APPLICATIONS.some(a => a.id === t)) setActive(t);
+    if (t && CATEGORIES.some(a => a.id === t)) setActive(t);
   }, [searchParams]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────────── */}
-      <section className="unified-hero">
-
-        <div className="unified-mol-field" aria-hidden="true">
-          <svg className="m-svg m-svg-1" viewBox="0 0 80 92" fill="none">
-            <polygon points="40,3 77,23 77,69 40,89 3,69 3,23" stroke="rgba(119,208,105,0.18)" strokeWidth="1.5"/>
-            <circle cx="40" cy="46" r="5" fill="rgba(92,184,69,0.12)"/>
-            <circle cx="40" cy="3"  r="3" fill="rgba(119,208,105,0.2)"/>
-            <circle cx="77" cy="23" r="3" fill="rgba(119,208,105,0.15)"/>
-            <circle cx="77" cy="69" r="3" fill="rgba(119,208,105,0.15)"/>
-            <circle cx="40" cy="89" r="3" fill="rgba(119,208,105,0.2)"/>
-            <circle cx="3"  cy="69" r="3" fill="rgba(119,208,105,0.12)"/>
-            <circle cx="3"  cy="23" r="3" fill="rgba(119,208,105,0.12)"/>
-          </svg>
-          <svg className="m-svg m-svg-2" viewBox="0 0 130 50" fill="none">
-            <circle cx="12" cy="25" r="9"  stroke="rgba(119,208,105,0.15)" strokeWidth="1.3"/>
-            <line x1="21" y1="22" x2="37" y2="14" stroke="rgba(119,208,105,0.12)" strokeWidth="1.2"/>
-            <line x1="21" y1="28" x2="37" y2="36" stroke="rgba(119,208,105,0.12)" strokeWidth="1.2"/>
-            <circle cx="44" cy="11" r="7"  stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-            <circle cx="44" cy="39" r="7"  stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-            <line x1="51" y1="11" x2="73" y2="25" stroke="rgba(119,208,105,0.1)"  strokeWidth="1"/>
-            <line x1="51" y1="39" x2="73" y2="25" stroke="rgba(119,208,105,0.1)"  strokeWidth="1"/>
-            <circle cx="79" cy="25" r="9"  stroke="rgba(119,208,105,0.15)" strokeWidth="1.3"/>
-            <line x1="88" y1="25" x2="108" y2="25" stroke="rgba(119,208,105,0.12)" strokeWidth="1.5"/>
-            <line x1="88" y1="21" x2="108" y2="21" stroke="rgba(119,208,105,0.08)" strokeWidth="1"/>
-            <circle cx="115" cy="25" r="7"  stroke="rgba(119,208,105,0.1)"  strokeWidth="1"/>
-          </svg>
-          <svg className="m-svg m-svg-3" viewBox="0 0 56 64" fill="none">
-            <polygon points="28,2 54,16 54,48 28,62 2,48 2,16" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-            <circle cx="28" cy="32" r="5" fill="none" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-            <circle cx="28" cy="32" r="2" fill="rgba(92,184,69,0.2)"/>
-          </svg>
-          <svg className="m-svg m-svg-4" viewBox="0 0 70 70" fill="none">
-            <circle cx="35" cy="35" r="31" stroke="rgba(119,208,105,0.06)" strokeWidth="1" strokeDasharray="5 5"/>
-            <circle cx="35" cy="35" r="10" stroke="rgba(119,208,105,0.16)" strokeWidth="1.5"/>
-            <circle cx="35" cy="4"  r="3.5" fill="rgba(92,184,69,0.15)"/>
-            <circle cx="66" cy="35" r="3.5" fill="rgba(92,184,69,0.10)"/>
-            <circle cx="35" cy="66" r="3.5" fill="rgba(92,184,69,0.12)"/>
-            <circle cx="4"  cy="35" r="3.5" fill="rgba(92,184,69,0.08)"/>
-            <line x1="35" y1="7"  x2="35" y2="25" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/>
-            <line x1="63" y1="35" x2="45" y2="35" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/>
-            <line x1="35" y1="63" x2="35" y2="45" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/>
-            <line x1="7"  y1="35" x2="25" y2="35" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/>
-          </svg>
-          <svg className="m-svg m-svg-5" viewBox="0 0 50 58" fill="none">
-            <polygon points="25,2 48,14 48,44 25,56 2,44 2,14" stroke="rgba(119,208,105,0.18)" strokeWidth="1.5"/>
-            <circle cx="25" cy="29" r="2.5" fill="rgba(92,184,69,0.25)"/>
-          </svg>
-          <svg className="m-svg m-svg-6" viewBox="0 0 60 52" fill="none">
-            <polygon points="30,2 58,50 2,50" stroke="rgba(119,208,105,0.13)" strokeWidth="1.2"/>
-            <circle cx="30" cy="2"  r="3" fill="rgba(92,184,69,0.18)"/>
-            <circle cx="58" cy="50" r="3" fill="rgba(92,184,69,0.12)"/>
-            <circle cx="2"  cy="50" r="3" fill="rgba(92,184,69,0.12)"/>
-          </svg>
-          <svg className="m-svg m-svg-7" viewBox="0 0 70 80" fill="none">
-            <polygon points="35,3 67,20 67,60 35,77 3,60 3,20" stroke="rgba(119,208,105,0.16)" strokeWidth="1.4"/>
-            <circle cx="35" cy="40" r="14" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-          </svg>
-          <svg className="m-svg m-svg-8" viewBox="0 0 100 30" fill="none">
-            <circle cx="15" cy="15" r="10" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-            <line x1="25" y1="11" x2="75" y2="11" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <line x1="25" y1="19" x2="75" y2="19" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <circle cx="85" cy="15" r="10" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-          </svg>
-          <svg className="m-svg m-svg-9" viewBox="0 0 60 60" fill="none">
-            <circle cx="30" cy="30" r="5" fill="rgba(92,184,69,0.20)"/>
-            <ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-            <ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.10)" strokeWidth="1" transform="rotate(60 30 30)"/>
-            <ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.08)" strokeWidth="1" transform="rotate(120 30 30)"/>
-          </svg>
-          <svg className="m-svg m-svg-10" viewBox="0 0 40 80" fill="none">
-            <path d="M20,5 C35,22 5,42 20,57 C35,72 5,80 20,80" stroke="rgba(119,208,105,0.13)" strokeWidth="1.2" fill="none"/>
-            <circle cx="20" cy="5"  r="3" fill="rgba(92,184,69,0.15)"/>
-            <circle cx="20" cy="57" r="3" fill="rgba(92,184,69,0.12)"/>
-          </svg>
-          <svg className="m-svg m-svg-11" viewBox="0 0 60 60" fill="none">
-            <line x1="30" y1="5"  x2="30" y2="55" stroke="rgba(119,208,105,0.13)" strokeWidth="1.5"/>
-            <line x1="5"  y1="30" x2="55" y2="30" stroke="rgba(119,208,105,0.13)" strokeWidth="1.5"/>
-            <circle cx="30" cy="30" r="6" fill="rgba(92,184,69,0.15)"/>
-            <circle cx="30" cy="5"  r="3" fill="rgba(92,184,69,0.10)"/>
-            <circle cx="30" cy="55" r="3" fill="rgba(92,184,69,0.10)"/>
-            <circle cx="5"  cy="30" r="3" fill="rgba(92,184,69,0.10)"/>
-            <circle cx="55" cy="30" r="3" fill="rgba(92,184,69,0.10)"/>
-          </svg>
-          <svg className="m-svg m-svg-12" viewBox="0 0 60 58" fill="none">
-            <polygon points="30,2 58,22 48,54 12,54 2,22" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-            <circle cx="30" cy="28" r="4" fill="rgba(92,184,69,0.14)"/>
-          </svg>
-          <svg className="m-svg m-svg-13" viewBox="0 0 40 46" fill="none">
-            <polygon points="20,2 38,12 38,34 20,44 2,34 2,12" stroke="rgba(119,208,105,0.20)" strokeWidth="1.8"/>
-          </svg>
-          <svg className="m-svg m-svg-14" viewBox="0 0 80 40" fill="none">
-            <circle cx="10" cy="20" r="7" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-            <line x1="17" y1="14" x2="33" y2="8"  stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <circle cx="40" cy="6"  r="6" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-            <line x1="46" y1="10" x2="62" y2="20" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <circle cx="70" cy="22" r="7" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-          </svg>
-          <svg className="m-svg m-svg-15" viewBox="0 0 50 50" fill="none">
-            <circle cx="25" cy="25" r="7" stroke="rgba(119,208,105,0.16)" strokeWidth="1.3"/>
-            <line x1="25" y1="4"  x2="25" y2="18" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <line x1="46" y1="25" x2="32" y2="25" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <line x1="25" y1="46" x2="25" y2="32" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <line x1="4"  y1="25" x2="18" y2="25" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-            <circle cx="25" cy="4"  r="2.5" fill="rgba(92,184,69,0.15)"/>
-            <circle cx="46" cy="25" r="2.5" fill="rgba(92,184,69,0.12)"/>
-            <circle cx="25" cy="46" r="2.5" fill="rgba(92,184,69,0.12)"/>
-            <circle cx="4"  cy="25" r="2.5" fill="rgba(92,184,69,0.10)"/>
-          </svg>
-          <svg className="m-svg m-svg-16" viewBox="0 0 70 45" fill="none">
-            <circle cx="22" cy="22" r="18" stroke="rgba(119,208,105,0.12)" strokeWidth="1.2"/>
-            <circle cx="22" cy="22" r="5"  fill="rgba(92,184,69,0.12)"/>
-            <line x1="40" y1="22" x2="65" y2="22" stroke="rgba(119,208,105,0.10)" strokeWidth="1.5"/>
-            <circle cx="65" cy="22" r="4" fill="rgba(92,184,69,0.14)"/>
-          </svg>
-          <svg className="m-svg m-svg-17" viewBox="0 0 110 64" fill="none">
-            <polygon points="28,2 54,16 54,48 28,62 2,48 2,16"    stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/>
-            <polygon points="82,2 108,16 108,48 82,62 56,48 56,16" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/>
-          </svg>
-          <svg className="m-svg m-svg-18" viewBox="0 0 50 44" fill="none">
-            <polygon points="25,2 48,42 2,42" stroke="rgba(119,208,105,0.16)" strokeWidth="1.4"/>
-            <circle cx="25" cy="22" r="3" fill="rgba(92,184,69,0.18)"/>
-          </svg>
-          <svg className="m-svg m-svg-19" viewBox="0 0 55 55" fill="none">
-            <circle cx="27" cy="10" r="8" stroke="rgba(119,208,105,0.13)" strokeWidth="1.2"/>
-            <circle cx="10" cy="42" r="8" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/>
-            <circle cx="45" cy="42" r="8" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/>
-            <line x1="22" y1="17" x2="15" y2="35" stroke="rgba(119,208,105,0.09)" strokeWidth="1"/>
-            <line x1="32" y1="17" x2="40" y2="35" stroke="rgba(119,208,105,0.09)" strokeWidth="1"/>
-            <line x1="18" y1="42" x2="37" y2="42" stroke="rgba(119,208,105,0.08)" strokeWidth="1"/>
-          </svg>
-          <svg className="m-svg m-svg-20" viewBox="0 0 120 28" fill="none">
-            <circle cx="10"  cy="14" r="8" stroke="rgba(119,208,105,0.13)" strokeWidth="1.2"/>
-            <line x1="18"  y1="14" x2="38"  y2="14" stroke="rgba(119,208,105,0.10)" strokeWidth="1.2"/>
-            <circle cx="46"  cy="14" r="7" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/>
-            <line x1="53"  y1="14" x2="73"  y2="14" stroke="rgba(119,208,105,0.10)" strokeWidth="1.2"/>
-            <circle cx="81"  cy="14" r="7" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/>
-            <line x1="88"  y1="14" x2="108" y2="14" stroke="rgba(119,208,105,0.09)" strokeWidth="1.2"/>
-            <circle cx="113" cy="14" r="6" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/>
-          </svg>
-          <div className="m-dot m-dot-1"/><div className="m-dot m-dot-2"/><div className="m-dot m-dot-3"/>
-          <div className="m-dot m-dot-4"/><div className="m-dot m-dot-5"/><div className="m-dot m-dot-6"/>
-          <div className="m-dot m-dot-7"/><div className="m-dot m-dot-8"/>
+      {/* ── 1. HERO ─────────────────────────────────────────────── */}
+      <section className="app2-hero">
+        <div className="app2-hero-text">
+          <span className="app2-eyebrow">APLICACIONES</span>
+          <h1 className="app2-hero-h1">
+            Soluciones diseñadas<br />
+            para cada{' '}
+            <span className="app2-gradient">aplicación</span>
+          </h1>
+          <p className="app2-hero-p">
+            Desarrollamos formulaciones especializadas que resuelven retos
+            específicos en procesos lácteos y mejoran los resultados de tu
+            producción.
+          </p>
         </div>
-
-        <div className="hero-fw-inner">
-          <div className="hero-fw-text">
-            <span className="app-hero-eyebrow">
-              <i className="fa-solid fa-atom"></i>
-              Catálogo de Soluciones
-            </span>
-            <h1 className="unified-hero-h1">
-              Soluciones para cada<br/>
-              <span>aplicación alimentaria</span>
-            </h1>
-            <p className="unified-hero-p">
-              Sistemas funcionales especializados que mejoran la estabilidad,
-              textura, rendimiento y calidad en procesos industriales.
-            </p>
-          </div>
-          <div className="unified-hero-stats hero-fw-stats">
-            <div className="unified-stat">
-              <strong><CountUp to={25} suffix="+" /></strong>
-              <span>Soluciones técnicas</span>
-            </div>
-            <div className="unified-stat">
-              <strong><CountUp to={4} /></strong>
-              <span>Líneas funcionales</span>
-            </div>
-            <div className="unified-stat">
-              <strong><CountUp to={15} suffix="+" /></strong>
-              <span>Años de experiencia</span>
-            </div>
-          </div>
+        <div className="app2-hero-img">
+          <img key={cat.id} src={cat.heroImg} alt={cat.label} />
+          <div className="app2-hero-img-overlay" />
         </div>
       </section>
 
-      {/* ── APPLICATION EXPLORER ─────────────────────────────── */}
-      <section className="app-explorer reveal-section">
+      {/* ── 2. CATEGORY NAV ─────────────────────────────────────── */}
+      <nav className="app2-nav" aria-label="Categorías de aplicación">
         <div className="contenedor">
-          <div className="app-explorer-header">
-            <span className="about-home-eyebrow">— Líneas de aplicación</span>
-            <h2>Soluciones especializadas<br/>por categoría</h2>
-            <p className="app-explorer-sub">Selecciona una línea para ver los productos disponibles y sus aplicaciones específicas en tu proceso.</p>
-          </div>
-
-          <div className="app-cat-nav" role="tablist">
-            {APPLICATIONS.map((a) => (
+          <div className="app2-nav-inner">
+            {CATEGORIES.map((c) => (
               <button
-                key={a.id}
+                key={c.id}
                 type="button"
-                role="tab"
-                aria-selected={active === a.id}
-                className={`app-cat-btn${active === a.id ? ' active' : ''}`}
-                onClick={() => setActive(a.id)}
+                className={`app2-nav-btn${active === c.id ? ' is-active' : ''}`}
+                onClick={() => setActive(c.id)}
               >
-                <i className={`fa-solid ${a.icon}`}></i>
-                <span>{a.label}</span>
+                <i className={`fa-solid ${c.icon}`}></i>
+                <span>{c.label}</span>
               </button>
             ))}
           </div>
+        </div>
+      </nav>
 
-          {APPLICATIONS.filter((a) => a.id === active).map((cat) => (
-            <div key={cat.id} className="app-cat-panel">
-              <div className="app-cat-sidebar">
-                <div className="app-cat-sidebar-icon">
+      {/* ── 3–5. DYNAMIC CATEGORY CONTENT ───────────────────────── */}
+      <div className="app2-content" key={cat.id}>
+
+        {/* 3. OVERVIEW */}
+        <section className="app2-overview">
+          <div className="contenedor">
+            <div className="app2-overview-grid">
+              <div className="app2-overview-left">
+                <div className="app2-overview-icon">
                   <i className={`fa-solid ${cat.icon}`}></i>
                 </div>
-                <h3>{cat.label}</h3>
-                <p>{cat.description}</p>
-                <Link
-                  to={`/contacto?interest=${encodeURIComponent(cat.label)}`}
-                  className="app-cat-cta"
-                >
-                  Solicitar formulación <i className="fa-solid fa-arrow-right"></i>
-                </Link>
+                <h2 className="app2-overview-title">{cat.headline}</h2>
+                <p className="app2-overview-desc">{cat.description}</p>
               </div>
-              <div className="app-cat-content">
-                {cat.subcategories.map((sub) => (
-                  <div key={sub.name} className="app-subcat">
-                    <div className="app-subcat-header">
-                      <h4>{sub.name}</h4>
-                      {sub.note && <span className="app-subcat-note">{sub.note}</span>}
+              <div className="app2-overview-card">
+                <span className="app2-overview-card-label">Nuestro objetivo</span>
+                <p className="app2-overview-card-text">{cat.objective}</p>
+                <button
+                  type="button"
+                  className="app2-overview-cta"
+                  onClick={() => openContactModal(cat.label)}
+                >
+                  Solicitar formulación
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. APPLICATION TYPES */}
+        <section className="app2-types">
+          <div className="contenedor">
+            <div className="app2-section-header">
+              <span className="app2-eyebrow">Tipos de aplicación</span>
+              <h2 className="app2-section-title">¿En qué productos lo usamos?</h2>
+            </div>
+            <div className={`app2-types-grid app2-types-grid--${cat.types.length}`}>
+              {cat.types.map((t) => (
+                <article key={t.name} className="app2-type-card">
+                  <div className="app2-type-card-img">
+                    <img src={t.img} alt={t.name} />
+                    <div className="app2-type-card-overlay" />
+                  </div>
+                  <div className="app2-type-card-body">
+                    {t.note && <span className="app2-type-note">{t.note}</span>}
+                    <h3 className="app2-type-name">{t.name}</h3>
+                    <p className="app2-type-desc">{t.desc}</p>
+                    <button
+                      type="button"
+                      className="app2-type-cta"
+                      onClick={() => openContactModal(t.name)}
+                    >
+                      Ver soluciones
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 5. DETAILED SOLUTION BLOCK */}
+        <section className="app2-detail">
+          <div className="contenedor">
+            <div className="app2-section-header">
+              <span className="app2-eyebrow">Formulaciones técnicas</span>
+              <h2 className="app2-section-title">Soluciones recomendadas</h2>
+            </div>
+            <div className="app2-detail-grid">
+              <div className="app2-detail-left">
+                <div className="app2-detail-img">
+                  <img src={cat.solutionImg} alt={cat.label} />
+                </div>
+                <div className="app2-benefits-list">
+                  {cat.benefits.map((b) => (
+                    <div key={b.title} className="app2-benefit">
+                      <div className="app2-benefit-icon">
+                        <i className={b.icon}></i>
+                      </div>
+                      <div className="app2-benefit-text">
+                        <h4>{b.title}</h4>
+                        <p>{b.desc}</p>
+                      </div>
                     </div>
-                    <div className="app-products-list">
-                      {sub.products.map((p) => (
-                        <div key={p.code} className="app-product-row">
-                          <span className="app-product-code">{p.code}</span>
-                          <p className="app-product-desc">{p.desc}</p>
-                        </div>
-                      ))}
+                  ))}
+                </div>
+              </div>
+              <div className="app2-solutions-list">
+                {cat.solutions.map((s) => (
+                  <div key={s.code} className="app2-solution-row">
+                    <div className="app2-solution-info">
+                      <span className="app2-solution-code">{s.code}</span>
+                      <p className="app2-solution-name">{s.name}</p>
+                      <p className="app2-solution-desc">{s.desc}</p>
                     </div>
+                    <Link
+                      to="/productos"
+                      className="app2-solution-arrow"
+                      aria-label="Ver en catálogo"
+                    >
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </Link>
                   </div>
                 ))}
-                <div className="app-cat-footer">
-                  <Link to="/productos" className="app-see-products">
-                    <i className="fa-solid fa-box-open"></i>
-                    Ver catálogo completo de productos
+                <div className="app2-solutions-footer">
+                  <Link to="/productos" className="app2-catalog-link">
+                    <i className="fa-solid fa-book-open"></i>
+                    Ver catálogo completo
                     <i className="fa-solid fa-arrow-right"></i>
                   </Link>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
+        </section>
+
+      </div>{/* /app2-content */}
+
+      {/* ── 6. INTERMEDIATE CTA ─────────────────────────────────── */}
+      <section className="app2-cta-mid">
+        <div className="contenedor">
+          <div className="app2-cta-mid-inner">
+            <div className="app2-cta-mid-text">
+              <h3>¿No encuentras la solución que necesitas?</h3>
+              <p>Nuestro equipo técnico puede desarrollar una formulación a la medida de tu proceso.</p>
+            </div>
+            <button
+              type="button"
+              className="btn-primary"
+              onClick={() => openContactModal()}
+            >
+              Hablar con un especialista
+              <i className="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* ── FEATURES STRIP ───────────────────────────────────── */}
-      <section className="app-features reveal-section">
+      {/* ── 7. BENEFITS STRIP ───────────────────────────────────── */}
+      <section className="app2-features">
         <div className="contenedor">
-          <div className="app-features-grid">
+          <div className="app2-features-grid">
             {FEATURES.map((f) => (
-              <div key={f.title} className="app-feature">
-                <div className="app-feature-icon">
+              <div key={f.title} className="app2-feature">
+                <div className="app2-feature-icon">
                   <i className={f.icon}></i>
                 </div>
                 <div>
-                  <p className="app-feature-title">{f.title}</p>
-                  <p className="app-feature-desc">{f.desc}</p>
+                  <p className="app2-feature-title">{f.title}</p>
+                  <p className="app2-feature-desc">{f.desc}</p>
                 </div>
               </div>
             ))}

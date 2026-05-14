@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { useContactModal } from '../context/ContactModalContext';
 
 const BASE = import.meta.env.BASE_URL;
 
 function NavBar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { cart, openPanel } = useCart();
+  const { openContactModal } = useContactModal();
 
-  // Close menu on route change
   useEffect(() => { setOpen(false); }, [location]);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -36,19 +38,37 @@ function NavBar() {
           <NavLink to="/nosotros">
             <i className="fa-solid fa-users"></i> Nosotros
           </NavLink>
-          <NavLink to="/contacto">
+          <button
+            type="button"
+            className="nav-contact-btn"
+            onClick={() => { setOpen(false); openContactModal(); }}
+          >
             <i className="fa-solid fa-envelope"></i> Contacto
-          </NavLink>
+          </button>
         </nav>
 
-        <button
-          className="nav-toggle"
-          onClick={() => setOpen((o) => !o)}
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-          aria-expanded={open}
-        >
-          <i className={`fa-solid ${open ? 'fa-xmark' : 'fa-bars'}`}></i>
-        </button>
+        <div className="header-actions">
+          <button
+            className={`nav-cart-btn${cart.length > 0 ? ' has-items' : ''}`}
+            onClick={openPanel}
+            aria-label="Ver solicitud de muestras"
+            title="Solicitud de muestras"
+          >
+            <i className="fa-solid fa-cart-shopping"></i>
+            {cart.length > 0 && (
+              <span className="nav-cart-badge">{cart.length}</span>
+            )}
+          </button>
+
+          <button
+            className="nav-toggle"
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={open}
+          >
+            <i className={`fa-solid ${open ? 'fa-xmark' : 'fa-bars'}`}></i>
+          </button>
+        </div>
       </div>
     </header>
   );

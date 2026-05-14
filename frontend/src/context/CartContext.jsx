@@ -24,13 +24,17 @@ export function CartProvider({ children }) {
       prev.map((p) => (p.id === id ? { ...p, selectedFlavors } : p))
     );
 
+  const [panelOpen, setPanelOpen] = useState(false);
+
   const remove = (id) => setCart((prev) => prev.filter((p) => p.id !== id));
   const clear = () => setCart([]);
   const inCart = (id) => cart.some((p) => p.id === id);
   const getItem = (id) => cart.find((p) => p.id === id) || null;
+  const openPanel = () => setPanelOpen(true);
+  const closePanel = () => setPanelOpen(false);
 
   return (
-    <CartContext.Provider value={{ cart, add, updateFlavors, remove, clear, inCart, getItem }}>
+    <CartContext.Provider value={{ cart, add, updateFlavors, remove, clear, inCart, getItem, panelOpen, openPanel, closePanel }}>
       {children}
     </CartContext.Provider>
   );

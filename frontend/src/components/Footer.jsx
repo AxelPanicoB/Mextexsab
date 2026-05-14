@@ -10,7 +10,7 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-section">
             <div className="logo-footer-wrap">
-              <img src={`${BASE}img/MetexSab(2).png`} alt="Metexsab" className="logo-footer" />
+              <img src={`${BASE}img/metexsabb.png`} alt="Metexsab" className="logo-footer" />
             </div>
             <p className="footer-description">
               Soluciones especializadas en aditivos alimentarios de calidad

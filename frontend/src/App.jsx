@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CartProvider } from './context/CartContext.jsx';
+import { ContactModalProvider } from './context/ContactModalContext.jsx';
 import NavBar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
 import CartBar from './components/CartBar.jsx';
+import ContactModal from './components/ContactModal.jsx';
 import ScrollToTopBtn from './components/ScrollToTopBtn.jsx';
 import RouteProgress from './components/RouteProgress.jsx';
 import Home from './pages/Home.jsx';
@@ -36,6 +38,7 @@ function App() {
   return (
     <BrowserRouter basename="/Mextexsab">
       <CartProvider>
+        <ContactModalProvider>
         <div className="app-shell">
           <RevealObserver />
           <NavBar />
@@ -50,6 +53,7 @@ function App() {
           </main>
           <Footer />
           <CartBar />
+          <ContactModal />
           <RouteProgress />
           <ScrollToTopBtn />
           <a
@@ -64,6 +68,7 @@ function App() {
             <i className="fa-brands fa-whatsapp"></i>
           </a>
         </div>
+        </ContactModalProvider>
       </CartProvider>
     </BrowserRouter>
   );

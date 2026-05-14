@@ -4,7 +4,6 @@ import ProductCard from '../components/ProductCard.jsx';
 import allProducts from '../data/products.js';
 
 const TECH_LINES = [
-  'Todo',
   'Texturizantes y Estabilizantes',
   'Saborizantes',
   'Colorantes',
@@ -12,7 +11,6 @@ const TECH_LINES = [
 ];
 
 const APPLICATIONS = [
-  'Todas',
   'Quesos',
   'Yogurt',
   'Helados',
@@ -39,34 +37,47 @@ function CountUp({ to, suffix = '' }) {
 
 function Products() {
   const location = useLocation();
-  const [techLine, setTechLine] = useState('Todo');
-  const [application, setApplication] = useState('Todas');
+  const [activeFilter, setActiveFilter] = useState('Todos');
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const appParam = params.get('app');
-    if (appParam) {
-      const match = APPLICATIONS.find(
-        (a) => a.toLowerCase() === appParam.toLowerCase()
+    const tabParam = params.get('tab') || params.get('app');
+    if (!tabParam) return;
+    const appMatch = APPLICATIONS.find(
+      (a) => a.toLowerCase() === tabParam.toLowerCase()
+    );
+    if (appMatch) {
+      setActiveFilter(appMatch);
+    } else {
+      const lineMatch = TECH_LINES.find(
+        (l) => l.toLowerCase().includes(tabParam.toLowerCase())
       );
-      if (match) setApplication(match);
+      if (lineMatch) setActiveFilter(lineMatch);
     }
+    setTimeout(() => {
+      const el = document.querySelector('.catalog-grid-section');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 160;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }
+    }, 150);
   }, [location.search]);
 
   const filtered = useMemo(() => {
     return allProducts.filter((p) => {
-      const matchLine = techLine === 'Todo' || p.category === techLine;
-      const matchApp =
-        application === 'Todas' ||
-        (p.applications && p.applications.includes(application));
+      const matchFilter =
+        activeFilter === 'Todos' ||
+        (APPLICATIONS.includes(activeFilter)
+          ? p.applications?.includes(activeFilter)
+          : p.category === activeFilter);
       const matchSearch = [p.name, p.summary, p.category, ...(p.tags || [])]
         .join(' ')
         .toLowerCase()
         .includes(search.toLowerCase());
-      return matchLine && matchApp && matchSearch;
+      return matchFilter && matchSearch;
     });
-  }, [techLine, application, search]);
+  }, [activeFilter, search]);
 
   return (
     <>
@@ -258,43 +269,58 @@ function Products() {
       {/* ── FILTER BAR ───────────────────────────────────────── */}
       <div className="catalog-filter-bar">
         <div className="contenedor">
-          <div className="filter-group">
-            <span className="filter-group-label">
-              <i className="fa-solid fa-industry"></i>
-              Aplicación industrial
-            </span>
-            <div className="filter-chips">
-              {APPLICATIONS.map((app) => (
-                <button
-                  key={app}
-                  type="button"
-                  className={`filter-app-chip${application === app ? ' active' : ''}`}
-                  onClick={() => setApplication(app)}
-                >
-                  {app}
-                </button>
-              ))}
-            </div>
+          {/* Desktop chips */}
+          <div className="filter-chips">
+            <button
+              type="button"
+              className={`filter-chip${activeFilter === 'Todos' ? ' active' : ''}`}
+              onClick={() => setActiveFilter('Todos')}
+            >
+              Todos
+            </button>
+            <span className="filter-chips-sep" />
+            {APPLICATIONS.map((app) => (
+              <button
+                key={app}
+                type="button"
+                className={`filter-chip${activeFilter === app ? ' active' : ''}`}
+                onClick={() => setActiveFilter(app)}
+              >
+                {app}
+              </button>
+            ))}
+            <span className="filter-chips-sep" />
+            {TECH_LINES.map((line) => (
+              <button
+                key={line}
+                type="button"
+                className={`filter-chip filter-chip--line${activeFilter === line ? ' active' : ''}`}
+                onClick={() => setActiveFilter(line)}
+              >
+                {line}
+              </button>
+            ))}
           </div>
 
-          <div className="filter-group">
-            <span className="filter-group-label">
-              <i className="fa-solid fa-layer-group"></i>
-              Línea técnica
-            </span>
-            <div className="filter-chips">
-              {TECH_LINES.map((line) => (
-                <button
-                  key={line}
-                  type="button"
-                  className={`filter-line-chip${techLine === line ? ' active' : ''}`}
-                  onClick={() => setTechLine(line)}
-                >
-                  {line}
-                </button>
+          {/* Mobile select */}
+          <select
+            className="filter-mobile-select"
+            value={activeFilter}
+            onChange={(e) => setActiveFilter(e.target.value)}
+            aria-label="Filtrar productos"
+          >
+            <option value="Todos">Todos los productos</option>
+            <optgroup label="Por aplicación">
+              {APPLICATIONS.map((a) => (
+                <option key={a} value={a}>{a}</option>
               ))}
-            </div>
-          </div>
+            </optgroup>
+            <optgroup label="Por línea técnica">
+              {TECH_LINES.map((l) => (
+                <option key={l} value={l}>{l}</option>
+              ))}
+            </optgroup>
+          </select>
 
           <div className="filter-search-row">
             <div className="filter-search-wrap">
@@ -317,7 +343,7 @@ function Products() {
       </div>
 
       {/* ── SOLUTIONS GRID ───────────────────────────────────── */}
-      <section className="catalog-grid-section reveal-section">
+      <section className="catalog-grid-section">
         <div className="contenedor">
           {filtered.length === 0 ? (
               <div className="catalog-empty">
@@ -325,7 +351,7 @@ function Products() {
                 <p>No se encontraron soluciones con esos filtros.</p>
                 <button
                   type="button"
-                  onClick={() => { setTechLine('Todo'); setApplication('Todas'); setSearch(''); }}
+                  onClick={() => { setActiveFilter('Todos'); setSearch(''); }}
                 >
                   Limpiar filtros
                 </button>
