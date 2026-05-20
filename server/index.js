@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import productsRouter from './routes/products.js';
 import contactRouter from './routes/contact.js';
+import samplesRouter from './routes/samples.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/products', productsRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/samples', samplesRouter);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Metexsab API está en línea' });

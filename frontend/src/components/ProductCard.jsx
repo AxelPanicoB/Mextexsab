@@ -89,10 +89,10 @@ function FlavorsModal({ product, onClose }) {
         <button type="button" className="flavors-modal-add-btn" onClick={handleAdd}>
           {alreadyInCart
             ? selected.length > 0
-              ? `Actualizar ${selected.length} perfil${selected.length > 1 ? 'es' : ''} en consulta`
+              ? `Actualizar ${selected.length} perfil${selected.length > 1 ? 'es' : ''} en tu lista`
               : 'Guardar sin perfil específico'
             : selected.length > 0
-              ? `Agregar ${selected.length} perfil${selected.length > 1 ? 'es' : ''} a la consulta`
+              ? `Agregar ${selected.length} perfil${selected.length > 1 ? 'es' : ''} a tu lista`
               : 'Agregar sin perfil específico'
           }
         </button>
@@ -118,7 +118,7 @@ function ProductCard({ product }) {
       <article className={`solution-card${selected ? ' solution-card--selected' : ''}`}>
         <div className="solution-card-img">
           {product.image && (
-            <img src={`${BASE}${encodeURI(product.image).replace(/^\//, '')}`} alt={product.name} loading="lazy" />
+            <img src={`${BASE}${encodeURI(product.image).replace(/^\//, '')}`} alt={product.name} />
           )}
           <span className="solution-badge">{product.functional || product.category}</span>
         </div>
@@ -166,7 +166,7 @@ function ProductCard({ product }) {
               onClick={() => (selected ? remove(product.id) : add(product))}
             >
               {selected ? (
-                <><i className="fa-solid fa-check"></i> En consulta</>
+                <><i className="fa-solid fa-check"></i> En tu lista</>
               ) : (
                 <><i className="fa-solid fa-vial"></i> Solicitar muestra</>
               )}

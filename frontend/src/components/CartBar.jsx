@@ -5,6 +5,15 @@ function CartBar() {
   const { cart, remove, clear, panelOpen, openPanel, closePanel } = useCart();
   const [form, setForm] = useState({ name: '', email: '', phone: '', notes: '' });
   const [status, setStatus] = useState(null);
+  const [giftAnim, setGiftAnim] = useState(false);
+
+  const handleFabClick = () => {
+    if (!panelOpen) {
+      setGiftAnim(true);
+      setTimeout(() => setGiftAnim(false), 600);
+    }
+    panelOpen ? closePanel() : openPanel();
+  };
 
   if (cart.length === 0 && !panelOpen) return null;
 
@@ -45,10 +54,10 @@ function CartBar() {
     <>
       <button
         className="cart-fab"
-        onClick={() => panelOpen ? closePanel() : openPanel()}
+        onClick={handleFabClick}
         aria-label="Ver solicitud de muestras"
       >
-        <i className="fa-solid fa-cart-shopping"></i>
+        <i className={`fa-solid fa-gift${giftAnim ? ' gift-opening' : ''}`}></i>
         {cart.length > 0 && (
           <span className="cart-fab-badge">{cart.length}</span>
         )}
@@ -59,7 +68,7 @@ function CartBar() {
       <div className={`cart-panel${panelOpen ? ' cart-panel--open' : ''}`}>
         <div className="cart-panel-head">
           <div className="cart-panel-title">
-            <i className="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-gift"></i>
             <span>Solicitud de muestras</span>
           </div>
           <button className="cart-panel-close" onClick={handleClose} aria-label="Cerrar">

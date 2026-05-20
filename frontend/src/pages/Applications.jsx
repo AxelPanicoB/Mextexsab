@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
+import { useCart } from '../context/CartContext';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -193,6 +194,7 @@ const FEATURES = [
 
 function Applications() {
   const { openContactModal } = useContactModal();
+  const { add, remove, inCart } = useCart();
   const [searchParams] = useSearchParams();
   const [active, setActive] = useState(() => {
     const t = searchParams.get('tab');
@@ -214,6 +216,17 @@ function Applications() {
     <>
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
       <section className="app2-hero">
+        <div className="unified-mol-field" aria-hidden="true">
+          <svg className="m-svg m-svg-1" viewBox="0 0 80 92" fill="none"><polygon points="40,3 77,23 77,69 40,89 3,69 3,23" stroke="rgba(119,208,105,0.18)" strokeWidth="1.5"/><circle cx="40" cy="46" r="5" fill="rgba(92,184,69,0.12)"/><circle cx="40" cy="3" r="3" fill="rgba(119,208,105,0.2)"/><circle cx="77" cy="23" r="3" fill="rgba(119,208,105,0.15)"/><circle cx="77" cy="69" r="3" fill="rgba(119,208,105,0.15)"/><circle cx="40" cy="89" r="3" fill="rgba(119,208,105,0.2)"/><circle cx="3" cy="69" r="3" fill="rgba(119,208,105,0.12)"/><circle cx="3" cy="23" r="3" fill="rgba(119,208,105,0.12)"/></svg>
+          <svg className="m-svg m-svg-4" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="31" stroke="rgba(119,208,105,0.06)" strokeWidth="1" strokeDasharray="5 5"/><circle cx="35" cy="35" r="10" stroke="rgba(119,208,105,0.16)" strokeWidth="1.5"/><circle cx="35" cy="4" r="3.5" fill="rgba(92,184,69,0.15)"/><circle cx="66" cy="35" r="3.5" fill="rgba(92,184,69,0.10)"/><circle cx="35" cy="66" r="3.5" fill="rgba(92,184,69,0.12)"/><circle cx="4" cy="35" r="3.5" fill="rgba(92,184,69,0.08)"/><line x1="35" y1="7" x2="35" y2="25" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><line x1="63" y1="35" x2="45" y2="35" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><line x1="35" y1="63" x2="35" y2="45" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><line x1="7" y1="35" x2="25" y2="35" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/></svg>
+          <svg className="m-svg m-svg-7" viewBox="0 0 70 80" fill="none"><polygon points="35,3 67,20 67,60 35,77 3,60 3,20" stroke="rgba(119,208,105,0.16)" strokeWidth="1.4"/><circle cx="35" cy="40" r="14" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/></svg>
+          <svg className="m-svg m-svg-9" viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="5" fill="rgba(92,184,69,0.20)"/><ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/><ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.10)" strokeWidth="1" transform="rotate(60 30 30)"/><ellipse cx="30" cy="30" rx="28" ry="10" stroke="rgba(119,208,105,0.08)" strokeWidth="1" transform="rotate(120 30 30)"/></svg>
+          <svg className="m-svg m-svg-11" viewBox="0 0 60 60" fill="none"><line x1="30" y1="5" x2="30" y2="55" stroke="rgba(119,208,105,0.13)" strokeWidth="1.5"/><line x1="5" y1="30" x2="55" y2="30" stroke="rgba(119,208,105,0.13)" strokeWidth="1.5"/><circle cx="30" cy="30" r="6" fill="rgba(92,184,69,0.15)"/><circle cx="30" cy="5" r="3" fill="rgba(92,184,69,0.10)"/><circle cx="30" cy="55" r="3" fill="rgba(92,184,69,0.10)"/><circle cx="5" cy="30" r="3" fill="rgba(92,184,69,0.10)"/><circle cx="55" cy="30" r="3" fill="rgba(92,184,69,0.10)"/></svg>
+          <svg className="m-svg m-svg-17" viewBox="0 0 110 64" fill="none"><polygon points="28,2 54,16 54,48 28,62 2,48 2,16" stroke="rgba(119,208,105,0.14)" strokeWidth="1.2"/><polygon points="82,2 108,16 108,48 82,62 56,48 56,16" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/></svg>
+          <svg className="m-svg m-svg-19" viewBox="0 0 55 55" fill="none"><circle cx="27" cy="10" r="8" stroke="rgba(119,208,105,0.13)" strokeWidth="1.2"/><circle cx="10" cy="42" r="8" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/><circle cx="45" cy="42" r="8" stroke="rgba(119,208,105,0.11)" strokeWidth="1"/><line x1="22" y1="17" x2="15" y2="35" stroke="rgba(119,208,105,0.09)" strokeWidth="1"/><line x1="32" y1="17" x2="40" y2="35" stroke="rgba(119,208,105,0.09)" strokeWidth="1"/><line x1="18" y1="42" x2="37" y2="42" stroke="rgba(119,208,105,0.08)" strokeWidth="1"/></svg>
+          <div className="m-dot m-dot-1"/><div className="m-dot m-dot-2"/><div className="m-dot m-dot-3"/>
+          <div className="m-dot m-dot-4"/><div className="m-dot m-dot-5"/><div className="m-dot m-dot-6"/>
+        </div>
         <div className="app2-hero-text">
           <span className="app2-eyebrow">APLICACIONES</span>
           <h1 className="app2-hero-h1">
@@ -303,7 +316,10 @@ function Applications() {
                     <button
                       type="button"
                       className="app2-type-cta"
-                      onClick={() => openContactModal(t.name)}
+                      onClick={() => {
+                        const el = document.getElementById('app2-solutions');
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
                     >
                       Ver soluciones
                       <i className="fa-solid fa-arrow-right"></i>
@@ -316,7 +332,7 @@ function Applications() {
         </section>
 
         {/* 5. DETAILED SOLUTION BLOCK */}
-        <section className="app2-detail">
+        <section className="app2-detail" id="app2-solutions">
           <div className="contenedor">
             <div className="app2-section-header">
               <span className="app2-eyebrow">Formulaciones técnicas</span>
@@ -349,13 +365,14 @@ function Applications() {
                       <p className="app2-solution-name">{s.name}</p>
                       <p className="app2-solution-desc">{s.desc}</p>
                     </div>
-                    <Link
-                      to="/productos"
-                      className="app2-solution-arrow"
-                      aria-label="Ver en catálogo"
+                    <button
+                      type="button"
+                      className={`app2-solution-arrow${inCart(s.code) ? ' app2-solution-arrow--added' : ''}`}
+                      aria-label={inCart(s.code) ? 'Quitar de tu lista' : 'Solicitar muestra'}
+                      onClick={() => inCart(s.code) ? remove(s.code) : add({ id: s.code, name: s.name })}
                     >
-                      <i className="fa-solid fa-arrow-right"></i>
-                    </Link>
+                      <i className={`fa-solid ${inCart(s.code) ? 'fa-check' : 'fa-vial'}`}></i>
+                    </button>
                   </div>
                 ))}
                 <div className="app2-solutions-footer">

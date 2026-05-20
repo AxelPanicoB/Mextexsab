@@ -322,22 +322,15 @@ function Products() {
             </optgroup>
           </select>
 
-          <div className="filter-search-row">
-            <div className="filter-search-wrap">
-              <i className="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="search"
-                placeholder="Buscar soluciones, aplicaciones o ingredientes..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                aria-label="Buscar soluciones"
-              />
-            </div>
-            {filtered.length > 0 && (
-              <span className="filter-count">
-                {filtered.length} {filtered.length === 1 ? 'solución' : 'soluciones'}
-              </span>
-            )}
+          <div className="filter-search-wrap">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="search"
+              placeholder="Buscar soluciones, aplicaciones o ingredientes..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              aria-label="Buscar soluciones"
+            />
           </div>
         </div>
       </div>
@@ -345,6 +338,13 @@ function Products() {
       {/* ── SOLUTIONS GRID ───────────────────────────────────── */}
       <section className="catalog-grid-section">
         <div className="contenedor">
+          {filtered.length > 0 && (
+            <div className="catalog-results-header">
+              <span className="filter-count">
+                {filtered.length} {filtered.length === 1 ? 'solución' : 'soluciones'}
+              </span>
+            </div>
+          )}
           {filtered.length === 0 ? (
               <div className="catalog-empty">
                 <i className="fa-solid fa-flask-vial"></i>

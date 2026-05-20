@@ -235,7 +235,7 @@ function Home() {
             </p>
           </div>
           <div className="aplicaciones-grid">
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Quesos" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" />
                 <div className="aplica-card-overlay" />
@@ -246,7 +246,7 @@ function Home() {
                 <p className="aplica-card-text">Saborizantes, colorantes y texturizantes para quesos frescos, fundidos, maduros y análogos.</p>
               </div>
             </Link>
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Cremas" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`} alt="Cremas" />
                 <div className="aplica-card-overlay" />
@@ -257,7 +257,7 @@ function Home() {
                 <p className="aplica-card-text">Saborizantes y estabilizantes para cremas ácidas, natillas y productos untables.</p>
               </div>
             </Link>
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Yogurt" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`} alt="Yogurt" />
                 <div className="aplica-card-overlay" />
@@ -268,7 +268,7 @@ function Home() {
                 <p className="aplica-card-text">Complejos estabilizantes para yogures naturales, con frutas y bebidas lácteas fermentadas.</p>
               </div>
             </Link>
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Bebidas" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas" />
                 <div className="aplica-card-overlay" />
@@ -279,7 +279,7 @@ function Home() {
                 <p className="aplica-card-text">Saborizantes y sistemas funcionales para bebidas lácteas, leches saborizadas y sueros.</p>
               </div>
             </Link>
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Helados" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`} alt="Helados" />
                 <div className="aplica-card-overlay" />
@@ -290,7 +290,7 @@ function Home() {
                 <p className="aplica-card-text">Formulaciones para helados, paletas, nieves y productos congelados con textura uniforme.</p>
               </div>
             </Link>
-            <Link to="/productos" className="aplica-card">
+            <Link to="/productos?app=Postres" className="aplica-card">
               <div className="aplica-card-img">
                 <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`} alt="Postres" />
                 <div className="aplica-card-overlay" />

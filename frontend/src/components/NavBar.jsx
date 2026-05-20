@@ -54,7 +54,7 @@ function NavBar() {
             aria-label="Ver solicitud de muestras"
             title="Solicitud de muestras"
           >
-            <i className="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-gift"></i>
             {cart.length > 0 && (
               <span className="nav-cart-badge">{cart.length}</span>
             )}
