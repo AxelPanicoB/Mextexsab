@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import Turnstile from './Turnstile';
 
 function CartBar() {
   const { cart, remove, clear, panelOpen, openPanel, closePanel } = useCart();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', notes: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', notes: '', website: '' });
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
   const [giftAnim, setGiftAnim] = useState(false);
 
@@ -31,6 +34,8 @@ function CartBar() {
           email: form.email,
           phone: form.phone,
           notes: form.notes,
+          website: form.website,
+          turnstileToken,
           products: cart,
         }),
       });
@@ -39,6 +44,7 @@ function CartBar() {
       clear();
     } catch {
       setStatus('error');
+      setTurnstileKey(k => k + 1);
     }
   };
 
@@ -46,7 +52,9 @@ function CartBar() {
     closePanel();
     if (status === 'ok') {
       setStatus(null);
-      setForm({ name: '', email: '', phone: '', notes: '' });
+      setForm({ name: '', email: '', phone: '', notes: '', website: '' });
+      setTurnstileToken('');
+      setTurnstileKey(k => k + 1);
     }
   };
 
@@ -90,10 +98,17 @@ function CartBar() {
           ) : (
             <>
               <div>
-                <p className="cart-panel-label">
-                  <i className="fa-solid fa-vial"></i>
-                  Productos seleccionados ({cart.length})
-                </p>
+                <div className="cart-panel-list-header">
+                  <p className="cart-panel-label">
+                    <i className="fa-solid fa-vial"></i>
+                    Productos seleccionados ({cart.length})
+                  </p>
+                  {cart.length > 0 && (
+                    <button type="button" className="cart-panel-clear" onClick={clear}>
+                      Vaciar <i className="fa-solid fa-trash-can"></i>
+                    </button>
+                  )}
+                </div>
                 {cart.length === 0 ? (
                   <p className="cart-panel-empty">
                     Agrega productos desde el catálogo.
@@ -102,8 +117,14 @@ function CartBar() {
                   <ul className="cart-panel-list">
                     {cart.map((p) => (
                       <li key={p.id} className="cart-panel-item">
+                        <div className="cart-panel-item-icon">
+                          <i className="fa-solid fa-flask"></i>
+                        </div>
                         <div className="cart-panel-item-info">
                           <span className="cart-panel-item-name">{p.name}</span>
+                          {p.sku && (
+                            <span className="cart-panel-item-sku">{p.sku}</span>
+                          )}
                           {p.selectedFlavors?.length > 0 && (
                             <small className="cart-panel-item-flavors">
                               {p.selectedFlavors.join(' · ')}
@@ -125,6 +146,17 @@ function CartBar() {
               </div>
 
               <form className="cart-panel-form" onSubmit={handleSubmit}>
+                {/* Honeypot — invisible para humanos, bots lo llenan */}
+                <input
+                  name="website"
+                  value={form.website}
+                  onChange={set('website')}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0, pointerEvents: 'none' }}
+                />
+
                 <p className="cart-panel-label">
                   <i className="fa-regular fa-user"></i>
                   Tus datos de contacto
@@ -156,6 +188,9 @@ function CartBar() {
                   value={form.notes}
                   onChange={set('notes')}
                 />
+
+                <Turnstile onVerify={setTurnstileToken} resetKey={turnstileKey} />
+
                 {status === 'error' && (
                   <p className="cart-panel-error">
                     <i className="fa-solid fa-circle-exclamation"></i>

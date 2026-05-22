@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useContactModal } from '../context/ContactModalContext';
 
 const BASE = import.meta.env.BASE_URL;
 
 function Footer() {
+  const { openContactModal } = useContactModal();
   return (
     <footer>
       {/* ── FOOTER VERDE ─────────────────────────────── */}
@@ -22,13 +24,6 @@ function Footer() {
             <h3 className="footer-title">Contacto</h3>
             <div className="footer-contact">
               <div className="contact-item">
-                <i className="fa-solid fa-envelope"></i>
-                <div>
-                  <p className="contact-label">Email</p>
-                  <a href="mailto:ventas@metexsab.com">ventas@metexsab.com</a>
-                </div>
-              </div>
-              <div className="contact-item">
                 <i className="fa-solid fa-phone"></i>
                 <div>
                   <p className="contact-label">Teléfono</p>
@@ -46,7 +41,7 @@ function Footer() {
               <li><Link to="/productos">Productos</Link></li>
               <li><Link to="/aplicaciones">Aplicaciones</Link></li>
               <li><Link to="/nosotros">Nosotros</Link></li>
-              <li><Link to="/contacto">Contacto</Link></li>
+              <li><button type="button" className="footer-link-btn" onClick={openContactModal}>Contacto</button></li>
             </ul>
           </div>
         </div>

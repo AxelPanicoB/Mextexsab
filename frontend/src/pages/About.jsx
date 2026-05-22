@@ -44,12 +44,12 @@ const VALUES = [
 ];
 
 const SOLUTIONS = [
-  { image: `${BASE}img/about-reference/solution-quesos.png`, icon: 'fa-solid fa-cheese', label: 'Quesos y cremas', path: '/aplicaciones?tab=quesos' },
-  { image: `${BASE}img/about-reference/solution-yogurt.png`, icon: 'fa-solid fa-bottle-droplet', label: 'Yogurt y lácteos', path: '/aplicaciones?tab=yogurt' },
-  { image: `${BASE}img/about-reference/solution-helados.png`, icon: 'fa-solid fa-ice-cream', label: 'Helados y postres', path: '/aplicaciones?tab=helados' },
-  { image: `${BASE}img/about-reference/solution-bebidas.png`, icon: 'fa-solid fa-glass-water', label: 'Bebidas y concentrados', path: '/aplicaciones?tab=bebidas' },
-  { image: `${BASE}img/about-reference/solution-colorantes.png`, icon: 'fa-solid fa-palette', label: 'Colorantes', path: '/aplicaciones?tab=colorantes' },
-  { image: `${BASE}img/about-reference/solution-auxiliares.png`, icon: 'fa-solid fa-box-open', label: 'Auxiliares de proceso', path: '/aplicaciones?tab=auxiliares' },
+  { image: `${BASE}img/about-reference/solution-quesos.png`, icon: 'fa-solid fa-cheese', label: 'Quesos y cremas', path: '/productos?tab=quesos' },
+  { image: `${BASE}img/about-reference/solution-yogurt.png`, icon: 'fa-solid fa-bottle-droplet', label: 'Yogurt y lácteos', path: '/productos?tab=yogurt' },
+  { image: `${BASE}img/about-reference/solution-helados.png`, icon: 'fa-solid fa-ice-cream', label: 'Helados y postres', path: '/productos?tab=helados' },
+  { image: `${BASE}img/about-reference/solution-bebidas.png`, icon: 'fa-solid fa-glass-water', label: 'Bebidas y concentrados', path: '/productos?tab=bebidas' },
+  { image: `${BASE}img/about-reference/solution-colorantes.png`, icon: 'fa-solid fa-palette', label: 'Colorantes', path: '/productos?tab=colorantes' },
+  { image: `${BASE}img/about-reference/solution-auxiliares.png`, icon: 'fa-solid fa-box-open', label: 'Auxiliares de proceso', path: '/productos?tab=auxiliares' },
 ];
 
 const PROOF_POINTS = [
@@ -221,7 +221,7 @@ function About() {
           </div>
 
           <div className="about-solutions-action">
-            <Link to="/aplicaciones" className="about-outline-btn">
+            <Link to="/productos" className="about-outline-btn">
               Ver todos los productos <i className="fa-solid fa-arrow-right"></i>
             </Link>
           </div>

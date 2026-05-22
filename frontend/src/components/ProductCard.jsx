@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useContactModal } from '../context/ContactModalContext';
 
 const LEVEL_LABELS = ['', 'Baja', 'Media', 'Alta', 'Muy alta', 'Óptima'];
 
@@ -110,6 +110,7 @@ const BASE = import.meta.env.BASE_URL;
 
 function ProductCard({ product }) {
   const { add, remove, inCart } = useCart();
+  const { openContactModal } = useContactModal();
   const selected = inCart(product.id);
   const [showFlavors, setShowFlavors] = useState(false);
 
@@ -166,14 +167,14 @@ function ProductCard({ product }) {
               onClick={() => (selected ? remove(product.id) : add(product))}
             >
               {selected ? (
-                <><i className="fa-solid fa-check"></i> En tu lista</>
+                <><i className="fa-solid fa-check"></i>En tu lista</>
               ) : (
-                <><i className="fa-solid fa-vial"></i> Solicitar muestra</>
+                <><i className="fa-solid fa-vial"></i>Solicitar muestra</>
               )}
             </button>
-            <Link className="btn-solution-contact" to="/contacto">
-              Ficha técnica <i className="fa-solid fa-arrow-up-right-from-square"></i>
-            </Link>
+            <button type="button" className="btn-solution-contact" onClick={() => openContactModal('', product.name)}>
+              Consultar <i className="fa-solid fa-arrow-up-right-from-square"></i>
+            </button>
           </div>
         </div>
       </article>

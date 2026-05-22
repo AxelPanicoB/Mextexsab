@@ -16,7 +16,7 @@ export function CartProvider({ children }) {
     setCart((prev) =>
       prev.some((p) => p.id === product.id)
         ? prev
-        : [...prev, { id: product.id, name: product.name, selectedFlavors }]
+        : [...prev, { id: product.id, name: product.name, sku: product.sku || null, selectedFlavors }]
     );
 
   const updateFlavors = (id, selectedFlavors) =>

@@ -1,0 +1,32 @@
+# robots.txt — metexsab.com
+# Nota: este archivo debe estar en la raíz del dominio para que los crawlers lo lean.
+# Si el sitio está en un subdirectorio (/Mextexsab/), asegúrate de que el host
+# sirva este archivo también desde domain.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Bloquear endpoints de API de crawlers
+Disallow: /api/
+
+# ── Scrapers comerciales agresivos (respetan robots.txt) ──────
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /

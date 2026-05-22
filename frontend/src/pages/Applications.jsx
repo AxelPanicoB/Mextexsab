@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
 import { useCart } from '../context/CartContext';
@@ -195,6 +195,8 @@ const FEATURES = [
 function Applications() {
   const { openContactModal } = useContactModal();
   const { add, remove, inCart } = useCart();
+  const navRef = useRef(null);
+  const scrollNav = (dir) => navRef.current?.scrollBy({ left: dir * 220, behavior: 'smooth' });
   const [searchParams] = useSearchParams();
   const [active, setActive] = useState(() => {
     const t = searchParams.get('tab');
@@ -249,18 +251,27 @@ function Applications() {
       {/* ── 2. CATEGORY NAV ─────────────────────────────────────── */}
       <nav className="app2-nav" aria-label="Categorías de aplicación">
         <div className="contenedor">
-          <div className="app2-nav-inner">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                className={`app2-nav-btn${active === c.id ? ' is-active' : ''}`}
-                onClick={() => setActive(c.id)}
-              >
-                <i className={`fa-solid ${c.icon}`}></i>
-                <span>{c.label}</span>
-              </button>
-            ))}
+            <span className="app2-nav-label">Categorías</span>
+          <div className="app2-nav-row">
+            <button type="button" className="cat-arrow" onClick={() => scrollNav(-1)} aria-label="Anterior">
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <div className="app2-nav-inner" ref={navRef}>
+              {CATEGORIES.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  className={`app2-nav-btn${active === c.id ? ' is-active' : ''}`}
+                  onClick={() => setActive(c.id)}
+                >
+                  <i className={`fa-solid ${c.icon}`}></i>
+                  <span>{c.label}</span>
+                </button>
+              ))}
+            </div>
+            <button type="button" className="cat-arrow" onClick={() => scrollNav(1)} aria-label="Siguiente">
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </nav>
@@ -367,11 +378,11 @@ function Applications() {
                     </div>
                     <button
                       type="button"
-                      className={`app2-solution-arrow${inCart(s.code) ? ' app2-solution-arrow--added' : ''}`}
-                      aria-label={inCart(s.code) ? 'Quitar de tu lista' : 'Solicitar muestra'}
-                      onClick={() => inCart(s.code) ? remove(s.code) : add({ id: s.code, name: s.name })}
+                      className={`app2-solution-btn${inCart(s.code) ? ' app2-solution-btn--added' : ''}`}
+                      onClick={() => inCart(s.code) ? remove(s.code) : add({ id: s.code, name: s.name, sku: s.code })}
                     >
                       <i className={`fa-solid ${inCart(s.code) ? 'fa-check' : 'fa-vial'}`}></i>
+                      {inCart(s.code) ? 'En tu lista' : 'Solicitar muestra'}
                     </button>
                   </div>
                 ))}

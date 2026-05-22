@@ -1,21 +1,57 @@
 import express from 'express';
 import cors from 'cors';
+import { helmetMiddleware } from './middleware/security.js';
+import { generalLimiter } from './middleware/rateLimiter.js';
 import productsRouter from './routes/products.js';
 import contactRouter from './routes/contact.js';
 import samplesRouter from './routes/samples.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const isDev = process.env.NODE_ENV !== 'production';
 
-app.use(cors());
-app.use(express.json());
+// ── CORS ──────────────────────────────────────────────────────────────
+// Set ALLOWED_ORIGIN in .env for production (comma-separated if multiple)
+const devOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'];
+const prodOrigins = process.env.ALLOWED_ORIGIN
+  ? process.env.ALLOWED_ORIGIN.split(',').map((o) => o.trim())
+  : [];
+const allowedOrigins = isDev ? devOrigins : prodOrigins;
 
+// ── SECURITY MIDDLEWARE ────────────────────────────────────────────────
+app.use(helmetMiddleware);
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error('CORS: origin not allowed'));
+  },
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+}));
+app.use(express.json({ limit: '10kb' }));
+app.use(generalLimiter);
+
+// ── ROUTES ─────────────────────────────────────────────────────────────
+// Prevent search engines from indexing API endpoints
+app.use('/api', (_req, res, next) => {
+  res.set('X-Robots-Tag', 'noindex, nofollow');
+  next();
+});
 app.use('/api/products', productsRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/samples', samplesRouter);
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Metexsab API está en línea' });
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// ── GLOBAL ERROR HANDLER ───────────────────────────────────────────────
+// Never expose stack traces in production
+app.use((err, _req, res, _next) => {
+  console.error('[Error]', err.message);
+  res.status(err.status || 500).json({
+    error: isDev ? err.message : 'Error interno del servidor.',
+  });
 });
 
 app.listen(PORT, () => {

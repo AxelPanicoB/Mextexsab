@@ -12,7 +12,6 @@ import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Products from './pages/Products.jsx';
 import Applications from './pages/Applications.jsx';
-import Contact from './pages/Contact.jsx';
 
 function RevealObserver() {
   const location = useLocation();
@@ -48,7 +47,6 @@ function App() {
               <Route path="/productos" element={<Products />} />
               <Route path="/aplicaciones" element={<Applications />} />
               <Route path="/nosotros" element={<About />} />
-              <Route path="/contacto" element={<Contact />} />
             </Routes>
           </main>
           <Footer />

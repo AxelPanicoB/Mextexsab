@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContactModal } from '../context/ContactModalContext';
+import Turnstile from './Turnstile';
+
+const BASE = import.meta.env.BASE_URL;
 
 function ContactModal() {
-  const { open, closeContactModal, prefill } = useContactModal();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', interest: '', message: '' });
+  const { open, closeContactModal, prefill, productName } = useContactModal();
+  const [form, setForm] = useState({ name: '', email: '', phone: '', interest: '', message: '', website: '' });
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
@@ -32,14 +37,17 @@ function ContactModal() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form }),
+        body: JSON.stringify({ ...form, turnstileToken }),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
       setStatus({ type: 'success', text: '¡Listo! Te contactamos pronto.' });
-      setForm({ name: '', email: '', phone: '', interest: '', message: '' });
+      setForm({ name: '', email: '', phone: '', interest: '', message: '', website: '' });
+      setTurnstileToken('');
+      setTurnstileKey(k => k + 1);
     } catch (err) {
       setStatus({ type: 'error', text: err.message });
+      setTurnstileKey(k => k + 1);
     }
   };
 
@@ -84,6 +92,23 @@ function ContactModal() {
             </div>
           ) : (
             <form className="cmodal-form" onSubmit={handleSubmit}>
+              {/* Honeypot — invisible para humanos, bots lo llenan */}
+              <input
+                name="website"
+                value={form.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0, pointerEvents: 'none' }}
+              />
+
+              {productName && (
+                <div className="cmodal-product-chip">
+                  <i className="fa-solid fa-flask"></i>
+                  <span>{productName}</span>
+                </div>
+              )}
               <div className="cmodal-row">
                 <label>
                   Nombre *
@@ -140,6 +165,8 @@ function ContactModal() {
                 />
               </label>
 
+              <Turnstile onVerify={setTurnstileToken} resetKey={turnstileKey} />
+
               <button
                 type="submit"
                 className="cmodal-submit"
@@ -157,6 +184,14 @@ function ContactModal() {
                   <i className="fa-solid fa-circle-exclamation"></i> {status.text}
                 </p>
               )}
+
+              <p className="cmodal-privacy">
+                <i className="fa-solid fa-shield-halved"></i>
+                Tus datos son tratados de forma confidencial conforme a nuestro{' '}
+                <a href={`${BASE}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
+                  Aviso de Privacidad
+                </a>.
+              </p>
             </form>
           )}
         </div>

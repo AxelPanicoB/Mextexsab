@@ -1,0 +1,99 @@
+# ══════════════════════════════════════════════════════════════
+#  Metexsab — Apache/.htaccess para Neubox (producción)
+#  Coloca este archivo en la raíz del directorio donde se aloja
+#  el build de Vite (public_html/ o public_html/Mextexsab/)
+# ══════════════════════════════════════════════════════════════
+
+Options -Indexes
+
+# ── 1. HTTPS forzado ─────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── 2. SPA ROUTING (React Router) ────────────────────────────
+# Si el sitio está en la raíz del dominio (metexsab.com/):
+#   RewriteBase /
+#   ...RewriteRule . /index.html [L]
+#
+# Si está en subdirectorio (metexsab.com/Mextexsab/):
+#   RewriteBase /Mextexsab/
+#   ...RewriteRule . /Mextexsab/index.html [L]
+#
+# Ajusta según cómo quedes configurado en Neubox:
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# ── 3. HOTLINK PROTECTION — imágenes y assets ─────────────────
+# Permite: acceso directo (sin referer), el propio dominio,
+# y www. Bloquea cualquier otro sitio que intente incrustar
+# nuestras imágenes directamente.
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?metexsab\.com [NC]
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?localhost [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp|avif|svg|ico|mp4|mp3)$ - [F,NC,L]
+
+# ── 4. SECURITY HEADERS ──────────────────────────────────────
+<IfModule mod_headers.c>
+  # Anti-clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Previene MIME sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Referrer: solo origen al cruzar dominios
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # No indexar assets directos
+  Header always set X-Robots-Tag "noindex, nofollow" "expr=%{REQUEST_URI} =~ m#^/api/#"
+
+  # Permissions Policy — desactiva APIs innecesarias
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # HSTS — solo activar cuando SSL esté confirmado en Neubox
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ── 5. CACHE CONTROL — assets con hash (Vite los nombra así) ──
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # JS/CSS con hash en nombre → inmutable (Vite genera hashes)
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imágenes y fuentes → 1 mes
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf)$">
+    ExpiresDefault "access plus 1 month"
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # HTML → sin cache (siempre fresco para updates del SPA)
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ── 6. COMPRESIÓN GZIP ────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml font/woff font/woff2
+</IfModule>
+
+# ── 7. BLOQUEO DE BOTS AGRESIVOS ─────────────────────────────
+# Estos user-agents corresponden a scrapers conocidos
+RewriteCond %{HTTP_USER_AGENT} (AhrefsBot|SemrushBot|MJ12bot|DotBot|BLEXBot|PetalBot) [NC]
+RewriteRule ^ - [F,L]
+
+# ── 8. BLOQUEAR ACCESO DIRECTO A ARCHIVOS SENSIBLES ──────────
+<FilesMatch "(^\.env|\.env\.|\.git|composer\.(json|lock)|package\.json|package-lock\.json)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

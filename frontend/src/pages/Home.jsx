@@ -201,8 +201,8 @@ function Home() {
             </div>
           </div>
           <div className="hero-logo-group" aria-hidden="true">
-            <img src={`${BASE}img/logo.png`} alt="" className="hero-logo-img" />
-            <img src={`${BASE}img/MetexsabL.png`} alt="" className="hero-logo-static" />
+            <img src={`${BASE}img/logo2.png`} alt="" className="hero-logo-img" />
+            <img src={`${BASE}img/Metexsabln.png`} alt="" className="hero-logo-static" />
           </div>
         </div>
       </section>
@@ -237,7 +237,7 @@ function Home() {
           <div className="aplicaciones-grid">
             <Link to="/productos?app=Quesos" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" />
+                <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -248,7 +248,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Cremas" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`} alt="Cremas" />
+                <img src={`${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`} alt="Cremas" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -259,7 +259,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Yogurt" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`} alt="Yogurt" />
+                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`} alt="Yogurt" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -270,7 +270,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Bebidas" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas" />
+                <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -281,7 +281,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Helados" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`} alt="Helados" />
+                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`} alt="Helados" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -292,7 +292,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Postres" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`} alt="Postres" />
+                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`} alt="Postres" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -370,12 +370,14 @@ function Home() {
                 src={`${BASE}img/propiospd.png`}
                 alt="Formulaciones propias Metexsab — quesos, saborizantes y colorantes"
                 className="why-editorial-img"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="why-blocks-col">
               <div className="why-block">
                 <div className="why-block-icon">
-                  <img src={`${BASE}img/frasco.png`} alt="Frasco de formulación" />
+                  <img src={`${BASE}img/frasco.png`} alt="Frasco de formulación" loading="lazy" decoding="async" />
                 </div>
                 <div className="why-block-text">
                   <h3>Productos propios</h3>
@@ -384,7 +386,7 @@ function Home() {
               </div>
               <div className="why-block">
                 <div className="why-block-icon">
-                  <img src={`${BASE}img/gota.png`} alt="Saborizante" />
+                  <img src={`${BASE}img/gota.png`} alt="Saborizante" loading="lazy" decoding="async" />
                 </div>
                 <div className="why-block-text">
                   <h3>Perfiles de sabor auténticos</h3>
@@ -393,7 +395,7 @@ function Home() {
               </div>
               <div className="why-block">
                 <div className="why-block-icon">
-                  <img src={`${BASE}img/queso.png`} alt="Queso" />
+                  <img src={`${BASE}img/queso.png`} alt="Queso" loading="lazy" decoding="async" />
                 </div>
                 <div className="why-block-text">
                   <h3>Color y funcionalidad</h3>
@@ -402,7 +404,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="why-band">
+          <Link to="/productos" className="why-band">
             <div className="why-band-icon">
               <i className="fa-solid fa-medal"></i>
             </div>
@@ -412,7 +414,7 @@ function Home() {
               Desarrolladas para la industria, hechas para tu proceso
             </p>
             <i className="fa-solid fa-arrow-right why-band-arrow"></i>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -428,51 +430,66 @@ function Home() {
           </div>
           <div className="formulacion-list">
             <div className="formulacion-item">
-              <span className="formulacion-cat">Quesos</span>
-              <div className="formulacion-info">
+              <Link to="/productos" className="formulacion-img-wrap">
+                <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" loading="lazy" decoding="async" />
+                <span className="formulacion-cat">Quesos</span>
+              </Link>
+              <Link to="/productos" className="formulacion-info">
                 <h3>Retención de humedad para quesos frescos</h3>
                 <p>Reduce el desuerado y mejora el rendimiento en quesos frescos y análogos. Textura uniforme y vida de anaquel extendida.</p>
-              </div>
+              </Link>
               <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
             </div>
             <div className="formulacion-item">
-              <span className="formulacion-cat">Saborizantes</span>
-              <div className="formulacion-info">
+              <Link to="/productos" className="formulacion-img-wrap">
+                <img src={`${BASE}img/Productos/Saborizantes/quesos/polvo/quesos.png`} alt="Saborizante cheddar" loading="lazy" decoding="async" />
+                <span className="formulacion-cat">Saborizantes</span>
+              </Link>
+              <Link to="/productos" className="formulacion-info">
                 <h3>Perfil sabor cheddar</h3>
                 <p>Saborizante líquido y en polvo para quesos análogos, fundidos y snacks con perfil auténtico e intenso.</p>
-              </div>
+              </Link>
               <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
             </div>
             <div className="formulacion-item">
-              <span className="formulacion-cat">Colorantes</span>
-              <div className="formulacion-info">
+              <Link to="/productos" className="formulacion-img-wrap">
+                <img src={`${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`} alt="Colorante annatto" loading="lazy" decoding="async" />
+                <span className="formulacion-cat">Colorantes</span>
+              </Link>
+              <Link to="/productos" className="formulacion-info">
                 <h3>Colorante annatto liposoluble</h3>
                 <p>Colorante natural de alta concentración para quesos, mantequillas y productos grasos. Estable a temperatura de proceso.</p>
-              </div>
+              </Link>
               <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
             </div>
             <div className="formulacion-item">
-              <span className="formulacion-cat">Yogurt</span>
-              <div className="formulacion-info">
+              <Link to="/productos" className="formulacion-img-wrap">
+                <img src={`${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.jpg`} alt="Estabilizante yogurt" loading="lazy" decoding="async" />
+                <span className="formulacion-cat">Yogurt</span>
+              </Link>
+              <Link to="/productos" className="formulacion-info">
                 <h3>Estabilizante para yogurt</h3>
                 <p>Complejo estabilizante que evita la sinéresis y da cuerpo natural en yogures con y sin homogeneizado.</p>
-              </div>
+              </Link>
               <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
             </div>
             <div className="formulacion-item">
-              <span className="formulacion-cat">Bebidas</span>
-              <div className="formulacion-info">
+              <Link to="/productos" className="formulacion-img-wrap">
+                <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas lácteas" loading="lazy" decoding="async" />
+                <span className="formulacion-cat">Bebidas</span>
+              </Link>
+              <Link to="/productos" className="formulacion-info">
                 <h3>Sistema para bebidas lácteas</h3>
                 <p>Formulación funcional para bebidas saborizadas, leches UHT y sueros con estabilidad en anaquel y buena dispersión.</p>
-              </div>
+              </Link>
               <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
                 <i className="fa-solid fa-arrow-right"></i>
               </Link>
@@ -530,24 +547,15 @@ function Home() {
         </div>
       </section>
 
-      {/* ── 8. BLOQUE EDITORIAL ──────────────────────────── */}
+      {/* ── 8. BANNER EDITORIAL ──────────────────────────── */}
       <section className="editorial-section reveal-section">
-        <div className="editorial-inner">
-          <div className="editorial-img-wrap">
-            <img
-              src={`${BASE}img/propiospd.png`}
-              alt="Soluciones Metexsab para producción real"
-            />
-          </div>
-          <div className="editorial-content">
-            <span className="editorial-eyebrow">Metexsab</span>
-            <p className="editorial-phrase">
-              "Desarrollamos soluciones pensadas para producción real."
-            </p>
-            <Link to="/nosotros" className="editorial-link">
-              Conoce nuestra historia <i className="fa-solid fa-arrow-right"></i>
-            </Link>
-          </div>
+        <div className="editorial-banner">
+          <img
+            src={`${BASE}img/imgmetexsab.png`}
+            alt="Metexsab"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </section>
 
@@ -594,12 +602,6 @@ function Home() {
               {' '}{ctaStatus.text}
             </p>
           )}
-          <p className="cta-note">
-            También puedes escribirnos directamente a{' '}
-            <a href="mailto:ventas@metexsab.com" style={{ color: 'var(--green-dark)', textDecoration: 'underline' }}>
-              ventas@metexsab.com
-            </a>
-          </p>
         </div>
       </section>
     </>

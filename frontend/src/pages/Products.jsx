@@ -1,7 +1,8 @@
-import { useMemo, useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useMemo, useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard.jsx';
 import allProducts from '../data/products.js';
+import { useContactModal } from '../context/ContactModalContext';
 
 const TECH_LINES = [
   'Texturizantes y Estabilizantes',
@@ -20,6 +21,21 @@ const APPLICATIONS = [
   'Tortillas',
 ];
 
+const FILTER_ICONS = {
+  'Todos':                          'fa-border-all',
+  'Quesos':                         'fa-cheese',
+  'Yogurt':                         'fa-bottle-droplet',
+  'Helados':                        'fa-ice-cream',
+  'Bebidas':                        'fa-mug-hot',
+  'Cremas':                         'fa-jar',
+  'Postres':                        'fa-cake-candles',
+  'Tortillas':                      'fa-bread-slice',
+  'Texturizantes y Estabilizantes': 'fa-layer-group',
+  'Saborizantes':                   'fa-droplet',
+  'Colorantes':                     'fa-palette',
+  'Auxiliares de proceso':          'fa-gear',
+};
+
 function CountUp({ to, suffix = '' }) {
   const [val, setVal] = useState(0);
   useEffect(() => {
@@ -37,8 +53,11 @@ function CountUp({ to, suffix = '' }) {
 
 function Products() {
   const location = useLocation();
+  const { openContactModal } = useContactModal();
   const [activeFilter, setActiveFilter] = useState('Todos');
   const [search, setSearch] = useState('');
+  const chipsRef = useRef(null);
+  const scrollChips = (dir) => chipsRef.current?.scrollBy({ left: dir * 220, behavior: 'smooth' });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -244,7 +263,7 @@ function Products() {
             <div className="unified-stat">
               <div className="unified-stat-icon"><i className="fa-solid fa-flask"></i></div>
               <div className="unified-stat-text">
-                <strong><CountUp to={150} suffix="+" /></strong>
+                <strong><CountUp to={25} suffix="+" /></strong>
                 <span>Soluciones desarrolladas</span>
               </div>
             </div>
@@ -269,58 +288,49 @@ function Products() {
       {/* ── FILTER BAR ───────────────────────────────────────── */}
       <div className="catalog-filter-bar">
         <div className="contenedor">
-          {/* Desktop chips */}
-          <div className="filter-chips">
-            <button
-              type="button"
-              className={`filter-chip${activeFilter === 'Todos' ? ' active' : ''}`}
-              onClick={() => setActiveFilter('Todos')}
-            >
-              Todos
-            </button>
-            <span className="filter-chips-sep" />
-            {APPLICATIONS.map((app) => (
-              <button
-                key={app}
-                type="button"
-                className={`filter-chip${activeFilter === app ? ' active' : ''}`}
-                onClick={() => setActiveFilter(app)}
-              >
-                {app}
+          <div className="filter-cat-section">
+            <p className="filter-cat-heading">Explora nuestras categorías</p>
+            <div className="filter-chips-row">
+              <button type="button" className="cat-arrow" onClick={() => scrollChips(-1)} aria-label="Anterior">
+                <i className="fa-solid fa-chevron-left"></i>
               </button>
-            ))}
-            <span className="filter-chips-sep" />
-            {TECH_LINES.map((line) => (
+              <div className="filter-chips" ref={chipsRef}>
               <button
-                key={line}
                 type="button"
-                className={`filter-chip filter-chip--line${activeFilter === line ? ' active' : ''}`}
-                onClick={() => setActiveFilter(line)}
+                className={`filter-chip${activeFilter === 'Todos' ? ' active' : ''}`}
+                onClick={() => setActiveFilter('Todos')}
               >
-                {line}
+                <i className="fa-solid fa-border-all"></i>
+                <span>Todos</span>
               </button>
-            ))}
+              {APPLICATIONS.map((app) => (
+                <button
+                  key={app}
+                  type="button"
+                  className={`filter-chip${activeFilter === app ? ' active' : ''}`}
+                  onClick={() => setActiveFilter(app)}
+                >
+                  <i className={`fa-solid ${FILTER_ICONS[app] || 'fa-circle-dot'}`}></i>
+                  <span>{app}</span>
+                </button>
+              ))}
+              {TECH_LINES.map((line) => (
+                <button
+                  key={line}
+                  type="button"
+                  className={`filter-chip${activeFilter === line ? ' active' : ''}`}
+                  onClick={() => setActiveFilter(line)}
+                >
+                  <i className={`fa-solid ${FILTER_ICONS[line] || 'fa-circle-dot'}`}></i>
+                  <span>{line}</span>
+                </button>
+              ))}
+              </div>
+              <button type="button" className="cat-arrow" onClick={() => scrollChips(1)} aria-label="Siguiente">
+                <i className="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
           </div>
-
-          {/* Mobile select */}
-          <select
-            className="filter-mobile-select"
-            value={activeFilter}
-            onChange={(e) => setActiveFilter(e.target.value)}
-            aria-label="Filtrar productos"
-          >
-            <option value="Todos">Todos los productos</option>
-            <optgroup label="Por aplicación">
-              {APPLICATIONS.map((a) => (
-                <option key={a} value={a}>{a}</option>
-              ))}
-            </optgroup>
-            <optgroup label="Por línea técnica">
-              {TECH_LINES.map((l) => (
-                <option key={l} value={l}>{l}</option>
-              ))}
-            </optgroup>
-          </select>
 
           <div className="filter-search-wrap">
             <i className="fa-solid fa-magnifying-glass"></i>
@@ -338,6 +348,9 @@ function Products() {
       {/* ── SOLUTIONS GRID ───────────────────────────────────── */}
       <section className="catalog-grid-section">
         <div className="contenedor">
+          {activeFilter !== 'Todos' && (
+            <h2 className="active-cat-title">{activeFilter}</h2>
+          )}
           {filtered.length > 0 && (
             <div className="catalog-results-header">
               <span className="filter-count">
@@ -378,10 +391,10 @@ function Products() {
                 la solución ideal para tu producto.
               </p>
             </div>
-            <Link to="/contacto" className="btn-catalog-cta">
+            <button type="button" className="btn-catalog-cta" onClick={openContactModal}>
               Escríbenos directamente
               <i className="fa-solid fa-arrow-right"></i>
-            </Link>
+            </button>
           </div>
         </div>
       </section>
