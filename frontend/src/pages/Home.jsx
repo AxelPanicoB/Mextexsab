@@ -202,7 +202,7 @@ function Home() {
           </div>
           <div className="hero-logo-group" aria-hidden="true">
             <img src={`${BASE}img/logo2.png`} alt="" className="hero-logo-img" />
-            <img src={`${BASE}img/Metexsabln.png`} alt="" className="hero-logo-static" />
+            <img src={`${BASE}img/MetexsabLN.png`} alt="" className="hero-logo-static" />
           </div>
         </div>
       </section>
