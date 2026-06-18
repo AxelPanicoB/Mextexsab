@@ -150,7 +150,7 @@ function About() {
 
           <div className="about-solutions-action">
             <Link to="/productos" className="about-outline-btn">
-              Ver todos los productos <ArrowRight size={24} weight="regular" />
+              Ver todos los productos
             </Link>
             <a
               className="about-whatsapp-btn"

@@ -6,9 +6,10 @@ import { useContactModal } from '../context/ContactModalContext';
 import { useCart } from '../context/CartContext';
 import {
   Cheese, IceCream, Drop, Palette, Gear, Coffee, Jar, Cake, Bread, Stack, TestTube,
-  SquaresFour, CaretLeft, CaretRight, MagnifyingGlass, Atom, Gift, ArrowRight,
+  SquaresFour, CaretLeft, CaretRight, MagnifyingGlass, Atom, Gift,
   CheckCircle, RadioButton,
 } from '@phosphor-icons/react';
+import WhatsAppIcon from '../components/WhatsAppIcon.jsx';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -385,7 +386,7 @@ function Catalog() {
           <div className="hero-fw-text">
             <span className="app-hero-eyebrow">
               <Atom size={22} weight="regular" />
-              Catálogo Técnico
+              Productos
             </span>
             <h1 className="unified-hero-h1">
               Ingredientes funcionales para<br/>
@@ -400,7 +401,6 @@ function Catalog() {
             <button type="button" className="btn-sample-free" onClick={openPanel}>
               <Gift size={27} weight="regular" />
               Solicitar muestra gratuita
-              <ArrowRight size={24} weight="regular" />
             </button>
             <p className="hero-sample-hint">
               <CheckCircle size={21} weight="fill" />
@@ -555,22 +555,28 @@ function Catalog() {
 
       {/* ── 6. CTA FINAL ─────────────────────────────────────────── */}
       <section className="catalog-bottom-cta reveal-section">
+        <div className="catalog-cta-glow" aria-hidden="true" />
         <div className="contenedor">
           <div className="catalog-cta-inner">
-            <div className="catalog-cta-icon">
-              <TestTube size={48} weight="regular" />
+            <div className="catalog-cta-wa-badge">
+              <WhatsAppIcon size={44} />
             </div>
             <div className="catalog-cta-text">
-              <h3>¿Buscas algo específico para tu proceso?</h3>
+              <h3>¿Buscas algo específico<br/>para tu proceso?</h3>
               <p>
-                Cuéntanos tu aplicación y con gusto te ayudamos a encontrar
+                Cuéntanos tu aplicación y un asesor técnico te ayuda a encontrar
                 la solución ideal para tu producto.
               </p>
             </div>
-            <button type="button" className="btn-catalog-cta" onClick={openContactModal}>
+            <a
+              className="btn-catalog-cta"
+              href={`https://wa.me/524422758979/?text=${encodeURIComponent('Hola, vengo del catálogo de productos y me gustaría recibir asesoría técnica')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon size={22} />
               Escríbenos directamente
-              <ArrowRight size={24} weight="regular" />
-            </button>
+            </a>
           </div>
         </div>
       </section>

@@ -2,7 +2,7 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useContactModal } from '../context/ContactModalContext';
-import { House, Package, Users, Envelope, Gift, List, X } from '@phosphor-icons/react';
+import { House, Package, Users, Envelope, Gift } from '@phosphor-icons/react';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -64,12 +64,14 @@ function NavBar() {
           </button>
 
           <button
-            className="nav-toggle"
+            className={`nav-toggle${open ? ' is-open' : ''}`}
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
           >
-            {open ? <X size={36} weight="bold" /> : <List size={36} weight="bold" />}
+            <span className="hb-bar" />
+            <span className="hb-bar" />
+            <span className="hb-bar" />
           </button>
         </div>
       </div>
