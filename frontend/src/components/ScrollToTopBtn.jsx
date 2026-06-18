@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
+import { CaretUp } from '@phosphor-icons/react';
 
 function ScrollToTopBtn() {
   const [visible, setVisible] = useState(false);
@@ -16,7 +17,7 @@ function ScrollToTopBtn() {
       aria-label="Volver arriba"
       title="Volver arriba"
     >
-      <i className="fa-solid fa-chevron-up"></i>
+      <CaretUp size={30} weight="bold" />
     </button>
   );
 }

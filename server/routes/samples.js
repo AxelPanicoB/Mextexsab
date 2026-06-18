@@ -66,6 +66,9 @@ function buildEmailHTML(data) {
           </td>
           <td style="font-size:13px;color:#5a7a60;">${esc(data.phone)}</td>
         </tr></table>
+        <div style="margin-top:8px;font-size:13px;color:#5a7a60;">
+          &#128205; <strong style="color:#2a3c2e;">Direcci&oacute;n de env&iacute;o:</strong> ${esc(data.address)}
+        </div>
       </td></tr>
     </table>
 

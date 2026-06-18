@@ -1,20 +1,44 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useContactModal } from '../context/ContactModalContext';
 import Turnstile from './Turnstile';
+import {
+  Envelope, X, Flask, Check, PaperPlane, WarningCircle,
+  Clock, ShieldCheck, CircleNotch, CheckCircle,
+} from '@phosphor-icons/react';
+import WhatsAppIcon from './WhatsAppIcon.jsx';
 
 const BASE = import.meta.env.BASE_URL;
 
+const INTEREST_OPTIONS = [
+  'Quesos',
+  'Cremas',
+  'Yogurt',
+  'Helados',
+  'Bebidas',
+  'Postres',
+  'Tortillas',
+  'Colorantes',
+  'Saborizantes',
+  'Texturizantes y Estabilizantes',
+  'Auxiliares de Proceso',
+  'Otro',
+];
+
 function ContactModal() {
   const { open, closeContactModal, prefill, productName } = useContactModal();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', interest: '', message: '', website: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', website: '' });
+  const [interests, setInterests] = useState([]);
   const [turnstileToken, setTurnstileToken] = useState('');
   const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
     if (open) {
-      setForm(f => ({ ...f, interest: prefill || '' }));
+      const match = prefill
+        ? INTEREST_OPTIONS.find(o => o === prefill || o.startsWith(prefill) || prefill.startsWith(o))
+        : null;
+      setInterests(match ? [match] : []);
       setStatus(null);
       document.body.style.overflow = 'hidden';
     } else {
@@ -30,19 +54,29 @@ function ContactModal() {
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
+  const toggleInterest = (opt) =>
+    setInterests(prev =>
+      prev.includes(opt) ? prev.filter(i => i !== opt) : [...prev, opt]
+    );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (interests.length === 0) {
+      setStatus({ type: 'error', text: 'Selecciona al menos un área de interés.' });
+      return;
+    }
     setStatus({ type: 'loading' });
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, turnstileToken }),
+        body: JSON.stringify({ ...form, interest: interests.join(', '), turnstileToken }),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
       setStatus({ type: 'success', text: '¡Listo! Te contactamos pronto.' });
-      setForm({ name: '', email: '', phone: '', interest: '', message: '', website: '' });
+      setForm({ name: '', email: '', phone: '', message: '', website: '' });
+      setInterests([]);
       setTurnstileToken('');
       setTurnstileKey(k => k + 1);
     } catch (err) {
@@ -62,7 +96,7 @@ function ContactModal() {
       >
         <div className="cmodal-header">
           <div className="cmodal-header-icon">
-            <i className="fa-solid fa-envelope"></i>
+            <Envelope size={30} weight="regular" />
           </div>
           <div className="cmodal-header-copy">
             <p className="cmodal-eyebrow">Contacto rápido</p>
@@ -74,7 +108,7 @@ function ContactModal() {
             onClick={closeContactModal}
             aria-label="Cerrar"
           >
-            <i className="fa-solid fa-xmark"></i>
+            <X size={30} weight="bold" />
           </button>
         </div>
 
@@ -82,7 +116,7 @@ function ContactModal() {
           {status?.type === 'success' ? (
             <div className="cmodal-success">
               <div className="cmodal-success-icon">
-                <i className="fa-solid fa-circle-check"></i>
+                <CheckCircle size={72} weight="fill" />
               </div>
               <h4>¡Mensaje enviado!</h4>
               <p>Un asesor técnico se pondrá en contacto contigo pronto.</p>
@@ -105,7 +139,7 @@ function ContactModal() {
 
               {productName && (
                 <div className="cmodal-product-chip">
-                  <i className="fa-solid fa-flask"></i>
+                  <Flask size={21} weight="regular" />
                   <span>{productName}</span>
                 </div>
               )}
@@ -121,12 +155,14 @@ function ContactModal() {
                   />
                 </label>
                 <label>
-                  Teléfono
+                  Teléfono *
                   <input
                     name="phone"
+                    type="tel"
                     value={form.phone}
                     onChange={handleChange}
                     placeholder="Teléfono"
+                    required
                   />
                 </label>
               </div>
@@ -141,27 +177,33 @@ function ContactModal() {
                   required
                 />
               </label>
-              <label>
-                Área de interés *
-                <select name="interest" value={form.interest} onChange={handleChange} required>
-                  <option value="">Selecciona una opción</option>
-                  <option value="Quesos y Cremas">Quesos y Cremas</option>
-                  <option value="Yogurt">Yogurt</option>
-                  <option value="Helados">Helados</option>
-                  <option value="Bebidas">Bebidas</option>
-                  <option value="Colorantes">Colorantes</option>
-                  <option value="Auxiliares de Proceso">Auxiliares de Proceso</option>
-                  <option value="Otros">Otros</option>
-                </select>
-              </label>
+              <div className="cmodal-interests">
+                <span className="cmodal-interests-label">
+                  Áreas de interés * <small>(puedes elegir varias)</small>
+                </span>
+                <div className="cmodal-interest-chips" role="group" aria-label="Áreas de interés">
+                  {INTEREST_OPTIONS.map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`cmodal-interest-chip${interests.includes(opt) ? ' selected' : ''}`}
+                      aria-pressed={interests.includes(opt)}
+                      onClick={() => toggleInterest(opt)}
+                    >
+                      {interests.includes(opt) && <Check size={16} weight="bold" />}
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <label>
                 Mensaje
                 <textarea
                   name="message"
-                  rows="3"
+                  rows="2"
                   value={form.message}
                   onChange={handleChange}
-                  placeholder="Cuéntanos sobre tu producto o necesidad específica..."
+                  placeholder="¿Qué producto haces? ¿Qué necesitas mejorar? Cuéntanos con tus palabras, con gusto te asesoramos..."
                 />
               </label>
 
@@ -173,40 +215,44 @@ function ContactModal() {
                 disabled={status?.type === 'loading'}
               >
                 {status?.type === 'loading' ? (
-                  <><i className="fa-solid fa-spinner fa-spin"></i> Enviando...</>
+                  <><CircleNotch size={24} weight="regular" className="icon-spin" /> Enviando...</>
                 ) : (
-                  <><i className="fa-solid fa-paper-plane"></i> Enviar mensaje</>
+                  <><PaperPlane size={24} weight="fill" /> Enviar mensaje</>
                 )}
               </button>
 
               {status?.type === 'error' && (
                 <p className="cmodal-status error">
-                  <i className="fa-solid fa-circle-exclamation"></i> {status.text}
+                  <WarningCircle size={24} weight="fill" /> {status.text}
                 </p>
               )}
 
-              <p className="cmodal-privacy">
-                <i className="fa-solid fa-shield-halved"></i>
-                Tus datos son tratados de forma confidencial conforme a nuestro{' '}
-                <a href={`${BASE}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
-                  Aviso de Privacidad
-                </a>.
-              </p>
             </form>
           )}
         </div>
 
         <div className="cmodal-footer">
           <span className="cmodal-footer-row">
-            <i className="fa-brands fa-whatsapp"></i>
             ¿Prefieres WhatsApp?{' '}
-            <a href="https://wa.me/524422758979" target="_blank" rel="noopener noreferrer">
-              442 275 8979
+            <a
+              className="flavors-note-btn flavors-note-btn--wa cmodal-wa-btn"
+              href="https://wa.me/524422758979/?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppIcon size={21} /> Escríbenos
             </a>
           </span>
           <span className="cmodal-footer-row cmodal-footer-hours">
-            <i className="fa-solid fa-clock"></i>
+            <Clock size={20} weight="regular" />
             Lun–Vie, 9:00–18:00
+          </span>
+          <span className="cmodal-footer-row cmodal-footer-privacy">
+            <ShieldCheck size={20} weight="regular" />
+            Tus datos son confidenciales.{' '}
+            <a href={`${BASE}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
+              Aviso de Privacidad
+            </a>
           </span>
         </div>
       </div>

@@ -1,0 +1,21 @@
+<?php
+/**
+ * Configuración del API de Metexsab.
+ * Copia este archivo como config.php y rellena los valores.
+ * (config.php está bloqueado por .htaccess y NO debe subirse a git)
+ */
+
+return [
+    // Destinatario de las notificaciones de contacto y muestras
+    'NOTIFY_EMAIL' => 'ventas@metexsab.com',
+
+    // Remitente — debe ser una cuenta de correo que exista en el dominio
+    // (créala en cPanel → Email Accounts para mejor entregabilidad)
+    'FROM_EMAIL' => 'noreply@metexsab.com',
+
+    // Cloudflare Turnstile (anti-bot). Si se deja vacío, la verificación se salta.
+    'TURNSTILE_SECRET' => '',
+
+    // Orígenes permitidos, separados por coma. Vacío = no se valida el Origin.
+    'ALLOWED_ORIGIN' => 'https://metexsab.com,https://www.metexsab.com',
+];

@@ -1,3 +1,7 @@
+// Load .env if present (Node 20.12+). Scripts don't pass --env-file,
+// so without this the SMTP/Turnstile/CORS vars are never read.
+try { process.loadEnvFile(); } catch { /* .env is optional in dev */ }
+
 import express from 'express';
 import cors from 'cors';
 import { helmetMiddleware } from './middleware/security.js';
@@ -23,7 +27,9 @@ app.use(helmetMiddleware);
 app.use(cors({
   origin: (origin, cb) => {
     if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    cb(new Error('CORS: origin not allowed'));
+    const err = new Error('CORS: origin not allowed');
+    err.status = 403;
+    cb(err);
   },
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],

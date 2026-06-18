@@ -1,0 +1,24 @@
+# ══════════════════════════════════════════════════════════════
+#  Metexsab API (PHP) — colocar esta carpeta en public_html/api/
+# ══════════════════════════════════════════════════════════════
+
+Options -Indexes
+
+# ── Endpoints "limpios": el frontend llama /api/contact y /api/samples ──
+RewriteEngine On
+RewriteRule ^contact/?$ contact.php [L]
+RewriteRule ^samples/?$ samples.php [L]
+
+# Bloquear el directorio interno de rate limiting
+RewriteRule ^\.ratelimit(/|$) - [F,L]
+
+# ── Bloquear acceso directo a archivos internos ──
+<FilesMatch "^(_lib\.php|config\.php|config\.php\.example)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# ── No indexar el API ──
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
+import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlane } from '@phosphor-icons/react';
 
 function CartBar() {
-  const { cart, remove, clear, panelOpen, openPanel, closePanel } = useCart();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', notes: '', website: '' });
+  const { cart, remove, clear, panelOpen, openPanel, closePanel, hintDismissed } = useCart();
+  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', notes: '', website: '' });
   const [turnstileToken, setTurnstileToken] = useState('');
   const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
@@ -33,6 +34,7 @@ function CartBar() {
           name: form.name,
           email: form.email,
           phone: form.phone,
+          address: form.address,
           notes: form.notes,
           website: form.website,
           turnstileToken,
@@ -52,7 +54,7 @@ function CartBar() {
     closePanel();
     if (status === 'ok') {
       setStatus(null);
-      setForm({ name: '', email: '', phone: '', notes: '', website: '' });
+      setForm({ name: '', email: '', phone: '', address: '', notes: '', website: '' });
       setTurnstileToken('');
       setTurnstileKey(k => k + 1);
     }
@@ -60,12 +62,17 @@ function CartBar() {
 
   return (
     <>
+      {cart.length > 0 && !panelOpen && !hintDismissed && (
+        <div className="cart-fab-hint" aria-hidden="true">
+          ¡Aquí están tus muestras! 🎁
+        </div>
+      )}
       <button
-        className="cart-fab"
+        className={`cart-fab${cart.length > 0 ? ' cart-fab--active' : ''}`}
         onClick={handleFabClick}
         aria-label="Ver solicitud de muestras"
       >
-        <i className={`fa-solid fa-gift${giftAnim ? ' gift-opening' : ''}`}></i>
+        <Gift size={42} weight="bold" className={giftAnim ? 'gift-opening' : ''} />
         {cart.length > 0 && (
           <span className="cart-fab-badge">{cart.length}</span>
         )}
@@ -76,18 +83,18 @@ function CartBar() {
       <div className={`cart-panel${panelOpen ? ' cart-panel--open' : ''}`}>
         <div className="cart-panel-head">
           <div className="cart-panel-title">
-            <i className="fa-solid fa-gift"></i>
+            <Gift size={30} weight="bold" />
             <span>Solicitud de muestras</span>
           </div>
           <button className="cart-panel-close" onClick={handleClose} aria-label="Cerrar">
-            <i className="fa-solid fa-xmark"></i>
+            <X size={33} weight="bold" />
           </button>
         </div>
 
         <div className="cart-panel-body">
           {status === 'ok' ? (
             <div className="cart-panel-success">
-              <i className="fa-solid fa-circle-check"></i>
+              <CheckCircle size={72} weight="fill" />
               <p>¡Solicitud enviada!</p>
               <small>
                 Recibimos tu solicitud de muestras. Nos pondremos en contacto
@@ -100,12 +107,12 @@ function CartBar() {
               <div>
                 <div className="cart-panel-list-header">
                   <p className="cart-panel-label">
-                    <i className="fa-solid fa-vial"></i>
+                    <TestTube size={24} weight="bold" />
                     Productos seleccionados ({cart.length})
                   </p>
                   {cart.length > 0 && (
                     <button type="button" className="cart-panel-clear" onClick={clear}>
-                      Vaciar <i className="fa-solid fa-trash-can"></i>
+                      Vaciar <Trash size={22} weight="regular" />
                     </button>
                   )}
                 </div>
@@ -118,7 +125,7 @@ function CartBar() {
                     {cart.map((p) => (
                       <li key={p.id} className="cart-panel-item">
                         <div className="cart-panel-item-icon">
-                          <i className="fa-solid fa-flask"></i>
+                          <Flask size={27} weight="regular" />
                         </div>
                         <div className="cart-panel-item-info">
                           <span className="cart-panel-item-name">{p.name}</span>
@@ -137,7 +144,7 @@ function CartBar() {
                           onClick={() => remove(p.id)}
                           aria-label="Quitar producto"
                         >
-                          <i className="fa-solid fa-xmark"></i>
+                          <X size={27} weight="bold" />
                         </button>
                       </li>
                     ))}
@@ -158,7 +165,7 @@ function CartBar() {
                 />
 
                 <p className="cart-panel-label">
-                  <i className="fa-regular fa-user"></i>
+                  <User size={24} weight="bold" />
                   Tus datos de contacto
                 </p>
                 <input
@@ -183,6 +190,13 @@ function CartBar() {
                   onChange={set('phone')}
                 />
                 <textarea
+                  required
+                  rows={2}
+                  placeholder="Dirección de envío de las muestras *"
+                  value={form.address}
+                  onChange={set('address')}
+                />
+                <textarea
                   rows={3}
                   placeholder="Notas adicionales (opcional)"
                   value={form.notes}
@@ -193,7 +207,7 @@ function CartBar() {
 
                 {status === 'error' && (
                   <p className="cart-panel-error">
-                    <i className="fa-solid fa-circle-exclamation"></i>
+                    <WarningCircle size={27} weight="fill" />
                     Error al enviar. Por favor intenta de nuevo.
                   </p>
                 )}
@@ -205,7 +219,7 @@ function CartBar() {
                   {status === 'sending' ? (
                     'Enviando...'
                   ) : (
-                    <>Enviar solicitud <i className="fa-solid fa-paper-plane"></i></>
+                    <>Enviar solicitud <PaperPlane size={27} weight="fill" /></>
                   )}
                 </button>
               </form>

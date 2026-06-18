@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useContactModal } from '../context/ContactModalContext';
+import { House, Package, Users, Envelope, Gift, List, X } from '@phosphor-icons/react';
 
 const BASE = import.meta.env.BASE_URL;
 
 function NavBar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { cart, openPanel } = useCart();
+  const { cart, openPanel, panelOpen, hintDismissed } = useCart();
   const { openContactModal } = useContactModal();
 
   useEffect(() => { setOpen(false); }, [location]);
@@ -27,34 +28,36 @@ function NavBar() {
 
         <nav className={`site-nav${open ? ' open' : ''}`} aria-label="Navegación principal">
           <NavLink to="/" end>
-            <i className="fa-solid fa-house"></i> Inicio
+            <House size={27} weight="bold" /> Inicio
           </NavLink>
           <NavLink to="/productos">
-            <i className="fa-solid fa-box-open"></i> Productos
-          </NavLink>
-          <NavLink to="/aplicaciones">
-            <i className="fa-solid fa-flask-vial"></i> Aplicaciones
+            <Package size={27} weight="bold" /> Productos
           </NavLink>
           <NavLink to="/nosotros">
-            <i className="fa-solid fa-users"></i> Nosotros
+            <Users size={27} weight="bold" /> Nosotros
           </NavLink>
           <button
             type="button"
             className="nav-contact-btn"
             onClick={() => { setOpen(false); openContactModal(); }}
           >
-            <i className="fa-solid fa-envelope"></i> Contacto
+            <Envelope size={27} weight="bold" /> Contacto
           </button>
         </nav>
 
         <div className="header-actions">
+          {cart.length > 0 && !panelOpen && !hintDismissed && (
+            <div className="nav-cart-hint" aria-hidden="true">
+              ¡Aquí están tus muestras! 🎁
+            </div>
+          )}
           <button
             className={`nav-cart-btn${cart.length > 0 ? ' has-items' : ''}`}
             onClick={openPanel}
             aria-label="Ver solicitud de muestras"
             title="Solicitud de muestras"
           >
-            <i className="fa-solid fa-gift"></i>
+            <Gift size={36} weight="bold" />
             {cart.length > 0 && (
               <span className="nav-cart-badge">{cart.length}</span>
             )}
@@ -66,7 +69,7 @@ function NavBar() {
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
           >
-            <i className={`fa-solid ${open ? 'fa-xmark' : 'fa-bars'}`}></i>
+            {open ? <X size={36} weight="bold" /> : <List size={36} weight="bold" />}
           </button>
         </div>
       </div>

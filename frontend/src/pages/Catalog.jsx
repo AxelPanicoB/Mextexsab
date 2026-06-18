@@ -1,9 +1,141 @@
-import { useMemo, useState, useEffect, useRef } from 'react';
+﻿import { useMemo, useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import ProductCard from '../components/ProductCard.jsx';
 import allProducts from '../data/products.js';
 import { useContactModal } from '../context/ContactModalContext';
 import { useCart } from '../context/CartContext';
+import {
+  Cheese, IceCream, Drop, Palette, Gear, Coffee, Jar, Cake, Bread, Stack, TestTube,
+  SquaresFour, CaretLeft, CaretRight, MagnifyingGlass, Atom, Gift, ArrowRight,
+  CheckCircle, RadioButton,
+} from '@phosphor-icons/react';
+
+const BASE = import.meta.env.BASE_URL;
+
+/* ── Tarjetas de aplicación por industria ─────────────────────── */
+const APP_CARDS = [
+  {
+    id: 'quesos',
+    filter: 'Quesos',
+    Icon: Cheese,
+    label: 'Quesos',
+    headline: 'Textura, rendimiento y estabilidad',
+    description:
+      'Sistemas funcionales que reducen el desuerado y mejoran el rendimiento en quesos frescos, análogos y pizzeros.',
+    img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+    benefits: ['Menor desuerado', 'Mejor textura', 'Mayor vida útil'],
+  },
+  {
+    id: 'helados',
+    filter: 'Helados',
+    Icon: IceCream,
+    label: 'Helados',
+    headline: 'Textura perfecta y resistencia al derretimiento',
+    description:
+      'Formulaciones que optimizan la textura, retención de aire y resistencia a cambios de temperatura en helados.',
+    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+    benefits: ['Control de cristales', 'Mayor overrun', 'Estabilidad en frío'],
+  },
+  {
+    id: 'yogurt',
+    filter: 'Yogurt',
+    Icon: Drop,
+    label: 'Yogurt',
+    headline: 'Consistencia y estabilidad en yogures y bebidas',
+    description:
+      'Sistemas que previenen la sinéresis, aportan viscosidad y estabilizan sólidos en yogures y bebidas lácteas.',
+    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    benefits: ['Sin sinéresis', 'Cuerpo y viscosidad', 'Estabilidad térmica'],
+  },
+  {
+    id: 'colorantes',
+    filter: 'Colorantes',
+    Icon: Palette,
+    label: 'Colorantes',
+    headline: 'Color natural, uniforme y estable en proceso',
+    description:
+      'Colorantes naturales de alta resistencia a pasteurización, tratamiento térmico y variaciones de pH.',
+    img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+    benefits: ['Tono uniforme', 'Resistencia térmica', 'Origen natural'],
+  },
+  {
+    id: 'auxiliares',
+    filter: 'Auxiliares de proceso',
+    Icon: Gear,
+    label: 'Auxiliares',
+    headline: 'Optimización funcional del proceso productivo',
+    description:
+      'Aditivos funcionales para controlar la emulsificación, regular el pH y mejorar la conservación.',
+    img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+    benefits: ['Mejor emulsificación', 'Control de pH', 'Mayor vida útil'],
+  },
+  {
+    id: 'bebidas',
+    filter: 'Bebidas',
+    Icon: Coffee,
+    label: 'Bebidas',
+    headline: 'Estabilidad y cuerpo en bebidas lácteas',
+    description:
+      'Sistemas que mantienen la homogeneidad, aportan cuerpo y estabilizan emulsiones en bebidas lácteas y nutritivas.',
+    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    benefits: ['Suspensión uniforme', 'Cuerpo y viscosidad', 'Sin sedimentación'],
+  },
+  {
+    id: 'cremas',
+    filter: 'Cremas',
+    Icon: Jar,
+    label: 'Cremas',
+    headline: 'Consistencia y cremosidad en cremas lácteas',
+    description:
+      'Formulaciones que controlan la viscosidad, aportan cremosidad y prolongan la vida útil en cremas y aderezos.',
+    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    benefits: ['Textura suave', 'Sin sinéresis', 'Mayor vida útil'],
+  },
+  {
+    id: 'postres',
+    filter: 'Postres',
+    Icon: Cake,
+    label: 'Postres',
+    headline: 'Gelificación y textura en postres lácteos',
+    description:
+      'Sistemas de gelificación y estabilización para flanes, natillas, gelatinas y postres con textura firme y suave.',
+    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    benefits: ['Gelificación perfecta', 'Desmoldado fácil', 'Textura uniforme'],
+  },
+  {
+    id: 'tortillas',
+    filter: 'Tortillas',
+    Icon: Bread,
+    label: 'Tortillas',
+    headline: 'Suavidad y vida útil en tortilla de maíz y trigo',
+    description:
+      'Aditivos funcionales que mejoran la extensibilidad, retardan el envejecimiento y controlan la humedad en tortillas.',
+    img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+    benefits: ['Mayor suavidad', 'Retarda envejecimiento', 'Menor rotura'],
+  },
+  {
+    id: 'texturizantes',
+    filter: 'Texturizantes y Estabilizantes',
+    Icon: Stack,
+    label: 'Texturizantes',
+    headline: 'Control de textura y estabilidad en proceso',
+    description:
+      'Línea completa de texturizantes y estabilizantes para controlar reología, viscosidad y estabilidad en productos lácteos.',
+    img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+    benefits: ['Control de viscosidad', 'Estabilidad en proceso', 'Sistemas a medida'],
+  },
+  {
+    id: 'saborizantes',
+    filter: 'Saborizantes',
+    Icon: Drop,
+    label: 'Saborizantes',
+    headline: 'Sabor auténtico e intenso en productos lácteos',
+    description:
+      'Saborizantes naturales y artificiales de alta intensidad y resistencia térmica para quesos, yogures, helados y bebidas.',
+    img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+    benefits: ['Alta intensidad', 'Resistencia térmica', 'Origen natural'],
+  },
+];
 
 const TECH_LINES = [
   'Texturizantes y Estabilizantes',
@@ -11,7 +143,6 @@ const TECH_LINES = [
   'Colorantes',
   'Auxiliares de proceso',
 ];
-
 
 const APPLICATIONS = [
   'Quesos',
@@ -24,52 +155,68 @@ const APPLICATIONS = [
 ];
 
 const FILTER_ICONS = {
-  'Todos':                          'fa-border-all',
-  'Quesos':                         'fa-cheese',
-  'Yogurt':                         'fa-bottle-droplet',
-  'Helados':                        'fa-ice-cream',
-  'Bebidas':                        'fa-mug-hot',
-  'Cremas':                         'fa-jar',
-  'Postres':                        'fa-cake-candles',
-  'Tortillas':                      'fa-bread-slice',
-  'Texturizantes y Estabilizantes': 'fa-layer-group',
-  'Saborizantes':                   'fa-droplet',
-  'Colorantes':                     'fa-palette',
-  'Auxiliares de proceso':          'fa-gear',
+  'Todos':                          SquaresFour,
+  'Quesos':                         Cheese,
+  'Yogurt':                         Drop,
+  'Helados':                        IceCream,
+  'Bebidas':                        Coffee,
+  'Cremas':                         Jar,
+  'Postres':                        Cake,
+  'Tortillas':                      Bread,
+  'Texturizantes y Estabilizantes': Stack,
+  'Saborizantes':                   Drop,
+  'Colorantes':                     Palette,
+  'Auxiliares de proceso':          Gear,
 };
 
-function Products() {
+function Catalog() {
   const location = useLocation();
   const { openContactModal } = useContactModal();
   const { openPanel } = useCart();
   const [activeFilter, setActiveFilter] = useState('Todos');
-  const [search, setSearch] = useState('');
-  const chipsRef = useRef(null);
-  const scrollChips = (dir) => chipsRef.current?.scrollBy({ left: dir * 220, behavior: 'smooth' });
+  const [activeApp, setActiveApp]       = useState(null);
+  const [search, setSearch]             = useState('');
+  const chipsRef   = useRef(null);
+  const catalogRef = useRef(null);
 
+  const scrollChips   = (dir) => chipsRef.current?.scrollBy({ left: dir * 220, behavior: 'smooth' });
+  const scrollToCatalog = () => {
+    setTimeout(() => {
+      catalogRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
+  /* Sincronizar con ?tab= / ?app= de la URL */
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params   = new URLSearchParams(location.search);
     const tabParam = params.get('tab') || params.get('app');
     if (!tabParam) return;
-    const appMatch = APPLICATIONS.find(
-      (a) => a.toLowerCase() === tabParam.toLowerCase()
-    );
+    const appMatch = APPLICATIONS.find((a) => a.toLowerCase() === tabParam.toLowerCase());
     if (appMatch) {
       setActiveFilter(appMatch);
+      const card = APP_CARDS.find((c) => c.filter === appMatch);
+      setActiveApp(card ? card.id : null);
     } else {
-      const lineMatch = TECH_LINES.find(
-        (l) => l.toLowerCase().includes(tabParam.toLowerCase())
-      );
-      if (lineMatch) setActiveFilter(lineMatch);
-    }
-    setTimeout(() => {
-      const el = document.querySelector('.catalog-grid-section');
-      if (el) {
-        const top = el.getBoundingClientRect().top + window.scrollY - 160;
-        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      const lineMatch = TECH_LINES.find((l) => l.toLowerCase().includes(tabParam.toLowerCase()));
+      if (lineMatch) {
+        setActiveFilter(lineMatch);
+        const card = APP_CARDS.find((c) => c.filter === lineMatch);
+        setActiveApp(card ? card.id : null);
       }
-    }, 150);
+    }
+    scrollToCatalog();
   }, [location.search]);
+
+  /* Clic en chip de filtro */
+  const handleChipFilter = (filter) => {
+    setActiveFilter(filter);
+    if (filter === 'Todos') {
+      setActiveApp(null);
+    } else {
+      const match = APP_CARDS.find((c) => c.filter === filter);
+      setActiveApp(match ? match.id : null);
+    }
+  };
 
   const filtered = useMemo(() => {
     return allProducts.filter((p) => {
@@ -86,9 +233,11 @@ function Products() {
     });
   }, [activeFilter, search]);
 
+  const activeAppData = APP_CARDS.find((c) => c.id === activeApp);
+
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* ── 1. HERO ──────────────────────────────────────────────── */}
       <section className="unified-hero">
         <div className="unified-mol-field" aria-hidden="true">
           <svg className="m-svg m-svg-1" viewBox="0 0 80 92" fill="none">
@@ -235,7 +384,7 @@ function Products() {
         <div className="hero-fw-inner">
           <div className="hero-fw-text">
             <span className="app-hero-eyebrow">
-              <i className="fa-solid fa-atom"></i>
+              <Atom size={22} weight="regular" />
               Catálogo Técnico
             </span>
             <h1 className="unified-hero-h1">
@@ -249,67 +398,83 @@ function Products() {
           </div>
           <div className="hero-sample-cta hero-fw-stats">
             <button type="button" className="btn-sample-free" onClick={openPanel}>
-              <i className="fa-solid fa-gift"></i>
+              <Gift size={27} weight="regular" />
               Solicitar muestra gratuita
-              <i className="fa-solid fa-arrow-right"></i>
+              <ArrowRight size={24} weight="regular" />
             </button>
             <p className="hero-sample-hint">
-              <i className="fa-solid fa-circle-check"></i>
+              <CheckCircle size={21} weight="fill" />
               Sin costo · Probada en tu planta · Asesoría técnica incluida
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── FILTER BAR ───────────────────────────────────────── */}
-      <div className="catalog-filter-bar">
+      {/* ── 4. FILTER BAR ────────────────────────────────────────── */}
+      <div className="catalog-filter-bar" ref={catalogRef}>
         <div className="contenedor">
           <div className="filter-cat-section">
             <p className="filter-cat-heading">Explora nuestras categorías</p>
             <div className="filter-chips-row">
-              <button type="button" className="cat-arrow" onClick={() => scrollChips(-1)} aria-label="Anterior">
-                <i className="fa-solid fa-chevron-left"></i>
-              </button>
-              <div className="filter-chips" ref={chipsRef}>
               <button
                 type="button"
-                className={`filter-chip${activeFilter === 'Todos' ? ' active' : ''}`}
-                onClick={() => setActiveFilter('Todos')}
+                className="cat-arrow"
+                onClick={() => scrollChips(-1)}
+                aria-label="Anterior"
               >
-                <i className="fa-solid fa-border-all"></i>
-                <span>Todos</span>
+                <CaretLeft size={24} weight="bold" />
               </button>
-              {APPLICATIONS.map((app) => (
+              <div className="filter-chips" ref={chipsRef}>
                 <button
-                  key={app}
                   type="button"
-                  className={`filter-chip${activeFilter === app ? ' active' : ''}`}
-                  onClick={() => setActiveFilter(app)}
+                  className={`filter-chip${activeFilter === 'Todos' ? ' active' : ''}`}
+                  onClick={() => handleChipFilter('Todos')}
                 >
-                  <i className={`fa-solid ${FILTER_ICONS[app] || 'fa-circle-dot'}`}></i>
-                  <span>{app}</span>
+                  <SquaresFour size={22} weight="regular" />
+                  <span>Todos</span>
                 </button>
-              ))}
-              {TECH_LINES.map((line) => (
-                <button
-                  key={line}
-                  type="button"
-                  className={`filter-chip${activeFilter === line ? ' active' : ''}`}
-                  onClick={() => setActiveFilter(line)}
-                >
-                  <i className={`fa-solid ${FILTER_ICONS[line] || 'fa-circle-dot'}`}></i>
-                  <span>{line}</span>
-                </button>
-              ))}
+                {APPLICATIONS.map((app) => {
+                  const ChipIcon = FILTER_ICONS[app] || RadioButton;
+                  return (
+                    <button
+                      key={app}
+                      type="button"
+                      className={`filter-chip${activeFilter === app ? ' active' : ''}`}
+                      onClick={() => handleChipFilter(app)}
+                    >
+                      <ChipIcon size={22} weight="regular" />
+                      <span>{app}</span>
+                    </button>
+                  );
+                })}
+                {TECH_LINES.map((line) => {
+                  const ChipIcon = FILTER_ICONS[line] || RadioButton;
+                  return (
+                    <button
+                      key={line}
+                      type="button"
+                      className={`filter-chip${activeFilter === line ? ' active' : ''}`}
+                      onClick={() => handleChipFilter(line)}
+                    >
+                      <ChipIcon size={22} weight="regular" />
+                      <span>{line}</span>
+                    </button>
+                  );
+                })}
               </div>
-              <button type="button" className="cat-arrow" onClick={() => scrollChips(1)} aria-label="Siguiente">
-                <i className="fa-solid fa-chevron-right"></i>
+              <button
+                type="button"
+                className="cat-arrow"
+                onClick={() => scrollChips(1)}
+                aria-label="Siguiente"
+              >
+                <CaretRight size={24} weight="bold" />
               </button>
             </div>
           </div>
 
           <div className="filter-search-wrap">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <MagnifyingGlass size={24} weight="regular" />
             <input
               type="search"
               placeholder="Buscar soluciones, aplicaciones o ingredientes..."
@@ -321,13 +486,45 @@ function Products() {
         </div>
       </div>
 
-      {/* ── SOLUTIONS GRID ───────────────────────────────────── */}
+      {/* ── 5. CONTEXT STRIP (condicional) ───────────────────────── */}
+      {activeAppData && (
+        <div className="catalog-app-context" key={activeApp}>
+          <div className="contenedor">
+            <div className="catalog-app-context-inner">
+              <div className="catalog-app-context-icon">
+                <activeAppData.Icon size={33} weight="regular" />
+              </div>
+              <div className="catalog-app-context-content">
+                <div className="catalog-app-context-text">
+                  <p className="catalog-app-context-title">{activeAppData.headline}</p>
+                  <p className="catalog-app-context-desc">{activeAppData.description}</p>
+                </div>
+                <div className="catalog-app-context-benefits">
+                  {activeAppData.benefits.map((b) => (
+                    <span key={b} className="catalog-app-context-benefit">
+                      <CheckCircle size={18} weight="fill" /> {b}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="catalog-app-context-cta"
+                onClick={() => openContactModal(activeAppData.label)}
+              >
+                Solicitar formulación
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── 6. GRID DE PRODUCTOS ─────────────────────────────────── */}
       <section className="catalog-grid-section">
         <div className="contenedor">
           {activeFilter !== 'Todos' && (
             <h2 className="active-cat-title">{activeFilter}</h2>
           )}
-
 
           {filtered.length > 0 && (
             <div className="catalog-results-header">
@@ -336,17 +533,18 @@ function Products() {
               </span>
             </div>
           )}
+
           {filtered.length === 0 ? (
-              <div className="catalog-empty">
-                <i className="fa-solid fa-flask-vial"></i>
-                <p>No se encontraron soluciones con esos filtros.</p>
-                <button
-                  type="button"
-                  onClick={() => { setActiveFilter('Todos'); setSearch(''); }}
-                >
-                  Limpiar filtros
-                </button>
-              </div>
+            <div className="catalog-empty">
+              <TestTube size={60} weight="regular" />
+              <p>No se encontraron soluciones con esos filtros.</p>
+              <button
+                type="button"
+                onClick={() => { setActiveFilter('Todos'); setSearch(''); setActiveApp(null); }}
+              >
+                Limpiar filtros
+              </button>
+            </div>
           ) : (
             <div className="solution-grid">
               {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
@@ -355,12 +553,12 @@ function Products() {
         </div>
       </section>
 
-      {/* ── BOTTOM CTA ───────────────────────────────────────── */}
+      {/* ── 6. CTA FINAL ─────────────────────────────────────────── */}
       <section className="catalog-bottom-cta reveal-section">
         <div className="contenedor">
           <div className="catalog-cta-inner">
             <div className="catalog-cta-icon">
-              <i className="fa-solid fa-flask-vial"></i>
+              <TestTube size={48} weight="regular" />
             </div>
             <div className="catalog-cta-text">
               <h3>¿Buscas algo específico para tu proceso?</h3>
@@ -371,7 +569,7 @@ function Products() {
             </div>
             <button type="button" className="btn-catalog-cta" onClick={openContactModal}>
               Escríbenos directamente
-              <i className="fa-solid fa-arrow-right"></i>
+              <ArrowRight size={24} weight="regular" />
             </button>
           </div>
         </div>
@@ -380,4 +578,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default Catalog;

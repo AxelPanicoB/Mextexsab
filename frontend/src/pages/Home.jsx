@@ -1,6 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
+import {
+  Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
+  PaperPlane, CircleNotch, CheckCircle, WarningCircle,
+} from '@phosphor-icons/react';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -181,7 +185,7 @@ function Home() {
         <div className="hero-content">
           <div className="hero-text">
             <div className="hero-badge">
-              <i className="fa-solid fa-star"></i>
+              <Star size={20} weight="fill" />
               Ingredientes Alimentarios Premium
             </div>
             <h1>
@@ -193,7 +197,7 @@ function Home() {
             </p>
             <div className="hero-actions">
               <Link to="/productos" className="btn-white">
-                Ver Catálogo <i className="fa-solid fa-arrow-right"></i>
+                Ver Catálogo <ArrowRight size={22} weight="regular" />
               </Link>
               <button type="button" className="btn-outline-white" onClick={openContactModal}>
                 Solicitar Cotización
@@ -202,26 +206,12 @@ function Home() {
           </div>
           <div className="hero-logo-group" aria-hidden="true">
             <img src={`${BASE}img/logo2.png`} alt="" className="hero-logo-img" />
-            <img src={`${BASE}img/MetexsabLN.png`} alt="" className="hero-logo-static" />
+            <img src={`${BASE}img/Metexsabln.png`} alt="" className="hero-logo-static" />
           </div>
         </div>
       </section>
 
-      {/* ── 2. STATS ─────────────────────────────────────── */}
-      <div className="stats-bar reveal-section">
-        <div className="stats-inner">
-          <div className="stat-item">
-            <span className="stat-number">25+</span>
-            <span className="stat-label">Productos en catálogo</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">15+</span>
-            <span className="stat-label">Años de experiencia</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── 3. APLICACIONES ──────────────────────────────── */}
+      {/* ── 2. APLICACIONES ──────────────────────────────── */}
       <section className="aplicaciones-section reveal-section">
         <div className="contenedor">
           <div className="aplicaciones-header">
@@ -241,7 +231,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-cheese"></i></div>
+                <div className="aplica-card-icon"><Cheese size={33} weight="regular" /></div>
                 <h3 className="aplica-card-title">Quesos</h3>
                 <p className="aplica-card-text">Saborizantes, colorantes y texturizantes para quesos frescos, fundidos, maduros y análogos.</p>
               </div>
@@ -252,7 +242,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-droplet"></i></div>
+                <div className="aplica-card-icon"><Drop size={33} weight="fill" /></div>
                 <h3 className="aplica-card-title">Cremas</h3>
                 <p className="aplica-card-text">Saborizantes y estabilizantes para cremas ácidas, natillas y productos untables.</p>
               </div>
@@ -263,7 +253,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-jar"></i></div>
+                <div className="aplica-card-icon"><Jar size={33} weight="regular" /></div>
                 <h3 className="aplica-card-title">Yogurt</h3>
                 <p className="aplica-card-text">Complejos estabilizantes para yogures naturales, con frutas y bebidas lácteas fermentadas.</p>
               </div>
@@ -274,7 +264,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-glass-water"></i></div>
+                <div className="aplica-card-icon"><Drop size={33} weight="regular" /></div>
                 <h3 className="aplica-card-title">Bebidas</h3>
                 <p className="aplica-card-text">Saborizantes y sistemas funcionales para bebidas lácteas, leches saborizadas y sueros.</p>
               </div>
@@ -285,7 +275,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-snowflake"></i></div>
+                <div className="aplica-card-icon"><Snowflake size={33} weight="regular" /></div>
                 <h3 className="aplica-card-title">Helados</h3>
                 <p className="aplica-card-text">Formulaciones para helados, paletas, nieves y productos congelados con textura uniforme.</p>
               </div>
@@ -296,7 +286,7 @@ function Home() {
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
-                <div className="aplica-card-icon"><i className="fa-solid fa-cake-candles"></i></div>
+                <div className="aplica-card-icon"><Cake size={33} weight="regular" /></div>
                 <h3 className="aplica-card-title">Postres</h3>
                 <p className="aplica-card-text">Saborizantes y espesantes para flanes, natillas, cajetas y postres lácteos artesanales.</p>
               </div>
@@ -305,53 +295,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ── 4. QUIÉNES SOMOS ─────────────────────────────── */}
-      <section className="about-home-section reveal-section">
-        <div className="contenedor">
-          <div className="about-home-inner">
-
-            <div className="about-home-left">
-              <span className="about-home-eyebrow">— Quiénes somos</span>
-              <h2>
-                Especialistas en <span>ingredientes</span> para la industria
-                alimentaria.
-              </h2>
-              <p>
-                Fundados en 2007 en Querétaro, México. Más de 15 años
-                desarrollando soluciones técnicas para quesos, yogures,
-                helados y bebidas en la industria láctea nacional.
-              </p>
-              <Link to="/nosotros" className="about-home-link">
-                Conoce más <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-
-            <div className="about-home-right">
-              <div className="about-home-point">
-                <div className="about-home-point-icon">
-                  <i className="fa-solid fa-medal"></i>
-                </div>
-                <p>Empresa 100% mexicana con más de 15 años de experiencia en ingredientes para la industria alimentaria.</p>
-              </div>
-              <div className="about-home-point">
-                <div className="about-home-point-icon">
-                  <i className="fa-solid fa-handshake"></i>
-                </div>
-                <p>Servicio eficiente, confiable y honesto.</p>
-              </div>
-              <div className="about-home-point">
-                <div className="about-home-point-icon">
-                  <i className="fa-solid fa-lightbulb"></i>
-                </div>
-                <p>Soluciones innovadoras que convierten a nuestros clientes en líderes de su segmento.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. POR QUÉ ELEGIRNOS ──────────────────────────── */}
+      {/* ── 3. POR QUÉ ELEGIRNOS ──────────────────────────── */}
       <section className="info-section reveal-section">
         <div className="contenedor">
           <div className="info-header">
@@ -367,7 +311,7 @@ function Home() {
           <div className="why-layout">
             <div className="why-image-col">
               <img
-                src={`${BASE}img/propiospd.png`}
+                src={`${BASE}img/imgmetexsab.png`}
                 alt="Formulaciones propias Metexsab — quesos, saborizantes y colorantes"
                 className="why-editorial-img"
                 loading="lazy"
@@ -406,104 +350,19 @@ function Home() {
           </div>
           <Link to="/productos" className="why-band">
             <div className="why-band-icon">
-              <i className="fa-solid fa-medal"></i>
+              <Medal size={33} weight="fill" />
             </div>
             <p>
               Soluciones que realzan el sabor, color y calidad de tus productos lácteos
               <span className="why-band-sep"> | </span>
               Desarrolladas para la industria, hechas para tu proceso
             </p>
-            <i className="fa-solid fa-arrow-right why-band-arrow"></i>
+            <ArrowRight size={27} weight="regular" className="why-band-arrow" />
           </Link>
         </div>
       </section>
 
-      {/* ── 6. FORMULACIONES DESTACADAS ──────────────────── */}
-      <section className="formulaciones-section reveal-section">
-        <div className="contenedor">
-          <div className="section-header">
-            <div className="section-badge">Formulaciones</div>
-            <h2>Formulaciones destacadas</h2>
-            <p className="section-copy">
-              Soluciones reales desarrolladas para procesos específicos de la industria láctea.
-            </p>
-          </div>
-          <div className="formulacion-list">
-            <div className="formulacion-item">
-              <Link to="/productos" className="formulacion-img-wrap">
-                <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" loading="lazy" decoding="async" />
-                <span className="formulacion-cat">Quesos</span>
-              </Link>
-              <Link to="/productos" className="formulacion-info">
-                <h3>Retención de humedad para quesos frescos</h3>
-                <p>Reduce el desuerado y mejora el rendimiento en quesos frescos y análogos. Textura uniforme y vida de anaquel extendida.</p>
-              </Link>
-              <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
-                <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="formulacion-item">
-              <Link to="/productos" className="formulacion-img-wrap">
-                <img src={`${BASE}img/Productos/Saborizantes/quesos/polvo/quesos.png`} alt="Saborizante cheddar" loading="lazy" decoding="async" />
-                <span className="formulacion-cat">Saborizantes</span>
-              </Link>
-              <Link to="/productos" className="formulacion-info">
-                <h3>Perfil sabor cheddar</h3>
-                <p>Saborizante líquido y en polvo para quesos análogos, fundidos y snacks con perfil auténtico e intenso.</p>
-              </Link>
-              <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
-                <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="formulacion-item">
-              <Link to="/productos" className="formulacion-img-wrap">
-                <img src={`${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`} alt="Colorante annatto" loading="lazy" decoding="async" />
-                <span className="formulacion-cat">Colorantes</span>
-              </Link>
-              <Link to="/productos" className="formulacion-info">
-                <h3>Colorante annatto liposoluble</h3>
-                <p>Colorante natural de alta concentración para quesos, mantequillas y productos grasos. Estable a temperatura de proceso.</p>
-              </Link>
-              <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
-                <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="formulacion-item">
-              <Link to="/productos" className="formulacion-img-wrap">
-                <img src={`${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.jpg`} alt="Estabilizante yogurt" loading="lazy" decoding="async" />
-                <span className="formulacion-cat">Yogurt</span>
-              </Link>
-              <Link to="/productos" className="formulacion-info">
-                <h3>Estabilizante para yogurt</h3>
-                <p>Complejo estabilizante que evita la sinéresis y da cuerpo natural en yogures con y sin homogeneizado.</p>
-              </Link>
-              <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
-                <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-            <div className="formulacion-item">
-              <Link to="/productos" className="formulacion-img-wrap">
-                <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas lácteas" loading="lazy" decoding="async" />
-                <span className="formulacion-cat">Bebidas</span>
-              </Link>
-              <Link to="/productos" className="formulacion-info">
-                <h3>Sistema para bebidas lácteas</h3>
-                <p>Formulación funcional para bebidas saborizadas, leches UHT y sueros con estabilidad en anaquel y buena dispersión.</p>
-              </Link>
-              <Link to="/productos" className="formulacion-link" aria-label="Ver producto">
-                <i className="fa-solid fa-arrow-right"></i>
-              </Link>
-            </div>
-          </div>
-          <div className="formulacion-cta">
-            <Link to="/productos" className="btn-primary">
-              Ver catálogo completo <i className="fa-solid fa-arrow-right"></i>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. NUESTRO PROCESO ───────────────────────────── */}
+      {/* ── 4. NUESTRO PROCESO ───────────────────────────── */}
       <section className="process-section reveal-section">
         <div className="contenedor">
           <div className="section-header">
@@ -547,19 +406,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ── 8. BANNER EDITORIAL ──────────────────────────── */}
-      <section className="editorial-section reveal-section">
-        <div className="editorial-banner">
-          <img
-            src={`${BASE}img/imgmetexsab.png`}
-            alt="Metexsab"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </section>
-
-      {/* ── 9. CTA FINAL ─────────────────────────────────── */}
+      {/* ── 5. CTA FINAL ─────────────────────────────────── */}
       <section className="cta-section reveal-section">
         <div className="contenedor">
           <h2>¿Listo para mejorar tus formulaciones?</h2>
@@ -591,14 +438,14 @@ function Home() {
               required
             />
             <button type="submit" className="btn-primary">
-              <i className="fa-solid fa-paper-plane"></i> Solicitar asesoría
+              <PaperPlane size={24} weight="fill" /> Solicitar asesoría
             </button>
           </form>
           {ctaStatus && (
             <p className={`cta-status ${ctaStatus.type}`}>
-              {ctaStatus.type === 'loading' && <i className="fa-solid fa-spinner fa-spin"></i>}
-              {ctaStatus.type === 'success' && <i className="fa-solid fa-circle-check"></i>}
-              {ctaStatus.type === 'error' && <i className="fa-solid fa-circle-exclamation"></i>}
+              {ctaStatus.type === 'loading' && <CircleNotch size={24} weight="regular" className="icon-spin" />}
+              {ctaStatus.type === 'success' && <CheckCircle size={24} weight="fill" />}
+              {ctaStatus.type === 'error' && <WarningCircle size={24} weight="fill" />}
               {' '}{ctaStatus.text}
             </p>
           )}

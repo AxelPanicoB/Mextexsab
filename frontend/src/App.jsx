@@ -1,5 +1,6 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+﻿import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import WhatsAppIcon from './components/WhatsAppIcon.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { ContactModalProvider } from './context/ContactModalContext.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -10,8 +11,31 @@ import ScrollToTopBtn from './components/ScrollToTopBtn.jsx';
 import RouteProgress from './components/RouteProgress.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
-import Products from './pages/Products.jsx';
-import Applications from './pages/Applications.jsx';
+import Catalog from './pages/Catalog.jsx';
+
+// Mensaje de WhatsApp contextual según la sección que está viendo el usuario
+function WhatsAppFab() {
+  const { pathname } = useLocation();
+  const section = pathname.startsWith('/productos')
+    ? 'Vengo del catálogo de productos y me gustaría recibir más información'
+    : pathname.startsWith('/nosotros')
+      ? 'Conocí su empresa en la sección Nosotros y me gustaría recibir más información'
+      : 'Visité su página web y me gustaría recibir más información';
+  const href = `https://wa.me/524422758979/?text=${encodeURIComponent(`Hola, ${section}`)}`;
+  return (
+    <a
+      className="whatsapp"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Contáctanos por WhatsApp"
+      aria-label="Contáctanos por WhatsApp"
+    >
+      <span className="whatsapp-pulse" />
+      <WhatsAppIcon size={28} />
+    </a>
+  );
+}
 
 function RevealObserver() {
   const location = useLocation();
@@ -44,8 +68,7 @@ function App() {
           <main className="app-main">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/productos" element={<Products />} />
-              <Route path="/aplicaciones" element={<Applications />} />
+              <Route path="/productos" element={<Catalog />} />
               <Route path="/nosotros" element={<About />} />
             </Routes>
           </main>
@@ -54,17 +77,7 @@ function App() {
           <ContactModal />
           <RouteProgress />
           <ScrollToTopBtn />
-          <a
-            className="whatsapp"
-            href="https://wa.me/524422758979/?text=%20Hola,%20me%20gustaria%20recibir%20más%20información"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Contáctanos por WhatsApp"
-            aria-label="Contáctanos por WhatsApp"
-          >
-            <span className="whatsapp-pulse" />
-            <i className="fa-brands fa-whatsapp"></i>
-          </a>
+          <WhatsAppFab />
         </div>
         </ContactModalProvider>
       </CartProvider>

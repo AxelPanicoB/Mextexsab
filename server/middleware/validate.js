@@ -1,13 +1,22 @@
 import { z } from 'zod';
 
-// Strip < > to prevent basic HTML injection in stored/emailed data
-const safeStr = (max) =>
-  z.string().trim().max(max).transform((s) => s.replace(/[<>]/g, ''));
+// Strip < > to prevent basic HTML injection in stored/emailed data.
+// Zod 4: string checks (.min/.max/.regex) must come BEFORE .transform()
+const safeStr = (max, min = 0) =>
+  z.string().trim().min(min).max(max).transform((s) => s.replace(/[<>]/g, ''));
+
+const phoneStr = z
+  .string()
+  .trim()
+  .min(7)
+  .max(20)
+  .regex(/^[\d\s\+\-\(\)]+$/, 'Teléfono inválido');
 
 export const samplesSchema = z.object({
-  name:     safeStr(100).min(2),
+  name:     safeStr(100, 2),
   email:    z.string().trim().email().max(200),
-  phone:    safeStr(20).min(7).regex(/^[\d\s\+\-\(\)]+$/, 'Teléfono inválido'),
+  phone:    phoneStr,
+  address:  safeStr(300, 8),
   notes:    safeStr(1000).optional().default(''),
   products: z
     .array(
@@ -23,10 +32,10 @@ export const samplesSchema = z.object({
 });
 
 export const contactSchema = z.object({
-  name:     safeStr(100).min(2),
+  name:     safeStr(100, 2),
   company:  safeStr(100).optional().default(''),
   email:    z.string().trim().email().max(200),
-  phone:    safeStr(20).min(7).regex(/^[\d\s\+\-\(\)]+$/, 'Teléfono inválido'),
+  phone:    phoneStr,
   interest: safeStr(200).optional().default('Consulta General'),
   message:  safeStr(2000).optional().default(''),
 });
@@ -37,7 +46,7 @@ export function validate(schema) {
     if (!result.success) {
       return res.status(400).json({
         error: 'Datos inválidos.',
-        details: result.error.errors.map((e) => ({
+        details: result.error.issues.map((e) => ({
           field: e.path.join('.'),
           message: e.message,
         })),
