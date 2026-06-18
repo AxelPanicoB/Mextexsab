@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useCart } from '../context/CartContext';
 import { useContactModal } from '../context/ContactModalContext';
@@ -8,7 +8,6 @@ import {
 } from '@phosphor-icons/react';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
 
-/* ── Toast global de confirmación ───────────────────────────────── */
 let toastTimeout = null;
 function showAddToast(name) {
   let el = document.getElementById('mtx-add-toast');
@@ -147,7 +146,7 @@ function FlavorsModal({ product, onClose, onContact }) {
 
 const BASE = import.meta.env.BASE_URL;
 
-function ProductCard({ product }) {
+function ProductCardV2({ product }) {
   const { add, remove, inCart } = useCart();
   const { openContactModal } = useContactModal();
   const WA = `https://wa.me/524422758979/?text=${encodeURIComponent(`Hola, vi el producto "${product.name}" en su catálogo y me gustaría solicitar más información`)}`;
@@ -171,7 +170,7 @@ function ProductCard({ product }) {
 
   return (
     <>
-      <article className={`solution-card${selected ? ' solution-card--selected' : ''}`}>
+      <article className={`solution-card solution-card-v2${selected ? ' solution-card--selected' : ''}`}>
         <div className="solution-card-img">
           {product.image && (
             <img src={encodeURI(product.image)} alt={product.name} />
@@ -252,4 +251,4 @@ function ProductCard({ product }) {
   );
 }
 
-export default ProductCard;
+export default ProductCardV2;

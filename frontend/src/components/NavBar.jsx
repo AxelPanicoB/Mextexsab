@@ -33,6 +33,9 @@ function NavBar() {
           <NavLink to="/productos">
             <Package size={27} weight="bold" /> Productos
           </NavLink>
+          <NavLink to="/productos-v2">
+            <Package size={27} weight="bold" /> Productos v2
+          </NavLink>
           <NavLink to="/nosotros">
             <Users size={27} weight="bold" /> Nosotros
           </NavLink>

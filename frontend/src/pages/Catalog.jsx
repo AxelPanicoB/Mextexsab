@@ -23,7 +23,7 @@ const APP_CARDS = [
     headline: 'Textura, rendimiento y estabilidad',
     description:
       'Sistemas funcionales que reducen el desuerado y mejoran el rendimiento en quesos frescos, análogos y pizzeros.',
-    img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+    img: `${BASE}img/impmenuproduct/quesos.png`,
     benefits: ['Menor desuerado', 'Mejor textura', 'Mayor vida útil'],
   },
   {
@@ -34,7 +34,7 @@ const APP_CARDS = [
     headline: 'Textura perfecta y resistencia al derretimiento',
     description:
       'Formulaciones que optimizan la textura, retención de aire y resistencia a cambios de temperatura en helados.',
-    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+    img: `${BASE}img/impmenuproduct/helados.png`,
     benefits: ['Control de cristales', 'Mayor overrun', 'Estabilidad en frío'],
   },
   {
@@ -45,7 +45,7 @@ const APP_CARDS = [
     headline: 'Consistencia y estabilidad en yogures y bebidas',
     description:
       'Sistemas que previenen la sinéresis, aportan viscosidad y estabilizan sólidos en yogures y bebidas lácteas.',
-    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    img: `${BASE}img/impmenuproduct/yogurt.png`,
     benefits: ['Sin sinéresis', 'Cuerpo y viscosidad', 'Estabilidad térmica'],
   },
   {
@@ -78,7 +78,7 @@ const APP_CARDS = [
     headline: 'Estabilidad y cuerpo en bebidas lácteas',
     description:
       'Sistemas que mantienen la homogeneidad, aportan cuerpo y estabilizan emulsiones en bebidas lácteas y nutritivas.',
-    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    img: `${BASE}img/impmenuproduct/bebidas.png`,
     benefits: ['Suspensión uniforme', 'Cuerpo y viscosidad', 'Sin sedimentación'],
   },
   {
@@ -100,7 +100,7 @@ const APP_CARDS = [
     headline: 'Gelificación y textura en postres lácteos',
     description:
       'Sistemas de gelificación y estabilización para flanes, natillas, gelatinas y postres con textura firme y suave.',
-    img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    img: `${BASE}img/impmenuproduct/postres.png`,
     benefits: ['Gelificación perfecta', 'Desmoldado fácil', 'Textura uniforme'],
   },
   {
@@ -111,7 +111,7 @@ const APP_CARDS = [
     headline: 'Suavidad y vida útil en tortilla de maíz y trigo',
     description:
       'Aditivos funcionales que mejoran la extensibilidad, retardan el envejecimiento y controlan la humedad en tortillas.',
-    img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+    img: `${BASE}img/impmenuproduct/tortillas.png`,
     benefits: ['Mayor suavidad', 'Retarda envejecimiento', 'Menor rotura'],
   },
   {
@@ -168,6 +168,11 @@ const FILTER_ICONS = {
   'Saborizantes':                   Drop,
   'Colorantes':                     Palette,
   'Auxiliares de proceso':          Gear,
+};
+
+const DISPLAY_LABELS = {
+  'Auxiliares de proceso':          'Conservadores',
+  'Texturizantes y Estabilizantes': 'Textura y consistencia',
 };
 
 function Catalog() {
@@ -389,12 +394,12 @@ function Catalog() {
               Productos
             </span>
             <h1 className="unified-hero-h1">
-              Ingredientes funcionales para<br/>
-              <span>cada proceso alimentario</span>
+              Ingredientes para que tus productos<br/>
+              <span>salgan mejor, siempre</span>
             </h1>
             <p className="unified-hero-p">
-              Soluciones técnicas especializadas que mejoran la estabilidad,
-              textura, rendimiento y calidad en procesos industriales.
+              Más textura, mejor sabor, mayor vida útil — para quesos,
+              helados, yogures y más. Probado por cientos de productores.
             </p>
           </div>
           <div className="hero-sample-cta hero-fw-stats">
@@ -457,7 +462,7 @@ function Catalog() {
                       onClick={() => handleChipFilter(line)}
                     >
                       <ChipIcon size={22} weight="regular" />
-                      <span>{line}</span>
+                      <span>{DISPLAY_LABELS[line] || line}</span>
                     </button>
                   );
                 })}
@@ -483,6 +488,21 @@ function Catalog() {
               aria-label="Buscar soluciones"
             />
           </div>
+        </div>
+      </div>
+
+      {/* ── BANNER ASESOR ────────────────────────────────────────── */}
+      <div className="catalog-advisor-nudge">
+        <div className="contenedor">
+          <p>¿No sabes cuál elegir? <strong>Te ayudamos a encontrar el indicado</strong></p>
+          <a
+            href={`https://wa.me/524422758979/?text=${encodeURIComponent('Hola, estoy en el catálogo y no sé qué producto me conviene, ¿me pueden ayudar?')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-nudge-wa"
+          >
+            <WhatsAppIcon size={17} /> Pregúntanos gratis
+          </a>
         </div>
       </div>
 
@@ -523,7 +543,9 @@ function Catalog() {
       <section className="catalog-grid-section">
         <div className="contenedor">
           {activeFilter !== 'Todos' && (
-            <h2 className="active-cat-title">{activeFilter}</h2>
+            <h2 className="active-cat-title">
+              {DISPLAY_LABELS[activeFilter] || activeFilter}
+            </h2>
           )}
 
           {filtered.length > 0 && (
@@ -554,7 +576,7 @@ function Catalog() {
       </section>
 
       {/* ── 6. CTA FINAL ─────────────────────────────────────────── */}
-      <section className="catalog-bottom-cta reveal-section">
+      <section className="catalog-bottom-cta">
         <div className="catalog-cta-glow" aria-hidden="true" />
         <div className="contenedor">
           <div className="catalog-cta-inner">

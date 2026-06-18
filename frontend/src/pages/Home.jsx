@@ -227,7 +227,7 @@ function Home() {
           <div className="aplicaciones-grid">
             <Link to="/productos?app=Quesos" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`} alt="Quesos" loading="lazy" decoding="async" />
+                <img src={`${BASE}img/impmenuproduct/quesos.png`} alt="Quesos" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -249,7 +249,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Yogurt" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`} alt="Yogurt" loading="lazy" decoding="async" />
+                <img src={`${BASE}img/impmenuproduct/yogurt.png`} alt="Yogurt" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -260,7 +260,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Bebidas" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/leches/leche.png`} alt="Bebidas" loading="lazy" decoding="async" />
+                <img src={`${BASE}img/impmenuproduct/bebidas.png`} alt="Bebidas" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -271,7 +271,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Helados" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`} alt="Helados" loading="lazy" decoding="async" />
+                <img src={`${BASE}img/impmenuproduct/helados.png`} alt="Helados" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">
@@ -282,7 +282,7 @@ function Home() {
             </Link>
             <Link to="/productos?app=Postres" className="aplica-card">
               <div className="aplica-card-img">
-                <img src={`${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`} alt="Postres" loading="lazy" decoding="async" />
+                <img src={`${BASE}img/impmenuproduct/postres.png`} alt="Postres" loading="lazy" decoding="async" />
                 <div className="aplica-card-overlay" />
               </div>
               <div className="aplica-card-body">

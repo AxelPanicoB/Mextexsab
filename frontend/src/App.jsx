@@ -12,6 +12,7 @@ import RouteProgress from './components/RouteProgress.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Catalog from './pages/Catalog.jsx';
+import CatalogV2 from './pages/CatalogV2.jsx';
 
 // Mensaje de WhatsApp contextual según la sección que está viendo el usuario
 function WhatsAppFab() {
@@ -69,6 +70,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Catalog />} />
+              <Route path="/productos-v2" element={<CatalogV2 />} />
               <Route path="/nosotros" element={<About />} />
             </Routes>
           </main>
