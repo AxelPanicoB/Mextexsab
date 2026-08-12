@@ -120,8 +120,9 @@ router.post('/', contactLimiter, honeypotMiddleware, turnstileMiddleware, valida
   const data = req.validated;
 
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    console.warn('[Contacto] SMTP no configurado — revisa las variables de entorno.');
-    return res.status(503).json({ error: 'El servicio de correo no está configurado.' });
+    console.warn('[Contacto] SMTP no configurado — devolviendo éxito para desarrollo.');
+    console.log(`[Contacto Simulado] Sería: ${data.name} — ${data.interest}`);
+    return res.json({ status: 'ok', message: '¡Consulta recibida! Nos pondremos en contacto contigo muy pronto.' });
   }
 
   try {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
 import {
   Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
-  PaperPlane, CircleNotch, CheckCircle, WarningCircle,
+  PaperPlane, CircleNotch, CheckCircle, WarningCircle, EnvelopeOpen, Envelope,
 } from '@phosphor-icons/react';
 
 const BASE = import.meta.env.BASE_URL;
@@ -29,7 +29,7 @@ function Home() {
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
-      setCtaStatus({ type: 'success', text: '¡Listo! Te contactamos pronto.' });
+      setCtaStatus({ type: 'success', text: 'Te contacteremos pronto' });
       setCtaForm({ name: '', email: '', phone: '' });
     } catch (err) {
       setCtaStatus({ type: 'error', text: err.message });
@@ -184,22 +184,18 @@ function Home() {
 
         <div className="hero-content">
           <div className="hero-text">
-            <div className="hero-badge">
-              <Star size={20} weight="fill" />
-              Ingredientes Alimentarios Premium
-            </div>
             <h1>
               Expertos en <span>Aditivos</span> para la Industria Láctea
             </h1>
             <p>
-              Saborizantes, espesantes, estabilizantes y gomas especialmente
+              Saborizantes, espesantes, estabilizantes y texturizantes especialmente
               formulados para quesos, yogures, helados y bebidas.
             </p>
             <div className="hero-actions">
               <Link to="/productos" className="btn-white">
                 Ver Catálogo <ArrowRight size={22} weight="regular" />
               </Link>
-              <button type="button" className="btn-outline-white" onClick={openContactModal}>
+              <button type="button" className="btn-outline-white" onClick={() => openContactModal()}>
                 Solicitar Cotización
               </button>
             </div>
@@ -220,8 +216,8 @@ function Home() {
               Soluciones para cada <span>aplicación láctea</span>.
             </h2>
             <p className="aplicaciones-desc">
-              Desarrollamos formulaciones especializadas que mejoran el sabor, el color,
-              la textura y la estabilidad en una amplia variedad de productos.
+              Formulaciones especializadas que mejoran el sabor, color,
+              textura y estabilidad en una amplia variedad de productos.
             </p>
           </div>
           <div className="aplicaciones-grid">
@@ -295,59 +291,8 @@ function Home() {
         </div>
       </section>
 
-      {/* ── 3. POR QUÉ ELEGIRNOS ──────────────────────────── */}
-      <section className="info-section reveal-section">
+      <section className="why-band-section">
         <div className="contenedor">
-          <div className="info-header">
-            <span className="about-home-eyebrow">— ¿Por qué elegirnos?</span>
-            <h2>Fórmulas propias para <span>cada proceso</span>.</h2>
-            <p>
-              No distribuimos ingredientes genéricos. Desarrollamos y vendemos
-              nuestras propias formulaciones: productos diseñados específicamente
-              para la industria láctea, listos para integrarse a tu proceso de
-              producción.
-            </p>
-          </div>
-          <div className="why-layout">
-            <div className="why-image-col">
-              <img
-                src={`${BASE}img/imgmetexsab.png`}
-                alt="Formulaciones propias Metexsab — quesos, saborizantes y colorantes"
-                className="why-editorial-img"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div className="why-blocks-col">
-              <div className="why-block">
-                <div className="why-block-icon">
-                  <img src={`${BASE}img/frasco.png`} alt="Frasco de formulación" loading="lazy" decoding="async" />
-                </div>
-                <div className="why-block-text">
-                  <h3>Productos propios</h3>
-                  <p>Contamos con 25 formulaciones desarrolladas en nuestro laboratorio, disponibles en catálogo para entrega directa a tu planta.</p>
-                </div>
-              </div>
-              <div className="why-block">
-                <div className="why-block-icon">
-                  <img src={`${BASE}img/gota.png`} alt="Saborizante" loading="lazy" decoding="async" />
-                </div>
-                <div className="why-block-text">
-                  <h3>Perfiles de sabor auténticos</h3>
-                  <p>Desarrollamos saborizantes para quesos, cremas, bebidas y postres con perfiles intensos, estables y consistentes en producción.</p>
-                </div>
-              </div>
-              <div className="why-block">
-                <div className="why-block-icon">
-                  <img src={`${BASE}img/queso.png`} alt="Queso" loading="lazy" decoding="async" />
-                </div>
-                <div className="why-block-text">
-                  <h3>Color y funcionalidad</h3>
-                  <p>Formulaciones que mejoran apariencia, textura y estabilidad en aplicaciones lácteas y alimentarias.</p>
-                </div>
-              </div>
-            </div>
-          </div>
           <Link to="/productos" className="why-band">
             <div className="why-band-icon">
               <Medal size={33} weight="fill" />
@@ -378,7 +323,7 @@ function Home() {
               <div className="timeline-node"><span>1</span></div>
               <div className="timeline-body">
                 <h3>Análisis de necesidad</h3>
-                <p>Escuchamos tu producto, proceso de producción y objetivos para entender qué ingrediente se adapta mejor.</p>
+                <p>Escuchamos tu proceso de producción, analizamos tu producto y objetivos para identificar áreas de oportunidad.</p>
               </div>
             </div>
             <div className="timeline-item">
@@ -392,14 +337,7 @@ function Home() {
               <div className="timeline-node"><span>3</span></div>
               <div className="timeline-body">
                 <h3>Muestras en tu planta</h3>
-                <p>Te enviamos muestras para que las pruebes en condiciones reales de producción y valides los resultados.</p>
-              </div>
-            </div>
-            <div className="timeline-item">
-              <div className="timeline-node"><span>4</span></div>
-              <div className="timeline-body">
-                <h3>Acompañamiento técnico</h3>
-                <p>Te apoyamos con ajustes y asesoría continua hasta que tu producto quede exactamente como lo necesitas.</p>
+                <p>Te enviamos muestras sin costo alguno para que pruebes en condiciones reales de producción y valides los resultados.</p>
               </div>
             </div>
           </div>
@@ -437,8 +375,18 @@ function Home() {
               onChange={handleCtaChange}
               required
             />
-            <button type="submit" className="btn-primary">
-              <PaperPlane size={24} weight="fill" /> Solicitar asesoría
+            <button type="submit" className={`btn-primary${ctaStatus?.type === 'success' ? ' success' : ''}`} disabled={ctaStatus?.type === 'success'}>
+              {ctaStatus?.type === 'success' ? (
+                <>
+                  <Envelope size={24} weight="fill" className="icon-envelope" />
+                  ¡Enviado!
+                </>
+              ) : (
+                <>
+                  <EnvelopeOpen size={24} weight="fill" className="icon-envelope" />
+                  Solicitar asesoría
+                </>
+              )}
             </button>
           </form>
           {ctaStatus && (
@@ -449,6 +397,13 @@ function Home() {
               {' '}{ctaStatus.text}
             </p>
           )}
+        </div>
+      </section>
+
+      {/* ── 6. TAGLINE BANNER ─────────────────────────────────── */}
+      <section className="tagline-banner">
+        <div className="contenedor">
+          <p className="tagline-text">¡Un mundo de ideas brillantes para sus productos alimenticios!</p>
         </div>
       </section>
     </>
