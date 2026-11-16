@@ -133,7 +133,7 @@ const APP_CARDS = [
     headline: 'Optimización funcional del proceso productivo',
     description:
       'Aditivos funcionales para controlar la emulsificación, regular el pH y mejorar la conservación.',
-    img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
+    img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural lactico.webp`,
     benefits: ['Mejor emulsificación', 'Control de pH', 'Mayor vida útil'],
   },
 ];

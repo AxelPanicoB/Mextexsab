@@ -2,3 +2,5 @@ node_modules
 dist
 .env
 dist-ssr
+.env.local
+.env.*.local

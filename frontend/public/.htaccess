@@ -42,7 +42,7 @@ RewriteRule . /index.html [L]
 # y www. Bloquea cualquier otro sitio que intente incrustar
 # nuestras imágenes directamente.
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^https?://(www\.)?metexsab\.com [NC]
+RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9-]+\.)?metexsab\.com [NC]
 RewriteCond %{HTTP_REFERER} !^https?://(www\.)?localhost [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp|avif|svg|ico|mp4|mp3)$ - [F,NC,L]
 
@@ -53,6 +53,9 @@ RewriteRule \.(jpg|jpeg|png|gif|webp|avif|svg|ico|mp4|mp3)$ - [F,NC,L]
 
   # Previene MIME sniffing
   Header always set X-Content-Type-Options "nosniff"
+
+  # Convierte a https cualquier recurso que se pida por http (regla que ya traía el sitio anterior)
+  Header always set Content-Security-Policy "upgrade-insecure-requests;"
 
   # Referrer: solo origen al cruzar dominios
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

@@ -4,7 +4,7 @@ import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
 import {
   Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
-  PaperPlane, CircleNotch, CheckCircle, WarningCircle, EnvelopeOpen, Envelope,
+  PaperPlane, CircleNotch, CheckCircle, WarningCircle, EnvelopeOpen, Envelope, ShieldCheck,
 } from '@phosphor-icons/react';
 
 const BASE = import.meta.env.BASE_URL;
@@ -392,6 +392,15 @@ function Home() {
               )}
             </button>
           </form>
+          <p className="cta-privacy">
+            <ShieldCheck size={16} weight="regular" aria-hidden="true" />
+            <span>
+              Al enviar aceptas el{' '}
+              <a href={`${BASE}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
+                Aviso de Privacidad
+              </a>.
+            </span>
+          </p>
           {ctaStatus && (
             <p className={`cta-status ${ctaStatus.type}`}>
               {ctaStatus.type === 'loading' && <CircleNotch size={24} weight="regular" className="icon-spin" />}

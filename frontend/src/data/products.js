@@ -9,7 +9,7 @@ const products = [
     category: 'Auxiliares de proceso',
     functional: 'Auxiliar',
     applications: ['Quesos', 'Cremas'],
-    image: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
+    image: `${BASE}img/Productos/Auxiliares de proceso/conservador natural lactico.webp`,
     summary: 'Conservador natural en presentación líquida. Estabiliza pH y\nprolonga vida de anaquel en lácteos y dulces suaves.',
     tags: ['conservador', 'acidez', 'natural'],
     highlights: ['Estabiliza pH', 'Limita propagación de lactobacilos', 'Origen natural'],

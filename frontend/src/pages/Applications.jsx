@@ -168,7 +168,7 @@ const CATEGORIES = [
       },
       {
         name: 'Conservadores y reguladores de pH',
-        img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
+        img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural lactico.webp`,
         desc: 'Buffer natural de pH y conservador para lácteos, dulces y productos de alta humedad.',
       },
     ],
@@ -181,7 +181,7 @@ const CATEGORIES = [
       { code: 'EML-30-010',        name: 'Emulsionante natural concentrado', desc: 'Mínimo 90% de concentración. Mejora textura sin sabor graso.' },
       { code: 'MTS-LACTO-70-003',  name: 'Lactato de sodio 60%',            desc: 'Buffer de pH y conservador natural para lácteos y dulces.' },
     ],
-    solutionImg: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
+    solutionImg: `${BASE}img/Productos/Auxiliares de proceso/conservador natural lactico.webp`,
   },
 ];
 

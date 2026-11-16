@@ -8653,18 +8653,34 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
 /* Aviso de privacidad debajo del botón de enviar (solicitud de muestras) */
 .cart-panel-privacy {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0.4rem;
-  margin: 0.75rem 0 0;
-  font-size: 0.8rem;
-  line-height: 1.45;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.35rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.3;
   color: #64748b;
-  text-align: center;
+  text-align: left;
 }
-.cart-panel-privacy svg { flex-shrink: 0; margin-top: 1px; }
+.cart-panel-privacy svg { flex-shrink: 0; }
 .cart-panel-privacy a { color: #2e7b19; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .cart-panel-privacy a:hover { color: #1e5c0a; }
 
 /* Con el panel de muestras abierto, el botón flotante del regalo sobra y tapaba el contenido en celular */
 .cart-fab.cart-fab--hidden { display: none; }
+
+/* Aviso de privacidad debajo del formulario del inicio */
+.cta-section .cta-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  max-width: none;
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: #64748b;
+}
+.cta-privacy svg { flex-shrink: 0; }
+.cta-privacy a { color: #2e7b19; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.cta-privacy a:hover { color: #1e5c0a; }

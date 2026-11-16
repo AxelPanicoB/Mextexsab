@@ -226,9 +226,9 @@ function CartBar() {
                   )}
                 </button>
                 <p className="cart-panel-privacy">
-                  <ShieldCheck size={18} weight="regular" aria-hidden="true" />
+                  <ShieldCheck size={16} weight="regular" aria-hidden="true" />
                   <span>
-                    Tus datos son confidenciales. Al enviar aceptas el{' '}
+                    Al enviar aceptas el{' '}
                     <a href={`${import.meta.env.BASE_URL}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
                       Aviso de Privacidad
                     </a>.
