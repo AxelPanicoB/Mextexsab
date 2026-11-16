@@ -23,12 +23,12 @@ const VALUES = [
 ];
 
 const SOLUTIONS = [
-  { image: `${BASE}img/about-reference/solution-quesos.png`,    Icon: Cheese,     label: 'Quesos y cremas',         path: '/productos?tab=quesos,cremas' },
-  { image: `${BASE}img/about-reference/solution-yogurt.png`,    Icon: Drop,       label: 'Yogurt y lácteos',        path: '/productos?tab=yogurt' },
-  { image: `${BASE}img/about-reference/solution-helados.png`,   Icon: IceCream,   label: 'Helados y postres',       path: '/productos?tab=helados,postres' },
-  { image: `${BASE}img/about-reference/solution-bebidas.png`,   Icon: GlassWater, label: 'Bebidas y concentrados',  path: '/productos?tab=bebidas' },
-  { image: `${BASE}img/about-reference/solution-colorantes.png`,Icon: Palette,    label: 'Colorantes',              path: '/productos?tab=colorantes' },
-  { image: `${BASE}img/about-reference/solution-auxiliares.png`,Icon: Package,    label: 'Auxiliares de proceso',   path: '/productos?tab=auxiliares' },
+  { image: `${BASE}img/about-reference/solution-quesos.webp`,    Icon: Cheese,     label: 'Quesos y cremas',         path: '/productos?tab=quesos,cremas' },
+  { image: `${BASE}img/about-reference/solution-yogurt.webp`,    Icon: Drop,       label: 'Yogurt y lácteos',        path: '/productos?tab=yogurt' },
+  { image: `${BASE}img/about-reference/solution-helados.webp`,   Icon: IceCream,   label: 'Helados y postres',       path: '/productos?tab=helados,postres' },
+  { image: `${BASE}img/about-reference/solution-bebidas.webp`,   Icon: GlassWater, label: 'Bebidas y concentrados',  path: '/productos?tab=bebidas' },
+  { image: `${BASE}img/about-reference/solution-colorantes.webp`,Icon: Palette,    label: 'Colorantes',              path: '/productos?tab=colorantes' },
+  { image: `${BASE}img/about-reference/solution-auxiliares.webp`,Icon: Package,    label: 'Auxiliares de proceso',   path: '/productos?tab=auxiliares' },
 ];
 
 function About() {
@@ -66,7 +66,7 @@ function About() {
           </div>
 
           <div className="about-hero-photo">
-            <img src={`${BASE}img/acueductod.png`} alt="Acueducto de Querétaro" />
+            <img src={`${BASE}img/acueductod.webp`} alt="Acueducto de Querétaro" />
           </div>
         </div>
       </section>

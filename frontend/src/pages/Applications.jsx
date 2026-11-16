@@ -10,7 +10,7 @@ const CATEGORIES = [
     id: 'quesos',
     icon: 'fa-cheese',
     label: 'Quesos',
-    heroImg: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+    heroImg: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.webp`,
     headline: 'Textura, rendimiento y estabilidad',
     objective: 'Maximizar el rendimiento y garantizar la textura, estabilidad y vida de anaquel del producto final.',
     description:
@@ -19,17 +19,17 @@ const CATEGORIES = [
       {
         name: 'Quesos frescos',
         note: 'Panela · Ranchero · Morral',
-        img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.png`,
+        img: `${BASE}img/Productos/Saborizantes/quesos/Liquidos/quesos.webp`,
         desc: 'Reduce el desuerado, mejora la textura y aumenta el rendimiento en quesos tipo panela, ranchero y morral.',
       },
       {
         name: 'Quesos análogos y pizzero',
-        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.png`,
+        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.webp`,
         desc: 'Mejora elasticidad, fundido y estabilidad en quesos para pizza y análogos a altas temperaturas de proceso.',
       },
       {
         name: 'Cremas y aderezos',
-        img: `${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`,
+        img: `${BASE}img/Productos/Saborizantes/cremas/crema.webp`,
         desc: 'Aporta cuerpo, cremosidad y brillo en cremas ácidas, aderezos y productos de alto contenido de agua.',
       },
     ],
@@ -44,13 +44,13 @@ const CATEGORIES = [
       { code: 'CRE-40-023',  name: 'Estabilizante / emulsionante',        desc: 'Cuerpo, cremosidad y brillo en cremas ácidas.' },
       { code: 'CRE-40-020',  name: 'Espesante para cremas',               desc: 'Textura uniforme y estable en aderezos y cremas ácidas.' },
     ],
-    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.png`,
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Queso Cheddar.webp`,
   },
   {
     id: 'helados',
     icon: 'fa-ice-cream',
     label: 'Helados',
-    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.webp`,
     headline: 'Textura perfecta y resistencia al derretimiento',
     objective: 'Controlar la cristalización, mejorar el overrun y garantizar estabilidad en toda la cadena de frío.',
     description:
@@ -58,12 +58,12 @@ const CATEGORIES = [
     types: [
       {
         name: 'Helados y cremas montadas',
-        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.png`,
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/helados.webp`,
         desc: 'Mejora el overrun, controla la cristalización y aporta suavidad al paladar sin alterar el perfil de sabor.',
       },
       {
         name: 'Postres y paletas congeladas',
-        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.jpg`,
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/natilla.webp`,
         desc: 'Controla el tamaño de cristales de hielo y mejora la resistencia al derretimiento en paletas y postres.',
       },
     ],
@@ -77,13 +77,13 @@ const CATEGORIES = [
       { code: 'EBH-40-033',   name: 'Estabilizante / emulsificante vegetal',  desc: 'Controla cristalización en bases vegetales y de mantequilla.' },
       { code: 'NPB-10-023',   name: 'Mezcla de gomas naturales',              desc: 'Controla cristales de hielo y mejora resistencia al derretimiento.' },
     ],
-    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizanteemulsificante.jpg`,
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizanteemulsificante.webp`,
   },
   {
     id: 'yogurt',
     icon: 'fa-bottle-droplet',
     label: 'Yogurt',
-    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+    heroImg: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.webp`,
     headline: 'Consistencia y estabilidad en yogures y bebidas',
     objective: 'Evitar la sinéresis, aportar cuerpo y garantizar estabilidad durante toda la vida de anaquel del producto.',
     description:
@@ -91,17 +91,17 @@ const CATEGORIES = [
     types: [
       {
         name: 'Yogurt batido y bebible',
-        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.png`,
+        img: `${BASE}img/Productos/Saborizantes/Yogurt,helados,bebidas,cajeras,natillas/yogur.webp`,
         desc: 'Proporciona consistencia, previene sinéresis y mantiene estabilidad durante el almacenamiento refrigerado.',
       },
       {
         name: 'Bebidas lácteas y concentrados',
-        img: `${BASE}img/Productos/Saborizantes/leches/leche.png`,
+        img: `${BASE}img/Productos/Saborizantes/leches/leche.webp`,
         desc: 'Desarrolla viscosidad inmediata y estabiliza sólidos en suspensión sin afectar el perfil de sabor.',
       },
       {
         name: 'Fórmulas UHT / HTST',
-        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizante  espesante para leches.png`,
+        img: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizante  espesante para leches.webp`,
         desc: 'Previene precipitación de proteínas bajo tratamiento térmico severo en productos de larga vida.',
       },
     ],
@@ -116,13 +116,13 @@ const CATEGORIES = [
       { code: 'BCP-20-030',  name: 'Texturizante para concentrados con pulpa', desc: 'Cuerpo y viscosidad sin afectar el perfil de sabor.' },
       { code: 'LEF-40-022',  name: 'Estabilizante UHT / HTST',               desc: 'Previene precipitación de proteínas bajo tratamiento térmico severo.' },
     ],
-    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.jpg`,
+    solutionImg: `${BASE}img/Productos/Texturizantes y Estabilizntes/Estabilizantesespesantes para Yogurt.webp`,
   },
   {
     id: 'colorantes',
     icon: 'fa-palette',
     label: 'Colorantes',
-    heroImg: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+    heroImg: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.webp`,
     headline: 'Color natural, uniforme y estable en proceso',
     objective: 'Lograr tonalidades uniformes y estables que resistan el proceso térmico y mantengan su intensidad durante la vida de anaquel.',
     description:
@@ -130,12 +130,12 @@ const CATEGORIES = [
     types: [
       {
         name: 'Colorantes naturales de achiote',
-        img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+        img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.webp`,
         desc: 'Tonos de amarillo a naranja intenso para quesos, mantequillas, productos grasos y confitería.',
       },
       {
         name: 'Colorantes inorgánicos',
-        img: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.png`,
+        img: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.webp`,
         desc: 'Blanqueamiento intenso y uniforme resistente a pasteurización y altas temperaturas de proceso.',
       },
     ],
@@ -149,13 +149,13 @@ const CATEGORIES = [
       { code: 'MTXX-8040', name: 'Achiote concentrado alta intensidad', desc: 'Mayor concentración para lácteos, confitería y productos grasos.' },
       { code: 'DTI-4022',  name: 'Dióxido de titanio en suspensión',    desc: 'Blanco intenso resistente a pasteurización y tratamiento térmico.' },
     ],
-    solutionImg: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.png`,
+    solutionImg: `${BASE}img/Productos/Colorantes/Dioxido-de-titanio.webp`,
   },
   {
     id: 'auxiliares',
     icon: 'fa-gear',
     label: 'Auxiliares',
-    heroImg: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+    heroImg: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.webp`,
     headline: 'Optimización funcional del proceso productivo',
     objective: 'Mejorar la eficiencia del proceso, estabilizar el pH y extender la vida de anaquel del producto terminado.',
     description:
@@ -163,12 +163,12 @@ const CATEGORIES = [
     types: [
       {
         name: 'Emulsionantes de proceso',
-        img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.jpg`,
+        img: `${BASE}img/Productos/Auxiliares de proceso/Emulsificante destilado concentrado.webp`,
         desc: 'Mejora textura y estabilidad emulsificando grasas sin aportar sabor ni color al producto final.',
       },
       {
         name: 'Conservadores y reguladores de pH',
-        img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.png`,
+        img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
         desc: 'Buffer natural de pH y conservador para lácteos, dulces y productos de alta humedad.',
       },
     ],
@@ -181,7 +181,7 @@ const CATEGORIES = [
       { code: 'EML-30-010',        name: 'Emulsionante natural concentrado', desc: 'Mínimo 90% de concentración. Mejora textura sin sabor graso.' },
       { code: 'MTS-LACTO-70-003',  name: 'Lactato de sodio 60%',            desc: 'Buffer de pH y conservador natural para lácteos y dulces.' },
     ],
-    solutionImg: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.png`,
+    solutionImg: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
   },
 ];
 

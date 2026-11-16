@@ -51,7 +51,7 @@ function RouteProgress() {
         </div>
 
         <div className="page-loader__badge">
-          <img src={`${BASE}img/logo2.png`} alt="Metexsab" />
+          <img src={`${BASE}img/logo2.webp`} alt="Metexsab" />
         </div>
       </div>
     </div>

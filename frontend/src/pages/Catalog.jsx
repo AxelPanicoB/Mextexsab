@@ -22,7 +22,7 @@ const APP_CARDS = [
     headline: 'Textura, rendimiento y estabilidad',
     description:
       'Sistemas funcionales que reducen el desuerado y mejoran el rendimiento en quesos frescos, análogos y pizzeros.',
-    img: `${BASE}img/impmenuproduct/quesos.png`,
+    img: `${BASE}img/impmenuproduct/quesos.webp`,
     benefits: ['Menor desuerado', 'Mejor textura', 'Mayor vida útil'],
   },
   {
@@ -33,7 +33,7 @@ const APP_CARDS = [
     headline: 'Textura perfecta y resistencia al derretimiento',
     description:
       'Formulaciones que optimizan la textura, retención de aire y resistencia a cambios de temperatura en helados.',
-    img: `${BASE}img/impmenuproduct/helados.png`,
+    img: `${BASE}img/impmenuproduct/helados.webp`,
     benefits: ['Control de cristales', 'Mayor overrun', 'Estabilidad en frío'],
   },
   {
@@ -44,7 +44,7 @@ const APP_CARDS = [
     headline: 'Consistencia y estabilidad en yogures y bebidas',
     description:
       'Sistemas que previenen la sinéresis, aportan viscosidad y estabilizan sólidos en yogures y bebidas lácteas.',
-    img: `${BASE}img/impmenuproduct/yogurt.png`,
+    img: `${BASE}img/impmenuproduct/yogurt.webp`,
     benefits: ['Sin sinéresis', 'Cuerpo y viscosidad', 'Estabilidad térmica'],
   },
   {
@@ -55,7 +55,7 @@ const APP_CARDS = [
     headline: 'Estabilidad y cuerpo en bebidas lácteas',
     description:
       'Sistemas que mantienen la homogeneidad, aportan cuerpo y estabilizan emulsiones en bebidas lácteas y nutritivas.',
-    img: `${BASE}img/impmenuproduct/bebidas.png`,
+    img: `${BASE}img/impmenuproduct/bebidas.webp`,
     benefits: ['Suspensión uniforme', 'Cuerpo y viscosidad', 'Sin sedimentación'],
   },
   {
@@ -66,7 +66,7 @@ const APP_CARDS = [
     headline: 'Consistencia y cremosidad en cremas lácteas',
     description:
       'Formulaciones que controlan la viscosidad, aportan cremosidad y prolongan la vida útil en cremas y aderezos.',
-    img: `${BASE}img/Productos/Saborizantes/cremas/crema.jpeg`,
+    img: `${BASE}img/Productos/Saborizantes/cremas/crema.webp`,
     benefits: ['Textura suave', 'Sin sinéresis', 'Mayor vida útil'],
   },
   {
@@ -77,7 +77,7 @@ const APP_CARDS = [
     headline: 'Gelificación y textura en postres lácteos',
     description:
       'Sistemas de gelificación y estabilización para flanes, natillas, gelatinas y postres con textura firme y suave.',
-    img: `${BASE}img/impmenuproduct/postres.png`,
+    img: `${BASE}img/impmenuproduct/postres.webp`,
     benefits: ['Gelificación perfecta', 'Desmoldado fácil', 'Textura uniforme'],
   },
   {
@@ -88,7 +88,7 @@ const APP_CARDS = [
     headline: 'Suavidad y vida útil en tortilla de maíz y trigo',
     description:
       'Aditivos funcionales que mejoran la extensibilidad, retardan el envejecimiento y controlan la humedad en tortillas.',
-    img: `${BASE}img/impmenuproduct/tortillas.png`,
+    img: `${BASE}img/impmenuproduct/tortillas.webp`,
     benefits: ['Mayor suavidad', 'Retarda envejecimiento', 'Menor rotura'],
   },
   {
@@ -99,7 +99,7 @@ const APP_CARDS = [
     headline: 'Color natural, uniforme y estable en proceso',
     description:
       'Colorantes naturales de alta resistencia a pasteurización, tratamiento térmico y variaciones de pH.',
-    img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.png`,
+    img: `${BASE}img/Productos/Colorantes/Rojo_Annatto_liposoluble.webp`,
     benefits: ['Tono uniforme', 'Resistencia térmica', 'Origen natural'],
   },
   {
@@ -110,7 +110,7 @@ const APP_CARDS = [
     headline: 'Control de textura y estabilidad en proceso',
     description:
       'Línea completa de texturizantes y estabilizantes para controlar reología, viscosidad y estabilidad en productos lácteos.',
-    img: `${BASE}img/impmenuproduct/texturizante.png`,
+    img: `${BASE}img/impmenuproduct/texturizante.webp`,
     benefits: ['Control de viscosidad', 'Estabilidad en proceso', 'Sistemas a medida'],
   },
   {
@@ -121,7 +121,7 @@ const APP_CARDS = [
     headline: 'Sabor auténtico e intenso en productos lácteos',
     description:
       'Saborizantes naturales y artificiales de alta intensidad y resistencia térmica para quesos, yogures, helados y bebidas.',
-    img: `${BASE}img/impmenuproduct/saborizantes.png`,
+    img: `${BASE}img/impmenuproduct/saborizantes.webp`,
     benefits: ['Alta intensidad', 'Resistencia térmica', 'Origen natural'],
   },
   {
@@ -132,7 +132,7 @@ const APP_CARDS = [
     headline: 'Optimización funcional del proceso productivo',
     description:
       'Aditivos funcionales para controlar la emulsificación, regular el pH y mejorar la conservación.',
-    img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.png`,
+    img: `${BASE}img/Productos/Auxiliares de proceso/conservador natural láctico.webp`,
     benefits: ['Mejor emulsificación', 'Control de pH', 'Mayor vida útil'],
   },
 ];
