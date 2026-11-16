@@ -47,37 +47,49 @@ function ScrollToTop() {
   return null;
 }
 
+// Ruta base del sitio: sale de "base" en vite.config.js ('/Mextexsab/' en GitHub Pages, '/' en el
+// dominio propio). Así, al pasar a metexsab.com solo se cambia ese valor.
+export const ROUTER_BASENAME = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+// Todo el sitio, sin el enrutador: el navegador lo envuelve en BrowserRouter (main.jsx) y el
+// prerender, que corre al compilar, en StaticRouter (entry-server.jsx).
+export function AppShell() {
+  return (
+    <CartProvider>
+      <ContactModalProvider>
+      <WhatsAppChatProvider>
+      <div className="app-shell">
+        <RevealObserver />
+        <ScrollToTop />
+        <RouteSeo />
+        <NavBar />
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Catalog />} />
+            <Route path="/nosotros" element={<About />} />
+            {LANDINGS.map((l) => (
+              <Route key={l.slug} path={`/${l.slug}`} element={<Landing landing={l} />} />
+            ))}
+          </Routes>
+        </main>
+        <Footer />
+        <CartBar />
+        <ContactModal />
+        <RouteProgress />
+        <ScrollToTopBtn />
+        <WhatsAppChat />
+      </div>
+      </WhatsAppChatProvider>
+      </ContactModalProvider>
+    </CartProvider>
+  );
+}
+
 function App() {
   return (
-    <BrowserRouter basename="/Mextexsab">
-      <CartProvider>
-        <ContactModalProvider>
-        <WhatsAppChatProvider>
-        <div className="app-shell">
-          <RevealObserver />
-          <ScrollToTop />
-          <RouteSeo />
-          <NavBar />
-          <main className="app-main">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/productos" element={<Catalog />} />
-              <Route path="/nosotros" element={<About />} />
-              {LANDINGS.map((l) => (
-                <Route key={l.slug} path={`/${l.slug}`} element={<Landing landing={l} />} />
-              ))}
-            </Routes>
-          </main>
-          <Footer />
-          <CartBar />
-          <ContactModal />
-          <RouteProgress />
-          <ScrollToTopBtn />
-          <WhatsAppChat />
-        </div>
-        </WhatsAppChatProvider>
-        </ContactModalProvider>
-      </CartProvider>
+    <BrowserRouter basename={ROUTER_BASENAME}>
+      <AppShell />
     </BrowserRouter>
   );
 }

@@ -175,7 +175,7 @@ function ProductCardV2({ product }) {
       <article className={`solution-card solution-card-v2${selected ? ' solution-card--selected' : ''}`}>
         <div className="solution-card-img">
           {product.image && (
-            <img src={encodeURI(product.image)} alt={product.name} />
+            <img src={encodeURI(product.image)} alt={product.name} loading="lazy" decoding="async" />
           )}
           <span className="solution-badge">{product.functional || product.category}</span>
         </div>

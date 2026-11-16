@@ -6,11 +6,7 @@ import SamplesCta from '../components/SamplesCta.jsx';
 import WhatsAppIcon from '../components/WhatsAppIcon.jsx';
 import allProducts, { sortForApplication } from '../data/products.js';
 import LANDINGS from '../data/landings.js';
-
-const SITE = 'https://www.metexsab.com';
-
-// Texto corto para los enlaces a otras páginas ("Saborizantes para quesos")
-const linkLabel = (l) => l.h1.join(' ').replace(/^./, (c) => c.toUpperCase());
+import { landingLabel as linkLabel, breadcrumbFor } from '../data/seo.js';
 
 function pickProducts(landing) {
   if (landing.ids) return landing.ids.map((id) => allProducts.find((p) => p.id === id)).filter(Boolean);
@@ -36,20 +32,14 @@ function Landing({ landing }) {
     .map((slug) => LANDINGS.find((l) => l.slug === slug))
     .filter(Boolean);
 
-  // Datos estructurados: ruta de navegación (Inicio > Productos > esta página)
+  // Datos estructurados: ruta de navegación (Inicio > Productos > esta página).
+  // Si el HTML prerenderizado ya trae uno, se reemplaza para no duplicarlo.
   useEffect(() => {
+    document.head.querySelectorAll('script[data-landing="breadcrumb"]').forEach((s) => s.remove());
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.dataset.landing = 'breadcrumb';
-    script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${SITE}/` },
-        { '@type': 'ListItem', position: 2, name: 'Productos', item: `${SITE}/productos` },
-        { '@type': 'ListItem', position: 3, name: linkLabel(landing), item: `${SITE}/${landing.slug}` },
-      ],
-    });
+    script.textContent = JSON.stringify(breadcrumbFor(landing));
     document.head.appendChild(script);
     return () => script.remove();
   }, [landing]);

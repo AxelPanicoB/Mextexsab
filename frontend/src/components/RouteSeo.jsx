@@ -1,34 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import LANDINGS from '../data/landings.js';
+import { pageFor, urlFor } from '../data/seo.js';
 
-// Dominio de producción: se usa para el canonical y og:url de cada página.
-const SITE = 'https://www.metexsab.com';
-
-// Título y descripción propios de cada ruta (Google los lee por separado).
-// "/" repite lo que ya trae index.html para volver a él al regresar al inicio.
-const PAGES = {
-  '/': {
-    title: 'Metexsab | Aditivos Alimentarios para la Industria Láctea – Querétaro, México',
-    description:
-      'Proveedor especializado en aditivos alimentarios para la industria láctea en México. Saborizantes, estabilizantes, texturizantes y gomas para quesos, yogur, helados y bebidas.',
-  },
-  '/productos': {
-    title: 'Productos | Saborizantes, Estabilizantes y Texturizantes para Lácteos – Metexsab',
-    description:
-      'Catálogo de saborizantes, estabilizantes, texturizantes, colorantes y auxiliares de proceso para quesos, cremas, yogurt, helados, bebidas y postres. Solicita muestras gratuitas.',
-  },
-  '/nosotros': {
-    title: 'Nosotros | Metexsab – Mexicana de Textura y Sabor, Querétaro',
-    description:
-      'Mexicana de Textura y Sabor, empresa queretana fundada en 2007. Ingredientes de calidad, soluciones a la medida y servicio eficiente para la industria alimentaria mexicana.',
-  },
-};
-
-// Las páginas por tema (data/landings.js) traen su propio título y descripción
-LANDINGS.forEach((l) => {
-  PAGES[`/${l.slug}`] = { title: l.title, description: l.description };
-});
+// Al navegar dentro del sitio, actualiza el título y las etiquetas de la página.
+// (La primera carga ya trae las etiquetas correctas porque se prerenderizan al compilar;
+// esto cubre los cambios de página sin recargar.)
 
 function setMeta(selector, attr, value) {
   const el = document.head.querySelector(selector);
@@ -39,9 +15,8 @@ function RouteSeo() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const path = pathname.replace(/\/+$/, '') || '/';
-    const page = PAGES[path] || PAGES['/'];
-    const url = `${SITE}${path === '/' ? '/' : path}`;
+    const page = pageFor(pathname);
+    const url = urlFor(pathname);
 
     document.title = page.title;
     setMeta('meta[name="description"]', 'content', page.description);
@@ -49,6 +24,7 @@ function RouteSeo() {
     setMeta('meta[property="og:url"]', 'content', url);
     setMeta('meta[property="og:title"]', 'content', page.title);
     setMeta('meta[property="og:description"]', 'content', page.description);
+    setMeta('meta[property="og:image"]', 'content', page.image);
   }, [pathname]);
 
   return null;

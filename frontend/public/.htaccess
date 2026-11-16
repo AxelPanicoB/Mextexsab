@@ -23,6 +23,16 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # Ajusta según cómo quedes configurado en Neubox:
 RewriteBase /
 RewriteRule ^index\.html$ - [L]
+
+# Páginas prerenderizadas (las genera "npm run build"): /productos se sirve desde productos.html,
+# /saborizantes-para-quesos desde saborizantes-para-quesos.html, etc. Cada una trae ya escritos su
+# título, descripción, imagen de vista previa y contenido (WhatsApp y Google no ejecutan JavaScript).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# Cualquier otra ruta: la app de React la resuelve
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
