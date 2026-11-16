@@ -6,6 +6,7 @@ import { ContactModalProvider } from './context/ContactModalContext.jsx';
 import NavBar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
 import CartBar from './components/CartBar.jsx';
+import RouteSeo from './components/RouteSeo.jsx';
 import ContactModal from './components/ContactModal.jsx';
 import ScrollToTopBtn from './components/ScrollToTopBtn.jsx';
 import RouteProgress from './components/RouteProgress.jsx';
@@ -64,6 +65,7 @@ function App() {
         <ContactModalProvider>
         <div className="app-shell">
           <RevealObserver />
+          <RouteSeo />
           <NavBar />
           <main className="app-main">
             <Routes>

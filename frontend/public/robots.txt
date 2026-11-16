@@ -3,6 +3,8 @@
 # Si el sitio está en un subdirectorio (/Mextexsab/), asegúrate de que el host
 # sirva este archivo también desde domain.com/robots.txt
 
+Sitemap: https://www.metexsab.com/sitemap.xml
+
 User-agent: *
 Allow: /
 
