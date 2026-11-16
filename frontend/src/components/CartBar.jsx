@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
-import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight } from '@phosphor-icons/react';
+import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight, ShieldCheck } from '@phosphor-icons/react';
 
 function CartBar() {
   const { cart, remove, clear, panelOpen, openPanel, closePanel, hintDismissed } = useCart();
@@ -70,7 +70,7 @@ function CartBar() {
         </div>
       )}
       <button
-        className={`cart-fab${cart.length > 0 ? ' cart-fab--active' : ''}`}
+        className={`cart-fab${cart.length > 0 ? ' cart-fab--active' : ''}${panelOpen ? ' cart-fab--hidden' : ''}`}
         onClick={handleFabClick}
         aria-label="Ver solicitud de muestras"
       >
@@ -225,6 +225,15 @@ function CartBar() {
                     <>Enviar solicitud <PaperPlaneRight size={27} weight="fill" /></>
                   )}
                 </button>
+                <p className="cart-panel-privacy">
+                  <ShieldCheck size={18} weight="regular" aria-hidden="true" />
+                  <span>
+                    Tus datos son confidenciales. Al enviar aceptas el{' '}
+                    <a href={`${import.meta.env.BASE_URL}Documentos/Aviso_Privacidad_Integral_Metexsab.pdf`} target="_blank" rel="noopener noreferrer">
+                      Aviso de Privacidad
+                    </a>.
+                  </span>
+                </p>
               </form>
             </>
           )}

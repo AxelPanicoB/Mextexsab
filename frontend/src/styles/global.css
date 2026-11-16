@@ -8649,3 +8649,22 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
   .solution-card .solution-summary,
   .solution-card .solution-highlights { text-wrap: pretty; }
 }
+
+/* Aviso de privacidad debajo del botón de enviar (solicitud de muestras) */
+.cart-panel-privacy {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #64748b;
+  text-align: center;
+}
+.cart-panel-privacy svg { flex-shrink: 0; margin-top: 1px; }
+.cart-panel-privacy a { color: #2e7b19; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.cart-panel-privacy a:hover { color: #1e5c0a; }
+
+/* Con el panel de muestras abierto, el botón flotante del regalo sobra y tapaba el contenido en celular */
+.cart-fab.cart-fab--hidden { display: none; }
