@@ -23,9 +23,9 @@ const VALUES = [
 ];
 
 const SOLUTIONS = [
-  { image: `${BASE}img/about-reference/solution-quesos.png`,    Icon: Cheese,     label: 'Quesos y cremas',         path: '/productos?tab=quesos' },
+  { image: `${BASE}img/about-reference/solution-quesos.png`,    Icon: Cheese,     label: 'Quesos y cremas',         path: '/productos?tab=quesos,cremas' },
   { image: `${BASE}img/about-reference/solution-yogurt.png`,    Icon: Drop,       label: 'Yogurt y lácteos',        path: '/productos?tab=yogurt' },
-  { image: `${BASE}img/about-reference/solution-helados.png`,   Icon: IceCream,   label: 'Helados y postres',       path: '/productos?tab=helados' },
+  { image: `${BASE}img/about-reference/solution-helados.png`,   Icon: IceCream,   label: 'Helados y postres',       path: '/productos?tab=helados,postres' },
   { image: `${BASE}img/about-reference/solution-bebidas.png`,   Icon: GlassWater, label: 'Bebidas y concentrados',  path: '/productos?tab=bebidas' },
   { image: `${BASE}img/about-reference/solution-colorantes.png`,Icon: Palette,    label: 'Colorantes',              path: '/productos?tab=colorantes' },
   { image: `${BASE}img/about-reference/solution-auxiliares.png`,Icon: Package,    label: 'Auxiliares de proceso',   path: '/productos?tab=auxiliares' },
@@ -158,7 +158,7 @@ function About() {
             </Link>
             <a
               className="about-whatsapp-btn"
-              href={`https://wa.me/524422758979/?text=${encodeURIComponent('Hola, conocí su empresa en su página web y me gustaría hablar de mi proyecto')}`}
+              href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, conocí su empresa en su página web y me gustaría hablar de mi proyecto')}`}
               target="_blank"
               rel="noopener noreferrer"
             >

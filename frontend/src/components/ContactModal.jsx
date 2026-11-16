@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
 import Turnstile from './Turnstile';
 import {
@@ -125,7 +126,7 @@ function ContactModal() {
               </button>
             </div>
           ) : (
-            <form className="cmodal-form" onSubmit={handleSubmit}>
+            <form className="cmodal-form" onSubmit={handleSubmit} {...spanishValidation}>
               {/* Honeypot — invisible para humanos, bots lo llenan */}
               <input
                 name="website"
@@ -236,7 +237,7 @@ function ContactModal() {
             ¿Prefieres WhatsApp?{' '}
             <a
               className="flavors-note-btn flavors-note-btn--wa cmodal-wa-btn"
-              href="https://wa.me/524422758979/?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
+              href="https://wa.me/524422180650/?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
               target="_blank"
               rel="noopener noreferrer"
             >

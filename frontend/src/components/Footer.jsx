@@ -15,6 +15,7 @@ function Footer() {
             <div className="logo-footer-wrap">
               <img src={`${BASE}img/metexsabb.png`} alt="Metexsab" className="logo-footer" />
             </div>
+            <p className="footer-description">¡Un mundo de ideas brillantes para sus productos alimenticios!</p>
           </div>
 
           <div className="footer-section">

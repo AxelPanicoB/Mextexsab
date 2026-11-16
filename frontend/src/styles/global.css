@@ -374,6 +374,8 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   gap: 0;
   pointer-events: none;
   padding-top: 50px;
+  /* baja el logo para que su centro coincida con el del texto de la izquierda */
+  transform: translateY(70px);
   filter: drop-shadow(0 2px 18px rgba(10,40,6,0.38)) drop-shadow(0 0 8px rgba(255,255,255,0.12));
 }
 .hero-logo-img {
@@ -8148,3 +8150,6 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   margin: 0;
   line-height: 1.2;
 }
+
+/* Banda "Soluciones que realzan..." dentro de la sección de aplicaciones */
+.why-band-wrap { margin-top: 2.5rem; }

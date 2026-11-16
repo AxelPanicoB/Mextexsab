@@ -122,7 +122,7 @@ function FlavorsModal({ product, onClose, onContact }) {
           <p><Info size={21} weight="fill" /> ¿No ves lo que buscas? Con gusto te ayudamos a encontrar el sabor ideal.</p>
           <div className="flavors-modal-note-actions">
             <a
-              href={`https://wa.me/524422758979/?text=${encodeURIComponent(`Hola, estoy buscando un sabor para "${product.name}" y no encuentro lo que necesito, ¿me pueden ayudar?`)}`}
+              href={`https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, estoy buscando un sabor para "${product.name}" y no encuentro lo que necesito, ¿me pueden ayudar?`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flavors-note-btn flavors-note-btn--wa"
@@ -149,7 +149,7 @@ const BASE = import.meta.env.BASE_URL;
 function ProductCardV2({ product }) {
   const { add, remove, inCart } = useCart();
   const { openContactModal } = useContactModal();
-  const WA = `https://wa.me/524422758979/?text=${encodeURIComponent(`Hola, vi el producto "${product.name}" en su catálogo y me gustaría solicitar más información`)}`;
+  const WA = `https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, vi el producto "${product.name}" en su catálogo y me gustaría solicitar más información`)}`;
 
   const selected = inCart(product.id);
   const [showFlavors, setShowFlavors] = useState(false);

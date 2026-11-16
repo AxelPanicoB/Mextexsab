@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import spanishValidation from '../utils/spanishValidation.js';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
 import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlane } from '@phosphor-icons/react';
@@ -154,7 +155,7 @@ function CartBar() {
                 )}
               </div>
 
-              <form className="cart-panel-form" onSubmit={handleSubmit}>
+              <form className="cart-panel-form" onSubmit={handleSubmit} {...spanishValidation}>
                 {/* Honeypot — invisible para humanos, bots lo llenan */}
                 <input
                   name="website"

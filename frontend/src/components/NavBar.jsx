@@ -22,7 +22,11 @@ function NavBar() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link to="/" className="brand">
+        <Link
+          to="/"
+          className="brand"
+          onClick={() => { if (location.pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+        >
           <img src={`${BASE}img/MetexSab.png`} alt="Metexsab" />
         </Link>
 

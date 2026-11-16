@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
 import {
   Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
@@ -288,22 +289,19 @@ function Home() {
               </div>
             </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="why-band-section">
-        <div className="contenedor">
-          <Link to="/productos" className="why-band">
-            <div className="why-band-icon">
-              <Medal size={33} weight="fill" />
-            </div>
-            <p>
-              Soluciones que realzan el sabor, color y calidad de tus productos lácteos
-              <span className="why-band-sep"> | </span>
-              Desarrolladas para la industria, hechas para tu proceso
-            </p>
-            <ArrowRight size={27} weight="regular" className="why-band-arrow" />
-          </Link>
+          <div className="why-band-wrap">
+            <Link to="/productos" className="why-band">
+              <div className="why-band-icon">
+                <Medal size={33} weight="fill" />
+              </div>
+              <p>
+                Soluciones que realzan el sabor, color y calidad de tus productos lácteos
+                <span className="why-band-sep"> | </span>
+                Desarrolladas para la industria, hechas para tu proceso
+              </p>
+              <ArrowRight size={27} weight="regular" className="why-band-arrow" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -357,7 +355,7 @@ function Home() {
             Déjanos tus datos y un asesor técnico se pondrá en contacto
             contigo a la brevedad.
           </p>
-          <form className="cta-form" onSubmit={handleCta}>
+          <form className="cta-form" onSubmit={handleCta} {...spanishValidation}>
             <input
               name="name"
               placeholder="Tu nombre"

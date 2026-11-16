@@ -192,9 +192,15 @@ function Catalog() {
     const params   = new URLSearchParams(location.search);
     const tabParam = params.get('tab') || params.get('app');
     if (!tabParam) return;
-    const appMatch = APPLICATIONS.find((a) => a.toLowerCase() === tabParam.toLowerCase());
-    if (appMatch) {
-      setActiveFilter(appMatch);
+    // Varias aplicaciones a la vez: ?tab=quesos,cremas
+    const appMatches = tabParam
+      .split(',')
+      .map((t) => APPLICATIONS.find((a) => a.toLowerCase() === t.trim().toLowerCase()))
+      .filter(Boolean);
+    if (appMatches.length > 1) {
+      setActiveFilter(appMatches);
+    } else if (appMatches.length === 1) {
+      setActiveFilter(appMatches[0]);
     } else {
       const lineMatch = TECH_LINES.find((l) => l.toLowerCase().includes(tabParam.toLowerCase()));
       if (lineMatch) {
@@ -208,11 +214,20 @@ function Catalog() {
     setActiveFilter(filter);
   };
 
+  // activeFilter puede ser un texto o una lista (varias aplicaciones)
+  const activeList = Array.isArray(activeFilter) ? activeFilter : [activeFilter];
+  const isFilterActive = (name) => activeList.includes(name);
+  const activeLabel = Array.isArray(activeFilter)
+    ? activeFilter.join(' y ')
+    : DISPLAY_LABELS[activeFilter] || activeFilter;
+
   const filtered = useMemo(() => {
     return allProducts.filter((p) => {
       const matchFilter =
         activeFilter === 'Todos' ||
-        (APPLICATIONS.includes(activeFilter)
+        (Array.isArray(activeFilter)
+          ? activeFilter.some((a) => p.applications?.includes(a))
+          : APPLICATIONS.includes(activeFilter)
           ? p.applications?.includes(activeFilter)
           : p.category === activeFilter);
       const matchSearch = [p.name, p.summary, p.category, ...(p.tags || [])]
@@ -265,7 +280,7 @@ function Catalog() {
             </button>
             <p className="hero-sample-hint">
               <CheckCircle size={21} weight="fill" />
-              Sin costo · Probada en tu planta
+              Sin costo – Probado en tu planta
             </p>
           </div>
         </div>
@@ -280,12 +295,12 @@ function Catalog() {
               <button
                 key={card.id}
                 type="button"
-                className={`cat-card${activeFilter === card.filter ? ' cat-card--active' : ''}`}
+                className={`cat-card${isFilterActive(card.filter) ? ' cat-card--active' : ''}`}
                 onClick={() => { handleChipFilter(card.filter); scrollToCatalog(); }}
               >
                 <img src={encodeURI(card.img)} alt={card.label} />
                 <div className="cat-card-overlay" />
-                {activeFilter === card.filter && (
+                {isFilterActive(card.filter) && (
                   <div className="cat-card-check"><CheckCircle size={20} weight="fill" /></div>
                 )}
                 <div className="cat-card-label">
@@ -315,7 +330,7 @@ function Catalog() {
         <div className="contenedor">
           <p>¿No sabes cuál elegir? <strong>Te ayudamos a encontrar el indicado</strong></p>
           <a
-            href={`https://wa.me/524422758979/?text=${encodeURIComponent('Hola, estoy en el catálogo y no sé qué producto me conviene, ¿me pueden ayudar?')}`}
+            href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, estoy en el catálogo y no sé qué producto me conviene, ¿me pueden ayudar?')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-nudge-wa"
@@ -340,7 +355,7 @@ function Catalog() {
           </div>
 
           {activeFilter !== 'Todos' && (
-            <h2 className="active-cat-title">{DISPLAY_LABELS[activeFilter] || activeFilter}</h2>
+            <h2 className="active-cat-title">{activeLabel}</h2>
           )}
 
           {filtered.length > 0 && (
@@ -387,7 +402,7 @@ function Catalog() {
             </div>
             <a
               className="btn-catalog-cta"
-              href={`https://wa.me/524422758979/?text=${encodeURIComponent('Hola, vengo del catálogo de productos y me gustaría recibir asesoría técnica')}`}
+              href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, vengo del catálogo de productos y me gustaría recibir asesoría técnica')}`}
               target="_blank"
               rel="noopener noreferrer"
             >

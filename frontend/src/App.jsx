@@ -22,7 +22,7 @@ function WhatsAppFab() {
     : pathname.startsWith('/nosotros')
       ? 'Conocí su empresa en la sección Nosotros y me gustaría recibir más información'
       : 'Visité su página web y me gustaría recibir más información';
-  const href = `https://wa.me/524422758979/?text=${encodeURIComponent(`Hola, ${section}`)}`;
+  const href = `https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, ${section}`)}`;
   return (
     <a
       className="whatsapp"
