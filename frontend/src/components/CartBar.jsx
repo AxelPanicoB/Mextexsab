@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
-import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlane } from '@phosphor-icons/react';
+import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight } from '@phosphor-icons/react';
 
 function CartBar() {
   const { cart, remove, clear, panelOpen, openPanel, closePanel, hintDismissed } = useCart();
@@ -222,7 +222,7 @@ function CartBar() {
                   {status === 'sending' ? (
                     'Enviando...'
                   ) : (
-                    <>Enviar solicitud <PaperPlane size={27} weight="fill" /></>
+                    <>Enviar solicitud <PaperPlaneRight size={27} weight="fill" /></>
                   )}
                 </button>
               </form>

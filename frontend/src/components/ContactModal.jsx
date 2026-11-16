@@ -4,7 +4,7 @@ import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
 import Turnstile from './Turnstile';
 import {
-  Envelope, X, Flask, Check, PaperPlane, WarningCircle,
+  Envelope, X, Flask, Check, PaperPlaneRight, WarningCircle,
   Clock, ShieldCheck, CircleNotch, CheckCircle,
 } from '@phosphor-icons/react';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
@@ -228,7 +228,7 @@ function ContactModal() {
                 {status?.type === 'loading' ? (
                   <><CircleNotch size={24} weight="regular" className="icon-spin" /> Enviando...</>
                 ) : (
-                  <><PaperPlane size={24} weight="fill" /> Enviar mensaje</>
+                  <><PaperPlaneRight size={24} weight="fill" /> Enviar mensaje</>
                 )}
               </button>
 
