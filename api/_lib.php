@@ -262,7 +262,7 @@ function email_footer(): string
   <tr><td style="background:#f0f7ed;border:1px solid #d8e8d2;border-top:none;border-radius:0 0 14px 14px;padding:16px 36px;">
     <table width="100%" cellpadding="0" cellspacing="0"><tr>
       <td style="font-size:12px;color:#6a8f66;">
-        &#128205; Quer&eacute;taro, M&eacute;xico &nbsp;&middot;&nbsp; &#128222; 442 218-0650 &nbsp;&middot;&nbsp; ventas@metexsab.com
+        &#128205; Quer&eacute;taro, M&eacute;xico &nbsp;&middot;&nbsp; &#128222; 442 279-4146 &nbsp;&middot;&nbsp; ventas@metexsab.com
       </td>
       <td align="right" style="font-size:11px;color:#99b595;white-space:nowrap;">metexsab.com</td>
     </tr></table>

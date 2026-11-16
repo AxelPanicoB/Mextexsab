@@ -123,7 +123,7 @@ function FlavorsModal({ product, onClose, onContact }) {
           <p><Info size={21} weight="fill" /> ¿No ves lo que buscas? Con gusto te ayudamos a encontrar el sabor ideal.</p>
           <div className="flavors-modal-note-actions">
             <a
-              href={`https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, estoy buscando un sabor para "${product.name}" y no encuentro lo que necesito, ¿me pueden ayudar?`)}`}
+              href={`https://wa.me/524422794146/?text=${encodeURIComponent(`Hola, estoy buscando un sabor para "${product.name}" y no encuentro lo que necesito, ¿me pueden ayudar?`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flavors-note-btn flavors-note-btn--wa"

@@ -160,7 +160,7 @@ function About() {
             </Link>
             <a
               className="about-whatsapp-btn"
-              href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, conocí su empresa en su página web y me gustaría hablar de mi proyecto')}`}
+              href={`https://wa.me/524422794146/?text=${encodeURIComponent('Hola, conocí su empresa en su página web y me gustaría hablar de mi proyecto')}`}
               target="_blank"
               rel="noopener noreferrer"
             >

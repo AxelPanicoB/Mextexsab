@@ -247,7 +247,7 @@ function ContactModal() {
             ¿Prefieres WhatsApp?{' '}
             <a
               className="flavors-note-btn flavors-note-btn--wa cmodal-wa-btn"
-              href="https://wa.me/524422180650/?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
+              href="https://wa.me/524422794146/?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
               target="_blank"
               rel="noopener noreferrer"
             >

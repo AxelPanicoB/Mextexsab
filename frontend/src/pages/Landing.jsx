@@ -97,7 +97,7 @@ function Landing({ landing }) {
         <div className="contenedor">
           <p>¿Necesitas ayuda para elegir? <strong>Escríbenos y te apoyaremos de forma gratuita</strong></p>
           <a
-            href={`https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, vi la página de ${landing.h1.join(' ')} y me gustaría recibir asesoría`)}`}
+            href={`https://wa.me/524422794146/?text=${encodeURIComponent(`Hola, vi la página de ${landing.h1.join(' ')} y me gustaría recibir asesoría`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-nudge-wa"

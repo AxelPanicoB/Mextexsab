@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useWhatsAppChat } from '../context/WhatsAppChatContext';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
 
-const PHONE = '524422180650';
+const PHONE = '524422794146';
 const BASE = import.meta.env.BASE_URL;
 
 // Lista de productos elegidos para muestras, lista para pegar en el mensaje

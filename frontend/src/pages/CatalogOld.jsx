@@ -496,7 +496,7 @@ function Catalog() {
         <div className="contenedor">
           <p>¿No sabes cuál elegir? <strong>Te ayudamos a encontrar el indicado</strong></p>
           <a
-            href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, estoy en el catálogo y no sé qué producto me conviene, ¿me pueden ayudar?')}`}
+            href={`https://wa.me/524422794146/?text=${encodeURIComponent('Hola, estoy en el catálogo y no sé qué producto me conviene, ¿me pueden ayudar?')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-nudge-wa"
@@ -592,7 +592,7 @@ function Catalog() {
             </div>
             <a
               className="btn-catalog-cta"
-              href={`https://wa.me/524422180650/?text=${encodeURIComponent('Hola, vengo del catálogo de productos y me gustaría recibir asesoría técnica')}`}
+              href={`https://wa.me/524422794146/?text=${encodeURIComponent('Hola, vengo del catálogo de productos y me gustaría recibir asesoría técnica')}`}
               target="_blank"
               rel="noopener noreferrer"
             >

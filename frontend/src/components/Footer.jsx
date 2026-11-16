@@ -21,12 +21,12 @@ function Footer() {
             <h3 className="footer-title">Contacto</h3>
             <div className="footer-contact">
               <div className="contact-phone">
-                <a href="tel:4422180650" className="contact-phone-row">
+                <a href="tel:4422794146" className="contact-phone-row">
                   <Phone size={20} weight="regular" />
                   <span>Teléfono</span>
                 </a>
                 <a
-                  href="https://wa.me/524422180650/?text=Hola,%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
+                  href="https://wa.me/524422794146/?text=Hola,%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="contact-phone-row"
@@ -34,7 +34,7 @@ function Footer() {
                   <WhatsAppIcon size={20} />
                   <span>WhatsApp</span>
                 </a>
-                <a href="tel:4422180650" className="contact-phone-number">442 218 0650</a>
+                <a href="tel:4422794146" className="contact-phone-number">442 279 4146</a>
               </div>
               <div className="contact-phone">
                 <a href="mailto:ventas@metexsab.com" className="contact-phone-row">
