@@ -1,6 +1,7 @@
 ﻿import { Link } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
 import { Phone, Envelope } from '@phosphor-icons/react';
+import LANDINGS from '../data/landings.js';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
 
 const BASE = import.meta.env.BASE_URL;
@@ -66,6 +67,17 @@ function Footer() {
             </ul>
           </div>
         </div>
+
+        <nav className="footer-solutions" aria-label="Soluciones por aplicación">
+          <h3 className="footer-title">Soluciones</h3>
+          <ul className="footer-links footer-solutions-list">
+            {LANDINGS.map((l) => (
+              <li key={l.slug}>
+                <Link to={`/${l.slug}`}>{l.h1.join(' ').replace(/^./, (c) => c.toUpperCase())}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Metexsab. Todos los derechos reservados.</p>

@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ProductCardV2 from '../components/ProductCardV2.jsx';
-import allProducts from '../data/products.js';
+import allProducts, { sortForApplication } from '../data/products.js';
+import LANDINGS from '../data/landings.js';
 import { useContactModal } from '../context/ContactModalContext';
 import { useCart } from '../context/CartContext';
 import {
@@ -222,7 +223,8 @@ function Catalog() {
     : DISPLAY_LABELS[activeFilter] || activeFilter;
 
   const filtered = useMemo(() => {
-    return allProducts.filter((p) => {
+    const byApplication = Array.isArray(activeFilter) || APPLICATIONS.includes(activeFilter);
+    const matches = allProducts.filter((p) => {
       const matchFilter =
         activeFilter === 'Todos' ||
         (Array.isArray(activeFilter)
@@ -236,6 +238,7 @@ function Catalog() {
         .includes(search.toLowerCase());
       return matchFilter && matchSearch;
     });
+    return byApplication ? sortForApplication(matches, activeFilter) : matches;
   }, [activeFilter, search]);
 
 
@@ -382,6 +385,20 @@ function Catalog() {
               {filtered.map((p) => <ProductCardV2 key={p.id} product={p} />)}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ── GUÍAS POR APLICACIÓN (enlaces a las páginas por tema) ── */}
+      <section className="landing-related landing-related--catalog">
+        <div className="contenedor">
+          <h2>Explora por aplicación</h2>
+          <ul>
+            {LANDINGS.map((l) => (
+              <li key={l.slug}>
+                <Link to={`/${l.slug}`}>{l.h1.join(' ').replace(/^./, (c) => c.toUpperCase())}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

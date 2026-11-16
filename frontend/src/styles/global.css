@@ -8372,3 +8372,159 @@ button.whatsapp { border: none; cursor: pointer; }
 }
 .solution-card-v2 .btn-solution-wa:hover { background: #1fb457; transform: translateY(-1px); }
 button.btn-solution-contact { font-family: inherit; cursor: pointer; }
+
+/* ══ PÁGINAS POR TEMA (landings) y enlaces de "Soluciones" ═══════════════ */
+.landing-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.75);
+}
+.landing-crumbs a { color: rgba(255,255,255,0.85); }
+.landing-crumbs a:hover { color: #fff; text-decoration: underline; }
+.landing-crumbs span { color: #fff; font-weight: 600; }
+
+.landing-intro { padding: 3.5rem 0 2.75rem; background: #fff; }
+.landing-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+.landing-intro-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 800;
+  color: var(--navy-dark);
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+.landing-intro-copy p {
+  color: var(--gray-700);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.landing-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  background: var(--bg-green);
+  border: 1px solid #cfe3c8;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.landing-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  color: var(--gray-900);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.landing-benefits svg { color: var(--green-dark); flex-shrink: 0; margin-top: 1px; }
+
+.landing-flavors { margin-top: 2.25rem; }
+.landing-flavors h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy-dark);
+  margin-bottom: 0.75rem;
+}
+.landing-flavors ul { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.landing-flavors li {
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1.5px solid #cfe3c8;
+  background: #fff;
+  color: var(--gray-700);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.landing-products-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  color: var(--navy-dark);
+  margin-bottom: 1.5rem;
+}
+.landing-catalog-link { margin-top: 2rem; text-align: center; }
+.landing-catalog-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.landing-catalog-link a:hover { color: var(--green-dark); }
+
+.landing-related { padding: 2.75rem 0; background: #fff; }
+.landing-related h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--navy-dark);
+  margin-bottom: 1.1rem;
+}
+.landing-related ul { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.landing-related a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1.5px solid #cfe3c8;
+  background: #fff;
+  color: var(--navy);
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: all 0.15s var(--ease);
+}
+.landing-related a:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #fff;
+}
+/* En el catálogo: una línea discreta de enlaces de texto (sin cajas ni flechas) */
+.landing-related--catalog { background: #f4f8f2; padding: 0 0 2.5rem; }
+.landing-related--catalog .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #dbe8d5;
+}
+.landing-related--catalog h2 {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+.landing-related--catalog ul { gap: 0.5rem; }
+/* botones tipo etiqueta, un poco más chicos que en las páginas por tema */
+.landing-related.landing-related--catalog a {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.86rem;
+}
+
+.footer-solutions {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.5rem 2.25rem;
+}
+.footer-solutions-list { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
+.footer-solutions-list li { margin: 0; }
+
+@media (max-width: 900px) {
+  .landing-intro { padding: 2.5rem 0 2rem; }
+  .landing-intro-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+}

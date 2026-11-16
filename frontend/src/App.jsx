@@ -14,6 +14,8 @@ import RouteProgress from './components/RouteProgress.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Catalog from './pages/Catalog.jsx';
+import Landing from './pages/Landing.jsx';
+import LANDINGS from './data/landings.js';
 
 function RevealObserver() {
   const location = useLocation();
@@ -35,6 +37,16 @@ function RevealObserver() {
   return null;
 }
 
+// Al cambiar de página, empieza arriba (sin esto se conserva el scroll de la página anterior).
+// "instant" porque el CSS tiene scroll-behavior: smooth y no queremos ver cómo sube.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter basename="/Mextexsab">
@@ -43,6 +55,7 @@ function App() {
         <WhatsAppChatProvider>
         <div className="app-shell">
           <RevealObserver />
+          <ScrollToTop />
           <RouteSeo />
           <NavBar />
           <main className="app-main">
@@ -50,6 +63,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Catalog />} />
               <Route path="/nosotros" element={<About />} />
+              {LANDINGS.map((l) => (
+                <Route key={l.slug} path={`/${l.slug}`} element={<Landing landing={l} />} />
+              ))}
             </Routes>
           </main>
           <Footer />

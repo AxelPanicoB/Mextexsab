@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import LANDINGS from '../data/landings.js';
 
 // Dominio de producción: se usa para el canonical y og:url de cada página.
 const SITE = 'https://www.metexsab.com';
@@ -23,6 +24,11 @@ const PAGES = {
       'Mexicana de Textura y Sabor, empresa queretana fundada en 2007. Ingredientes de calidad, soluciones a la medida y servicio eficiente para la industria alimentaria mexicana.',
   },
 };
+
+// Las páginas por tema (data/landings.js) traen su propio título y descripción
+LANDINGS.forEach((l) => {
+  PAGES[`/${l.slug}`] = { title: l.title, description: l.description };
+});
 
 function setMeta(selector, attr, value) {
   const el = document.head.querySelector(selector);

@@ -423,5 +423,31 @@ const products = [
 
 ];
 
-export default products;
+// Orden de la lista de productos (pedido del cliente): primero saborizantes, luego
+// texturizantes y estabilizantes, después colorantes y al final los auxiliares de proceso.
+// Dentro de cada línea se respeta el orden en que están escritos arriba.
+const CATEGORY_ORDER = [
+  'Saborizantes',
+  'Texturizantes y Estabilizantes',
+  'Colorantes',
+  'Auxiliares de proceso',
+];
+const categoryRank = (p) => {
+  const i = CATEGORY_ORDER.indexOf(p.category);
+  return i === -1 ? CATEGORY_ORDER.length : i;
+};
+
+// Al filtrar por una aplicación (ej. Bebidas) van primero los productos hechos específicamente
+// para ella y después los de uso general (los que también sirven a otras aplicaciones).
+// Dentro de cada grupo se mantiene el orden por línea (saborizantes, texturizantes, ...).
+// "apps" son las aplicaciones elegidas en el filtro (una o varias).
+export const sortForApplication = (list, apps) => {
+  const wanted = Array.isArray(apps) ? apps : [apps];
+  const specific = (p) => (p.applications || []).every((a) => wanted.includes(a));
+  return [...list].sort(
+    (a, b) => Number(!specific(a)) - Number(!specific(b)) || categoryRank(a) - categoryRank(b)
+  );
+};
+
+export default [...products].sort((a, b) => categoryRank(a) - categoryRank(b));
 
