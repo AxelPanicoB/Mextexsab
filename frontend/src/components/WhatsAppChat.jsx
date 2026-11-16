@@ -15,7 +15,7 @@ function productList(cart) {
 }
 
 // Respuestas rápidas: rellenan el mensaje para que el visitante lo revise antes de enviarlo.
-// Si ya eligió productos para muestras, se incluyen en el mensaje.
+// Si ya eligió productos para muestras, se incluyen en el mensaje de cotización.
 function quickReplies(cart) {
   const list = cart.length > 0 ? `\n${productList(cart)}` : '';
   return [
@@ -25,12 +25,9 @@ function quickReplies(cart) {
         ? `Hola, me gustaría solicitar una cotización de los siguientes productos:${list}`
         : 'Hola, me gustaría solicitar una cotización.',
     },
-    {
-      label: 'Solicitar muestras',
-      text: cart.length > 0
-        ? `Hola, me gustaría solicitar muestras gratuitas de:${list}`
-        : 'Hola, me gustaría solicitar muestras gratuitas.',
-    },
+    // Las muestras no se piden por WhatsApp: se lleva al visitante al formulario de
+    // "Solicitud de muestras", que llega por correo para tener mejor control.
+    { label: 'Solicitar muestras', action: 'samples' },
     // Termina en "en " para que el visitante complete la frase
     { label: 'Me gustaría asesoría en…', text: 'Hola, me gustaría asesoría en ' },
   ];
@@ -51,7 +48,7 @@ function defaultMessage(pathname) {
 // (WhatsApp exige que el visitante pulse "enviar" en su app; no se puede saltar ese paso.)
 function WhatsAppChat() {
   const { pathname } = useLocation();
-  const { cart } = useCart();
+  const { cart, openPanel } = useCart();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const textareaRef = useRef(null);
@@ -76,6 +73,12 @@ function WhatsAppChat() {
       ta.focus();
       ta.setSelectionRange(text.length, text.length);
     });
+  };
+
+  // Abre el formulario de solicitud de muestras (llega por correo) y cierra el chat
+  const openSamples = () => {
+    setOpen(false);
+    openPanel();
   };
 
   const send = (e) => {
@@ -116,7 +119,12 @@ function WhatsAppChat() {
             </p>
             <div className="wa-chat-replies">
               {quickReplies(cart).map((r) => (
-                <button type="button" key={r.label} onClick={() => pickReply(r.text)}>
+                <button
+                  type="button"
+                  key={r.label}
+                  onClick={() => (r.action === 'samples' ? openSamples() : pickReply(r.text))}
+                >
+                  {r.action === 'samples' && <Gift size={15} weight="fill" />}
                   {r.label}
                 </button>
               ))}
@@ -125,7 +133,7 @@ function WhatsAppChat() {
               <p className="wa-chat-hint">
                 <Gift size={16} weight="fill" />
                 Tienes {cart.length} {cart.length === 1 ? 'producto seleccionado' : 'productos seleccionados'}.
-                Se incluirán en tu mensaje al elegir "Quiero cotizar" o "Solicitar muestras".
+                Se incluirán en tu mensaje al elegir "Quiero cotizar".
               </p>
             )}
           </div>
