@@ -8636,27 +8636,13 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
 
 .solution-card-v2 .btn-flavors-toggle { font-size: 0.9rem; }
 
-/* Una acción principal (muestra gratis) + WhatsApp; "Solicitar información" pasa a enlace */
+/* Botones de la tarjeta: los tres con el mismo tamaño de letra y alto */
 .solution-card-v2 .btn-solution-add,
-.solution-card-v2 .btn-solution-remove { font-size: 0.95rem; padding: 0.7rem 1.1rem; }
-.solution-card-v2 .btn-solution-contact {
-  border: none;
-  background: transparent;
-  color: #2e7b19;
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  padding: 0.7rem 0.6rem;
-}
-.solution-card-v2 .btn-solution-contact:hover { background: transparent; color: #1e5c0a; }
+.solution-card-v2 .btn-solution-remove,
+.solution-card-v2 .btn-solution-contact { font-size: 0.95rem; padding: 0.7rem 1.1rem; }
 
 /* Texto de apoyo de las secciones: un poco más grande y más oscuro */
 .section-copy { font-size: 1.125rem; color: #475569; }
-
-@media (max-width: 768px) {
-  .solution-card-v2 .btn-solution-contact { flex: 0 1 auto; }
-}
 
 /* En celular el texto más grande se partía muy pronto por el balanceo de líneas */
 @media (max-width: 768px) {
