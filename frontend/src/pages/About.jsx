@@ -1,22 +1,25 @@
 ﻿import { Link } from 'react-router-dom';
 import { useContactModal } from '../context/ContactModalContext';
 import {
-  Flag, Star, ListChecks, Lightbulb, Handshake, Scales, ClipboardText, ShieldCheck,
-  Users,
+  Flag, Star, ListChecks, Handshake, Scales, ShieldCheck,
+  Smiley,
   Cheese, Drop, Jar, Drop as GlassWater, Palette, Package, IceCream,
   ArrowRight,
 } from '@phosphor-icons/react';
 import WhatsAppIcon from '../components/WhatsAppIcon.jsx';
+import SamplesCta from '../components/SamplesCta.jsx';
 
 const BASE = import.meta.env.BASE_URL;
 
+const FOUNDING_YEAR = 2007;
+const YEARS_OF_EXPERIENCE = new Date().getFullYear() - FOUNDING_YEAR;
+
 const VALUES = [
-  { Icon: ListChecks,   title: 'Responsabilidad',                                     text: 'Cumplimos nuestros compromisos con seriedad y puntualidad.' },
-  { Icon: Lightbulb,    title: 'Innovación y valor agregado',                         text: 'Mejoramos continuamente para ofrecer soluciones de alto impacto.' },
-  { Icon: Users,        title: 'Trato profesional y amable',                          text: 'Construimos relaciones de confianza con un trato cercano y respetuoso.' },
-  { Icon: Scales,       title: 'Honestidad',                                          text: 'Actuamos con ética, transparencia y claridad en cada proceso.' },
-  { Icon: ShieldCheck,  title: 'Confiabilidad',                                       text: 'Somos consistentes en la calidad y desempeño de nuestras soluciones.' },
-  { Icon: Handshake,    title: 'Cooperación con clientes y proveedores',              text: 'Obtenemos sinergia que apoya los intereses mutuos a largo plazo.' },
+  { Icon: Scales,       title: 'Honestidad',            text: 'Actuamos con ética, transparencia y claridad en cada proceso.' },
+  { Icon: ListChecks,   title: 'Responsabilidad',       text: 'Cumplimos nuestros compromisos con seriedad y puntualidad.' },
+  { Icon: Smiley,       title: 'Amabilidad',            text: 'Construimos relaciones de confianza con un trato cercano y respetuoso.' },
+  { Icon: Handshake,    title: 'Actitud de Servicio',   text: 'Atendemos a cada cliente con rapidez y disposición para resolver sus necesidades.' },
+  { Icon: ShieldCheck,  title: 'Confiabilidad',         text: 'Somos consistentes en la calidad y desempeño de nuestras soluciones.' },
 ];
 
 const SOLUTIONS = [
@@ -47,18 +50,18 @@ function About() {
                 <span key={index}></span>
               ))}
             </div>
-            <span className="about-pill">Nosotros</span>
+            <span className="about-pill">Orgullosamente Queretanos</span>
             <h1>
               Mexicana de <span>Textura y Sabor</span>
             </h1>
             <p>
-              Fundada en 2007 en la ciudad de Querétaro, Metexsab nació para
-              servir a la industria alimentaria mexicana con ingredientes de
-              calidad y soluciones a la medida. Más de 15 años después, seguimos
-              desarrollando texturizantes, saborizantes, colorantes y auxiliares
-              de proceso con el mismo compromiso: un servicio eficiente, rápido
-              y cordial que ayuda a nuestros clientes a lograr sus objetivos de
-              calidad, costo y eficiencia.
+              Fundada en {FOUNDING_YEAR}, METEXSAB nació para servir a la industria
+              alimentaria mexicana con ingredientes de calidad, soluciones a la
+              medida y excelencia en servicio. Más de {YEARS_OF_EXPERIENCE} años
+              después, seguimos desarrollando texturizantes, saborizantes,
+              colorantes y auxiliares de proceso con el mismo compromiso: un
+              servicio eficiente, rápido y cordial que ayuda a nuestros clientes
+              a lograr sus objetivos de calidad, costo y eficiencia.
             </p>
           </div>
 
@@ -77,10 +80,10 @@ function About() {
                 <h3>Misión</h3>
               </div>
               <p>
-                Servir a la comunidad de la industria alimentaria mexicana con
-                ingredientes de calidad y competitivos, con un servicio
-                eficiente, confiable, honesto y amable. Agregar valor y proveer
-                soluciones, eliminando los problemas de suministro.
+                Brindar a la industria alimentaria mexicana ingredientes de alta
+                calidad y competitivos, con un servicio eficiente y transparente.
+                Agregar valor y asegurar el suministro para que nuestros clientes
+                produzcan con consistencia, competitividad y calidad.
               </p>
             </article>
 
@@ -90,9 +93,10 @@ function About() {
                 <h3>Visión</h3>
               </div>
               <p>
-                Brindar soluciones innovadoras, prácticas e inspiradoras a la
-                industria alimentaria que provoquen que nuestros clientes se
-                conviertan en líderes de su segmento.
+                Ser la empresa más confiable y reconocida en la industria de
+                ingredientes alimenticios en México, liderando con soluciones
+                innovadoras que aseguren consistencia y mejoran el desempeño de
+                nuestros clientes.
               </p>
             </article>
           </div>
@@ -163,6 +167,8 @@ function About() {
           </div>
         </div>
       </section>
+
+      <SamplesCta />
     </>
   );
 }

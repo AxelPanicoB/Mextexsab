@@ -1,4 +1,5 @@
 ﻿import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
 import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlane } from '@phosphor-icons/react';
@@ -118,7 +119,8 @@ function CartBar() {
                 </div>
                 {cart.length === 0 ? (
                   <p className="cart-panel-empty">
-                    Agrega productos desde el catálogo.
+                    Agrega productos desde el{' '}
+                    <Link to="/productos" onClick={closePanel}>catálogo</Link>.
                   </p>
                 ) : (
                   <ul className="cart-panel-list">

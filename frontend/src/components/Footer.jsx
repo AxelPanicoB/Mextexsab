@@ -20,24 +20,21 @@ function Footer() {
           <div className="footer-section">
             <h3 className="footer-title">Contacto</h3>
             <div className="footer-contact">
-              <div className="contact-item">
-                <Phone size={27} weight="regular" />
-                <div>
-                  <p className="contact-label">Teléfono</p>
-                  <a href="tel:4422180650">442 218 0650</a>
-                </div>
-              </div>
-              <div className="contact-item">
-                <WhatsAppIcon size={27} />
-                <div>
-                  <a
-                    href="https://wa.me/524422758979/?text=Hola,%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    442 275 8979
-                  </a>
-                </div>
+              <div className="contact-phone">
+                <a href="tel:4422180650" className="contact-phone-row">
+                  <Phone size={20} weight="regular" />
+                  <span>Teléfono</span>
+                </a>
+                <a
+                  href="https://wa.me/524422180650/?text=Hola,%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-phone-row"
+                >
+                  <WhatsAppIcon size={20} />
+                  <span>WhatsApp</span>
+                </a>
+                <a href="tel:4422180650" className="contact-phone-number">442 218 0650</a>
               </div>
               <div className="contact-item">
                 <Envelope size={27} weight="regular" />

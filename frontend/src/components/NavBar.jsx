@@ -58,6 +58,7 @@ function NavBar() {
             title="Solicitud de muestras"
           >
             <Gift size={36} weight="bold" />
+            <span className="nav-cart-label">Muestras gratis</span>
             {cart.length > 0 && (
               <span className="nav-cart-badge">{cart.length}</span>
             )}

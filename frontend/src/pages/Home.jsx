@@ -322,24 +322,29 @@ function Home() {
             <div className="timeline-item">
               <div className="timeline-node"><span>1</span></div>
               <div className="timeline-body">
-                <h3>Análisis de necesidad</h3>
+                <h3>Análisis Diagnóstico</h3>
                 <p>Escuchamos tu proceso de producción, analizamos tu producto y objetivos para identificar áreas de oportunidad.</p>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-node"><span>2</span></div>
               <div className="timeline-body">
-                <h3>Propuesta de formulación</h3>
+                <h3>Propuesta Integral</h3>
                 <p>Seleccionamos y combinamos ingredientes de nuestro catálogo para darte la solución técnica más adecuada.</p>
               </div>
             </div>
             <div className="timeline-item">
               <div className="timeline-node"><span>3</span></div>
               <div className="timeline-body">
-                <h3>Muestras en tu planta</h3>
+                <h3>Muestras Gratuitas</h3>
                 <p>Te enviamos muestras sin costo alguno para que pruebes en condiciones reales de producción y valides los resultados.</p>
               </div>
             </div>
+          </div>
+          <div className="process-samples-action">
+            <Link to="/productos" className="samples-cta-btn">
+              Solicitar muestras gratuitas <ArrowRight size={22} weight="bold" />
+            </Link>
           </div>
         </div>
       </section>

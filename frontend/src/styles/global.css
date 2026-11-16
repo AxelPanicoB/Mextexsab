@@ -2637,6 +2637,26 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   display: block;
 }
 .contact-item a:hover { color: #fff; font-weight: 600; }
+.contact-phone { display: flex; flex-direction: column; gap: 0.7rem; }
+.contact-phone-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.2s var(--ease);
+}
+.contact-phone-row:hover { color: #fff; }
+.contact-phone-number {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.9rem;
+  /* ícono 20px + gap 10px: alinea con el inicio de la palabra WHATSAPP */
+  margin-left: 30px;
+}
+.contact-phone-number:hover { color: var(--green); }
 .footer-links li { margin-bottom: 0.6rem; }
 .footer-links a {
   color: rgba(255,255,255,0.7);
@@ -3030,6 +3050,13 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   font-size: 0.84rem;
   font-style: italic;
 }
+.cart-panel-empty a {
+  color: var(--green-dark);
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: underline;
+}
+.cart-panel-empty a:hover { color: #1e5c0a; }
 .cart-panel-list-header {
   display: flex;
   align-items: center;
@@ -4620,7 +4647,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 340px;
+  height: 440px;
 }
 .about-hero-copy {
   position: relative;
@@ -4918,7 +4945,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 }
 .about-values-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 .about-value-item {
   position: relative;
@@ -5202,11 +5229,11 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 
 /* ABOUT PAGE - tighter match to supplied mockup */
 .about-hero {
-  min-height: 340px;
+  min-height: 440px;
 }
 .about-hero-shell {
   grid-template-columns: minmax(0, 44%) minmax(0, 56%);
-  min-height: 340px;
+  min-height: 440px;
 }
 .about-hero-copy {
   padding-top: 1.5rem;
@@ -7977,4 +8004,120 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   .solution-card-v2 .btn-solution-contact {
     flex: 1 1 100%;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CTA DE MUESTRAS GRATUITAS
+══════════════════════════════════════════════════════════════ */
+.samples-cta {
+  padding: 3.5rem 0;
+  background: linear-gradient(135deg, #2e7b19 0%, #1e5c0a 100%);
+  color: #fff;
+}
+.samples-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+.samples-cta-icon {
+  flex-shrink: 0;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+}
+.samples-cta-copy { flex: 1; min-width: 0; }
+.samples-cta-copy h2 {
+  color: #fff;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin-bottom: 0.35rem;
+}
+.samples-cta-copy p {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 560px;
+}
+.samples-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  padding: 0.95rem 1.7rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: #1e5c0a;
+  font-size: 1rem;
+  font-weight: 800;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.samples-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.28);
+}
+.samples-cta-btn svg { transition: transform 0.2s var(--ease); }
+.samples-cta-btn:hover svg { transform: translateX(4px); }
+
+/* Botón bajo la línea de tiempo del inicio (fondo claro) */
+.process-samples-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+.process-samples-action .samples-cta-btn {
+  background: linear-gradient(135deg, #2e7b19, #1e5c0a);
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(30,92,10,0.3);
+}
+
+/* Etiqueta y pulso del regalo en la barra superior */
+.nav-cart-label { display: none; }
+@media (min-width: 1001px) {
+  .nav-cart-btn {
+    width: auto;
+    padding: 0 0.9rem 0 0.6rem;
+    gap: 0.45rem;
+  }
+  .nav-cart-label {
+    display: inline;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    white-space: nowrap;
+  }
+}
+.nav-cart-btn:not(.has-items)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--green);
+  opacity: 0;
+  pointer-events: none;
+  animation: nav-gift-pulse 2.6s ease-out infinite;
+}
+@keyframes nav-gift-pulse {
+  0%   { opacity: 0.7; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-cart-btn:not(.has-items)::after { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .samples-cta { padding: 2.5rem 0; }
+  .samples-cta-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+  .samples-cta-copy p { margin: 0 auto; }
+  .samples-cta-btn { width: 100%; }
 }
