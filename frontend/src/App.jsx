@@ -1,6 +1,6 @@
 ﻿import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import WhatsAppIcon from './components/WhatsAppIcon.jsx';
+import WhatsAppChat from './components/WhatsAppChat.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { ContactModalProvider } from './context/ContactModalContext.jsx';
 import NavBar from './components/NavBar.jsx';
@@ -13,30 +13,6 @@ import RouteProgress from './components/RouteProgress.jsx';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Catalog from './pages/Catalog.jsx';
-
-// Mensaje de WhatsApp contextual según la sección que está viendo el usuario
-function WhatsAppFab() {
-  const { pathname } = useLocation();
-  const section = pathname.startsWith('/productos')
-    ? 'Vengo del catálogo de productos y me gustaría recibir más información'
-    : pathname.startsWith('/nosotros')
-      ? 'Conocí su empresa en la sección Nosotros y me gustaría recibir más información'
-      : 'Visité su página web y me gustaría recibir más información';
-  const href = `https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, ${section}`)}`;
-  return (
-    <a
-      className="whatsapp"
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      title="Contáctanos por WhatsApp"
-      aria-label="Contáctanos por WhatsApp"
-    >
-      <span className="whatsapp-pulse" />
-      <WhatsAppIcon size={28} />
-    </a>
-  );
-}
 
 function RevealObserver() {
   const location = useLocation();
@@ -79,7 +55,7 @@ function App() {
           <ContactModal />
           <RouteProgress />
           <ScrollToTopBtn />
-          <WhatsAppFab />
+          <WhatsAppChat />
         </div>
         </ContactModalProvider>
       </CartProvider>

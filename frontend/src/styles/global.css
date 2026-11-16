@@ -8179,3 +8179,145 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
   .site-footer { padding-bottom: 4.5rem; }
   .footer-bottom { padding-right: 5rem; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MINI CHAT DE WHATSAPP
+══════════════════════════════════════════════════════════════ */
+button.whatsapp { border: none; cursor: pointer; }
+
+.wa-chat {
+  position: fixed;
+  right: 24px;
+  bottom: 96px;
+  z-index: 1001;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(10, 40, 6, 0.32);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  animation: wa-chat-in 0.22s var(--ease);
+}
+@keyframes wa-chat-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.wa-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #2e7b19, #1e5c0a);
+  color: #fff;
+}
+.wa-chat-avatar {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.wa-chat-avatar img { width: 100%; height: 100%; object-fit: contain; }
+.wa-chat-id { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.wa-chat-id strong { font-size: 1rem; }
+.wa-chat-id small { font-size: 0.75rem; opacity: 0.85; }
+.wa-chat-close {
+  background: rgba(255, 255, 255, 0.14);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s var(--ease);
+}
+.wa-chat-close:hover { background: rgba(255, 255, 255, 0.26); }
+
+.wa-chat-body {
+  padding: 1rem;
+  background: #eef4eb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.wa-chat-bubble {
+  align-self: flex-start;
+  max-width: 85%;
+  margin: 0;
+  background: #fff;
+  color: #1a2733;
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px 14px 14px 14px;
+  font-size: 0.92rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+.wa-chat-replies { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.wa-chat-replies button {
+  background: #fff;
+  color: #1e5c0a;
+  border: 1px solid #bdddb4;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.wa-chat-replies button:hover { background: #2e7b19; border-color: #2e7b19; color: #fff; }
+
+.wa-chat-form { padding: 0.85rem 1rem 0.9rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.wa-chat-form textarea {
+  width: 100%;
+  resize: none;
+  border: 1px solid #d3e0cf;
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: #1a2733;
+}
+.wa-chat-form textarea:focus { outline: none; border-color: #5cb845; box-shadow: 0 0 0 3px rgba(92, 184, 69, 0.18); }
+.wa-chat-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.wa-chat-send:hover { background: #1fb457; transform: translateY(-1px); }
+.wa-chat-note { margin: 0; text-align: center; font-size: 0.72rem; color: #5f7a63; }
+
+@media (max-width: 480px) {
+  .wa-chat { right: 16px; bottom: 88px; width: calc(100vw - 32px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-chat { animation: none; }
+}
+
+.wa-chat-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #2d6e1a;
+}
+.wa-chat-hint svg { flex-shrink: 0; margin-top: 1px; }
+.wa-chat-form textarea { max-height: 150px; }
