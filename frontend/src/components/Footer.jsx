@@ -37,12 +37,12 @@ function Footer() {
                 </a>
                 <a href="tel:4422180650" className="contact-phone-number">442 218 0650</a>
               </div>
-              <div className="contact-item">
-                <Envelope size={27} weight="regular" />
-                <div>
-                  <p className="contact-label">Correo</p>
-                  <a href="mailto:ventas@metexsab.com">ventas@metexsab.com</a>
-                </div>
+              <div className="contact-phone">
+                <a href="mailto:ventas@metexsab.com" className="contact-phone-row">
+                  <Envelope size={20} weight="regular" />
+                  <span>Correo</span>
+                </a>
+                <a href="mailto:ventas@metexsab.com" className="contact-phone-number">ventas@metexsab.com</a>
               </div>
             </div>
           </div>
