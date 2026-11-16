@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Favicon: sombrero de chef blanco sobre círculo verde. El SVG se ve nítido en navegadores modernos; los PNG son respaldo.
-         ?v=6 obliga al navegador a descargar el icono otra vez (los navegadores lo guardan en caché). -->
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%img/favicon.svg?v=6" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%img/favicon-32.png?v=6" />
-    <link rel="icon" type="image/png" sizes="64x64" href="%BASE_URL%img/faviconP.png?v=6" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%img/favicon-180.png?v=6" />
+    <!-- Favicon: sombrero de chef verde sin fondo (verde claro en pestañas oscuras, lo decide el SVG).
+         Los PNG van primero y el SVG al final: así Chrome y Firefox usan el SVG y los demás navegadores los PNG.
+         El icono de iPhone (180) lleva fondo verde porque iOS rellena de negro lo transparente.
+         ?v=7 obliga al navegador a descargar el icono otra vez (los navegadores lo guardan en caché). -->
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%img/favicon-32.png?v=7" />
+    <link rel="icon" type="image/png" sizes="64x64" href="%BASE_URL%img/faviconP.png?v=7" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="%BASE_URL%img/favicon.svg?v=7" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%img/favicon-180.png?v=7" />
     <meta name="application-name" content="Metexsab" />
     <meta name="apple-mobile-web-app-title" content="Metexsab" />
 
