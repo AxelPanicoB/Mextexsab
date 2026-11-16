@@ -238,7 +238,7 @@ function Catalog() {
         .includes(search.toLowerCase());
       return matchFilter && matchSearch;
     });
-    return byApplication ? sortForApplication(matches, activeFilter) : matches;
+    return byApplication ? sortForApplication(matches) : matches;
   }, [activeFilter, search]);
 
 

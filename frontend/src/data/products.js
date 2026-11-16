@@ -437,17 +437,34 @@ const categoryRank = (p) => {
   return i === -1 ? CATEGORY_ORDER.length : i;
 };
 
-// Al filtrar por una aplicación (ej. Bebidas) van primero los productos hechos específicamente
-// para ella y después los de uso general (los que también sirven a otras aplicaciones).
-// Dentro de cada grupo se mantiene el orden por línea (saborizantes, texturizantes, ...).
-// "apps" son las aplicaciones elegidas en el filtro (una o varias).
-export const sortForApplication = (list, apps) => {
-  const wanted = Array.isArray(apps) ? apps : [apps];
-  const specific = (p) => (p.applications || []).every((a) => wanted.includes(a));
-  return [...list].sort(
-    (a, b) => Number(!specific(a)) - Number(!specific(b)) || categoryRank(a) - categoryRank(b)
+// Al filtrar por una aplicación (ej. Bebidas) el orden por línea es el mismo que en "Todos"
+// (saborizantes, texturizantes, colorantes, auxiliares). Solo dentro de cada línea van primero los
+// productos hechos para esa aplicación (los que sirven a menos aplicaciones) y después los de uso
+// general. Así "Bebidas" no abre con un producto marcado "Quesos · Cremas · Bebidas".
+export const sortForApplication = (list) =>
+  [...list].sort(
+    (a, b) =>
+      categoryRank(a) - categoryRank(b) ||
+      (a.applications?.length || 0) - (b.applications?.length || 0)
   );
-};
 
-export default [...products].sort((a, b) => categoryRank(a) - categoryRank(b));
+// Orden de las aplicaciones dentro de cada línea (el mismo de las tarjetas del inicio): quesos primero.
+const APPLICATION_ORDER = ['Quesos', 'Cremas', 'Yogurt', 'Bebidas', 'Helados', 'Postres', 'Tortillas'];
+const applicationRank = (p) =>
+  Math.min(
+    ...(p.applications || []).map((a) => {
+      const i = APPLICATION_ORDER.indexOf(a);
+      return i === -1 ? APPLICATION_ORDER.length : i;
+    }),
+    APPLICATION_ORDER.length
+  );
+
+// Lista completa ("Todos"): por línea y, dentro de cada una, por aplicación (quesos primero);
+// si empatan, los hechos para menos aplicaciones van antes que los de uso general.
+export default [...products].sort(
+  (a, b) =>
+    categoryRank(a) - categoryRank(b) ||
+    applicationRank(a) - applicationRank(b) ||
+    (a.applications?.length || 0) - (b.applications?.length || 0)
+);
 

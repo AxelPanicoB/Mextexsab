@@ -14,7 +14,7 @@ const linkLabel = (l) => l.h1.join(' ').replace(/^./, (c) => c.toUpperCase());
 
 function pickProducts(landing) {
   if (landing.ids) return landing.ids.map((id) => allProducts.find((p) => p.id === id)).filter(Boolean);
-  if (landing.app) return sortForApplication(allProducts.filter((p) => p.applications?.includes(landing.app)), landing.app);
+  if (landing.app) return sortForApplication(allProducts.filter((p) => p.applications?.includes(landing.app)));
   if (landing.category) return allProducts.filter((p) => p.category === landing.category);
   return [];
 }
