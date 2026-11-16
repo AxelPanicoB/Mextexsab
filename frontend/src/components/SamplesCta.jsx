@@ -13,7 +13,7 @@ function SamplesCta() {
         <div className="samples-cta-copy">
           <h2>Prueba antes de comprar</h2>
           <p>
-            Elige los ingredientes que te interesan y te enviamos muestras
+            Elige los productos que te interesan y te enviamos muestras
             gratuitas para que las pruebes en tu producción.
           </p>
         </div>

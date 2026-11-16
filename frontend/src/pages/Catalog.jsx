@@ -301,7 +301,8 @@ function Catalog() {
                 className={`cat-card${isFilterActive(card.filter) ? ' cat-card--active' : ''}`}
                 onClick={() => { handleChipFilter(card.filter); scrollToCatalog(); }}
               >
-                <img src={encodeURI(card.img)} alt={card.label} />
+                {/* alt vacío: el nombre ya está escrito en la etiqueta de la tarjeta */}
+                <img src={encodeURI(card.img)} alt="" />
                 <div className="cat-card-overlay" />
                 {isFilterActive(card.filter) && (
                   <div className="cat-card-check"><CheckCircle size={20} weight="fill" /></div>
@@ -346,6 +347,7 @@ function Catalog() {
       {/* ── GRID DE PRODUCTOS ─────────────────────────────────── */}
       <section className="catalog-grid-section" ref={catalogRef}>
         <div className="contenedor">
+          <h2 className="sr-only">Catálogo de productos</h2>
           <div className="catalog-search-simple">
             <MagnifyingGlass size={20} weight="regular" />
             <input

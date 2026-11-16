@@ -73,6 +73,7 @@ function About() {
 
       <section className="about-story-section reveal-section">
         <div className="contenedor">
+          <h2 className="sr-only">Misión y visión</h2>
           <div className="about-story-grid">
             <article className="about-mv-card">
               <div className="about-mv-header">
@@ -143,7 +144,8 @@ function About() {
           <div className="about-solutions-grid">
             {SOLUTIONS.map((solution) => (
               <Link to={solution.path} className="about-solution-card" key={solution.label}>
-                <img src={solution.image} alt={solution.label} />
+                {/* alt vacío: el nombre ya está escrito en el título de la tarjeta */}
+                <img src={solution.image} alt="" />
                 <span>
                   <solution.Icon size={33} weight="regular" />
                 </span>
