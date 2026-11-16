@@ -254,7 +254,12 @@ function ProductCardV2({ product }) {
         <FlavorsModal
           product={product}
           onClose={() => setShowFlavors(false)}
-          onContact={(name) => openContactModal('', name)}
+          // Es una petición de ayuda ("no encuentro el sabor"): no se marca ningún área
+          onContact={(name) => openContactModal(
+            '',
+            name,
+            'Busco un sabor que no encuentro en la lista de este producto. ¿Me pueden ayudar a encontrar el ideal?'
+          )}
         />
       )}
     </>

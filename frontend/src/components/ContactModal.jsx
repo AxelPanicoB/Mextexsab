@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
@@ -27,12 +27,13 @@ const INTEREST_OPTIONS = [
 ];
 
 function ContactModal() {
-  const { open, closeContactModal, prefill, productName } = useContactModal();
+  const { open, closeContactModal, prefill, productName, prefillMessage } = useContactModal();
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', website: '' });
   const [interests, setInterests] = useState([]);
   const [turnstileToken, setTurnstileToken] = useState('');
   const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
+  const suggestedRef = useRef('');
 
   useEffect(() => {
     if (open) {
@@ -42,13 +43,27 @@ function ContactModal() {
         wanted.some(p => o.toLowerCase() === p || o.toLowerCase().startsWith(p) || p.startsWith(o.toLowerCase()))
       );
       setInterests(matches);
+      // Si el botón trae un mensaje sugerido (p. ej. "no encuentro el sabor"), se escribe ya en el campo.
+      // Si no trae, no se toca lo que la persona escribió; solo se quita un mensaje sugerido que
+      // quedó de una apertura anterior y que ella no modificó.
+      setForm(prev => {
+        if (prefillMessage) {
+          suggestedRef.current = prefillMessage;
+          return { ...prev, message: prefillMessage };
+        }
+        if (suggestedRef.current && prev.message === suggestedRef.current) {
+          suggestedRef.current = '';
+          return { ...prev, message: '' };
+        }
+        return prev;
+      });
       setStatus(null);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [open, prefill]);
+  }, [open, prefill, prefillMessage]);
 
   if (!open) return null;
 
@@ -64,7 +79,8 @@ function ContactModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (interests.length === 0) {
+    // Si el formulario viene de un producto, el producto ya dice qué le interesa
+    if (interests.length === 0 && !productName) {
       setStatus({ type: 'error', text: 'Selecciona al menos un área de interés.' });
       return;
     }
@@ -190,7 +206,8 @@ function ContactModal() {
               </label>
               <div className="cmodal-interests">
                 <span className="cmodal-interests-label">
-                  Áreas de interés * <small>(puedes elegir varias)</small>
+                  Áreas de interés{productName ? '' : ' *'}{' '}
+                  <small>{productName ? '(opcional, ya elegiste un producto)' : '(puedes elegir varias)'}</small>
                 </span>
                 <div className="cmodal-interest-chips" role="group" aria-label="Áreas de interés">
                   {INTEREST_OPTIONS.map((opt) => (

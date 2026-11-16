@@ -22,6 +22,18 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 #
 # Ajusta según cómo quedes configurado en Neubox:
 RewriteBase /
+
+# ── 2b. Redirecciones desde las direcciones del sitio anterior ─
+# Google ya conoce estas URLs (estaban en su sitemap). Con redirección permanente (301) la página nueva
+# hereda lo que ya tenían, en vez de perderlo con un error 404.
+RewriteRule ^html/nosotros\.html$ /nosotros [R=301,L]
+RewriteRule ^html/productos\.html$ /productos [R=301,L]
+RewriteRule ^html/aplicaciones\.html$ /productos [R=301,L]
+RewriteRule ^contacto\.html$ / [R=301,L]
+# /index.html → / (solo cuando lo piden desde fuera; evita un ciclo con el índice del directorio)
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
+RewriteRule ^index\.html$ / [R=301,L]
+
 RewriteRule ^index\.html$ - [L]
 
 # Páginas prerenderizadas (las genera "npm run build"): /productos se sirve desde productos.html,
