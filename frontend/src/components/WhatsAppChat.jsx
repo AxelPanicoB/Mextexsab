@@ -101,7 +101,8 @@ function WhatsAppChat() {
         <section className="wa-chat" role="dialog" aria-label="Chat de WhatsApp con Metexsab">
           <header className="wa-chat-header">
             <span className="wa-chat-avatar">
-              <img src={`${BASE}img/favicon-180.png`} alt="" />
+              {/* logo completo de Metexsab (la mascota), no el icono del navegador */}
+              <img src={`${BASE}img/wa-avatar.png`} alt="" />
             </span>
             <div className="wa-chat-id">
               <strong>Metexsab</strong>
