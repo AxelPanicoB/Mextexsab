@@ -8613,3 +8613,53 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .nav-cart-btn { animation: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ESCALA TIPOGRÁFICA Y TARJETAS MÁS LIGERAS
+   Título de tarjeta más grande que el texto (antes 16 px vs 14,4 px:
+   no se distinguía cuál mandaba), texto a 16 px, una sola acción principal.
+══════════════════════════════════════════════════════════════ */
+.solution-card .solution-app { font-size: 0.75rem; letter-spacing: 0.08em; }
+.solution-card-v2 .solution-badge { font-size: 0.7rem; }
+
+.solution-card h3 {
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 46ch;
+}
+.solution-card .solution-summary { font-size: 0.975rem; line-height: 1.6; }
+.solution-card .solution-highlights { gap: 0.45rem; }
+.solution-card .solution-highlights li { font-size: 1rem; line-height: 1.45; color: #2f4d2b; }
+.solution-card .solution-highlights li svg { margin-top: 3px; }
+
+.solution-card-v2 .btn-flavors-toggle { font-size: 0.9rem; }
+
+/* Una acción principal (muestra gratis) + WhatsApp; "Solicitar información" pasa a enlace */
+.solution-card-v2 .btn-solution-add,
+.solution-card-v2 .btn-solution-remove { font-size: 0.95rem; padding: 0.7rem 1.1rem; }
+.solution-card-v2 .btn-solution-contact {
+  border: none;
+  background: transparent;
+  color: #2e7b19;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.7rem 0.6rem;
+}
+.solution-card-v2 .btn-solution-contact:hover { background: transparent; color: #1e5c0a; }
+
+/* Texto de apoyo de las secciones: un poco más grande y más oscuro */
+.section-copy { font-size: 1.125rem; color: #475569; }
+
+@media (max-width: 768px) {
+  .solution-card-v2 .btn-solution-contact { flex: 0 1 auto; }
+}
+
+/* En celular el texto más grande se partía muy pronto por el balanceo de líneas */
+@media (max-width: 768px) {
+  .solution-card .solution-summary,
+  .solution-card .solution-highlights { text-wrap: pretty; }
+}
