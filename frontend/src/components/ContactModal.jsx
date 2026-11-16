@@ -146,7 +146,7 @@ function ContactModal() {
                 <CheckCircle size={72} weight="fill" />
               </div>
               <h4>¡Mensaje enviado!</h4>
-              <p>Un asesor técnico se pondrá en contacto contigo pronto.</p>
+              <p>Nos pondremos en contacto contigo muy pronto.</p>
               <button type="button" className="cmodal-close-btn" onClick={closeContactModal}>
                 Cerrar
               </button>
