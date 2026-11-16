@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- ?v=3: logo nuevo dentro de círculo blanco (el parámetro obliga al navegador a descargar el icono otra vez) -->
-    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%img/favicon-32.png?v=3" />
-    <link rel="icon" type="image/png" sizes="64x64" href="%BASE_URL%img/faviconP.png?v=3" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%img/favicon-180.png?v=3" />
+    <!-- Favicon: sombrero de chef blanco sobre círculo verde. El SVG se ve nítido en navegadores modernos; los PNG son respaldo.
+         ?v=4 obliga al navegador a descargar el icono otra vez (los navegadores lo guardan en caché). -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%img/favicon.svg?v=4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%img/favicon-32.png?v=4" />
+    <link rel="icon" type="image/png" sizes="64x64" href="%BASE_URL%img/faviconP.png?v=4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%img/favicon-180.png?v=4" />
+    <meta name="application-name" content="Metexsab" />
+    <meta name="apple-mobile-web-app-title" content="Metexsab" />
 
     <!-- ── SEO PRIMARIO ─────────────────────────────────────── -->
     <title>Metexsab | Aditivos Alimentarios para la Industria Láctea – Querétaro, México</title>
@@ -42,6 +46,17 @@
     <meta property="og:image:height" content="630" />
 
     <!-- ── SCHEMA.ORG JSON-LD (datos estructurados) ─────────── -->
+    <!-- Nombre del sitio: así Google muestra "Metexsab" junto al icono en los resultados -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Metexsab",
+      "alternateName": ["Mexicana de Textura y Sabor", "METEXSAB"],
+      "url": "https://www.metexsab.com/",
+      "inLanguage": "es-MX"
+    }
+    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
