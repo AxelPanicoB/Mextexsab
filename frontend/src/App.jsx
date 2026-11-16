@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import WhatsAppChat from './components/WhatsAppChat.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import { ContactModalProvider } from './context/ContactModalContext.jsx';
+import { WhatsAppChatProvider } from './context/WhatsAppChatContext.jsx';
 import NavBar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
 import CartBar from './components/CartBar.jsx';
@@ -39,6 +40,7 @@ function App() {
     <BrowserRouter basename="/Mextexsab">
       <CartProvider>
         <ContactModalProvider>
+        <WhatsAppChatProvider>
         <div className="app-shell">
           <RevealObserver />
           <RouteSeo />
@@ -57,6 +59,7 @@ function App() {
           <ScrollToTopBtn />
           <WhatsAppChat />
         </div>
+        </WhatsAppChatProvider>
         </ContactModalProvider>
       </CartProvider>
     </BrowserRouter>

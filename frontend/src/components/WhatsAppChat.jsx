@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { X, PaperPlaneRight, Gift } from '@phosphor-icons/react';
 import { useCart } from '../context/CartContext';
+import { useWhatsAppChat } from '../context/WhatsAppChatContext';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
 
 const PHONE = '524422180650';
@@ -12,25 +13,6 @@ function productList(cart) {
   return cart
     .map((p) => `• ${p.name}${p.selectedFlavors?.length ? ` (${p.selectedFlavors.join(', ')})` : ''}`)
     .join('\n');
-}
-
-// Respuestas rápidas: rellenan el mensaje para que el visitante lo revise antes de enviarlo.
-// Si ya eligió productos para muestras, se incluyen en el mensaje de cotización.
-function quickReplies(cart) {
-  const list = cart.length > 0 ? `\n${productList(cart)}` : '';
-  return [
-    {
-      label: 'Quiero cotizar',
-      text: cart.length > 0
-        ? `Hola, me gustaría solicitar una cotización de los siguientes productos:${list}`
-        : 'Hola, me gustaría solicitar una cotización.',
-    },
-    // Las muestras no se piden por WhatsApp: se lleva al visitante al formulario de
-    // "Solicitud de muestras", que llega por correo para tener mejor control.
-    { label: 'Solicitar muestras', action: 'samples' },
-    // Termina en "en " para que el visitante complete la frase
-    { label: 'Me gustaría asesoría en…', text: 'Hola, me gustaría asesoría en ' },
-  ];
 }
 
 // Mensaje por defecto según la sección que está viendo el visitante
@@ -46,12 +28,20 @@ function defaultMessage(pathname) {
 
 // Mini chat: el visitante escribe aquí y al enviar se abre WhatsApp con el mensaje ya listo.
 // (WhatsApp exige que el visitante pulse "enviar" en su app; no se puede saltar ese paso.)
+//
+// Los productos elegidos para muestras NO se copian dentro del texto: se leen del carrito
+// en vivo y se agregan al final al enviar. Así, si el visitante agrega o quita productos
+// con el chat abierto, el mensaje se actualiza solo.
 function WhatsAppChat() {
   const { pathname } = useLocation();
   const { cart, openPanel } = useCart();
-  const [open, setOpen] = useState(false);
+  const { open, setOpen, prefill } = useWhatsAppChat();
   const [message, setMessage] = useState('');
+  const [includeProducts, setIncludeProducts] = useState(false);
   const textareaRef = useRef(null);
+
+  const hasProducts = cart.length > 0;
+  const attach = includeProducts && hasProducts;
 
   useEffect(() => {
     if (!open) return undefined;
@@ -64,8 +54,15 @@ function WhatsAppChat() {
   // al cambiar de página el chat se cierra
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  const pickReply = (text) => {
+  // si se abre desde otro lugar con un mensaje (ej. tarjeta de producto), se escribe solo
+  useEffect(() => {
+    if (prefill.id > 0 && prefill.text) pickReply(prefill.text, false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefill.id]);
+
+  const pickReply = (text, withProducts) => {
     setMessage(text);
+    setIncludeProducts(withProducts);
     // el cursor queda al final para que el visitante complete o ajuste el mensaje
     requestAnimationFrame(() => {
       const ta = textareaRef.current;
@@ -75,7 +72,8 @@ function WhatsAppChat() {
     });
   };
 
-  // Abre el formulario de solicitud de muestras (llega por correo) y cierra el chat
+  // Las muestras no se piden por WhatsApp: se lleva al visitante al formulario de
+  // "Solicitud de muestras", que llega por correo para tener mejor control.
   const openSamples = () => {
     setOpen(false);
     openPanel();
@@ -83,10 +81,12 @@ function WhatsAppChat() {
 
   const send = (e) => {
     e.preventDefault();
-    const text = message.trim() || defaultMessage(pathname);
+    let text = message.trim() || (attach ? 'Hola, me gustaría solicitar una cotización.' : defaultMessage(pathname));
+    if (attach) text += `\n\nProductos:\n${productList(cart)}`;
     const url = `https://wa.me/${PHONE}/?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
     setMessage('');
+    setIncludeProducts(false);
     setOpen(false);
   };
 
@@ -118,24 +118,21 @@ function WhatsAppChat() {
               ¿En qué podemos ayudarte?
             </p>
             <div className="wa-chat-replies">
-              {quickReplies(cart).map((r) => (
-                <button
-                  type="button"
-                  key={r.label}
-                  onClick={() => (r.action === 'samples' ? openSamples() : pickReply(r.text))}
-                >
-                  {r.action === 'samples' && <Gift size={15} weight="fill" />}
-                  {r.label}
-                </button>
-              ))}
+              <button
+                type="button"
+                onClick={() => pickReply('Hola, me gustaría solicitar una cotización.', true)}
+              >
+                Quiero cotizar
+              </button>
+              <button type="button" onClick={openSamples}>
+                <Gift size={15} weight="fill" />
+                Solicitar muestras
+              </button>
+              {/* Termina en "en " para que el visitante complete la frase */}
+              <button type="button" onClick={() => pickReply('Hola, me gustaría asesoría en ', false)}>
+                Me gustaría asesoría en…
+              </button>
             </div>
-            {cart.length > 0 && (
-              <p className="wa-chat-hint">
-                <Gift size={16} weight="fill" />
-                Tienes {cart.length} {cart.length === 1 ? 'producto seleccionado' : 'productos seleccionados'}.
-                Se incluirán en tu mensaje al elegir "Quiero cotizar".
-              </p>
-            )}
           </div>
 
           <form className="wa-chat-form" onSubmit={send}>
@@ -144,11 +141,26 @@ function WhatsAppChat() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={onKeyDown}
-              rows={message.includes('\n') ? 5 : 2}
-              maxLength={1500}
+              rows={Math.min(6, Math.max(2, Math.ceil(message.length / 34) + message.split('\n').length - 1))}
+              maxLength={1000}
               placeholder="Escribe tu mensaje…"
               aria-label="Tu mensaje"
             />
+
+            {hasProducts && (
+              <div className="wa-chat-products">
+                <label className="wa-chat-products-toggle">
+                  <input
+                    type="checkbox"
+                    checked={includeProducts}
+                    onChange={(e) => setIncludeProducts(e.target.checked)}
+                  />
+                  Incluir mis {cart.length} {cart.length === 1 ? 'producto seleccionado' : 'productos seleccionados'}
+                </label>
+                {attach && <pre className="wa-chat-products-list">{productList(cart)}</pre>}
+              </div>
+            )}
+
             <button type="submit" className="wa-chat-send">
               <PaperPlaneRight size={20} weight="fill" /> Enviar por WhatsApp
             </button>

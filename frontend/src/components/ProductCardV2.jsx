@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useCart } from '../context/CartContext';
 import { useContactModal } from '../context/ContactModalContext';
+import { useWhatsAppChat } from '../context/WhatsAppChatContext';
 import {
   Flask, X, Check, CheckCircle, CircleNotch, CaretRight,
   TestTube, Info, Envelope, RadioButton,
@@ -149,7 +150,8 @@ const BASE = import.meta.env.BASE_URL;
 function ProductCardV2({ product }) {
   const { add, remove, inCart } = useCart();
   const { openContactModal } = useContactModal();
-  const WA = `https://wa.me/524422180650/?text=${encodeURIComponent(`Hola, vi el producto "${product.name}" en su catálogo y me gustaría solicitar más información`)}`;
+  const { openChat } = useWhatsAppChat();
+  const waMessage = `Hola, vi el producto "${product.name}" en su catálogo y me gustaría solicitar más información`;
 
   const selected = inCart(product.id);
   const [showFlavors, setShowFlavors] = useState(false);
@@ -228,14 +230,22 @@ function ProductCardV2({ product }) {
                 <><TestTube size={22} weight="regular" />Muestra gratis</>
               )}
             </button>
-            <a
+            <button
+              type="button"
               className="btn-solution-contact"
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => openContactModal([...(product.applications || []), product.category], product.name)}
             >
               Solicitar información
-            </a>
+            </button>
+            <button
+              type="button"
+              className="btn-solution-wa"
+              onClick={() => openChat(waMessage)}
+              aria-label={`Preguntar por WhatsApp sobre ${product.name}`}
+              title="Preguntar por WhatsApp"
+            >
+              <WhatsAppIcon size={22} />
+            </button>
           </div>
         </div>
       </article>

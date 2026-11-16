@@ -8322,3 +8322,49 @@ button.whatsapp { border: none; cursor: pointer; }
 .wa-chat-hint svg { flex-shrink: 0; margin-top: 1px; }
 .wa-chat-form textarea { max-height: 150px; }
 .wa-chat-replies button { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+/* Productos del carrito dentro del chat: se leen en vivo, no se copian al texto */
+.wa-chat-products {
+  background: #f2fbed;
+  border: 1px solid #d3e8cc;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+}
+.wa-chat-products-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2d6e1a;
+  cursor: pointer;
+}
+.wa-chat-products-toggle input { accent-color: #2e7b19; width: 16px; height: 16px; }
+.wa-chat-products-list {
+  margin: 0.45rem 0 0;
+  max-height: 96px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #3a5a35;
+}
+
+/* Botón de WhatsApp de la tarjeta: solo ícono, abre el mini chat con el producto */
+.solution-card-v2 .btn-solution-wa {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  align-self: stretch;
+  border-radius: var(--radius-sm);
+  background: #25d366;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.solution-card-v2 .btn-solution-wa:hover { background: #1fb457; transform: translateY(-1px); }
+button.btn-solution-contact { font-family: inherit; cursor: pointer; }

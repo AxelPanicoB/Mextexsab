@@ -36,10 +36,12 @@ function ContactModal() {
 
   useEffect(() => {
     if (open) {
-      const match = prefill
-        ? INTEREST_OPTIONS.find(o => o === prefill || o.startsWith(prefill) || prefill.startsWith(o))
-        : null;
-      setInterests(match ? [match] : []);
+      // prefill puede ser un texto o una lista (aplicaciones y línea del producto)
+      const wanted = (Array.isArray(prefill) ? prefill : prefill ? [prefill] : []).map(p => p.toLowerCase());
+      const matches = INTEREST_OPTIONS.filter(o =>
+        wanted.some(p => o.toLowerCase() === p || o.toLowerCase().startsWith(p) || p.startsWith(o.toLowerCase()))
+      );
+      setInterests(matches);
       setStatus(null);
       document.body.style.overflow = 'hidden';
     } else {
@@ -71,7 +73,15 @@ function ContactModal() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, interest: interests.join(', '), turnstileToken }),
+        body: JSON.stringify({
+          ...form,
+          // el producto de interés viaja en el mensaje para que llegue en el correo
+          message: productName
+            ? [`Producto de interés: ${productName}`, form.message].filter(Boolean).join('\n\n')
+            : form.message,
+          interest: interests.join(', '),
+          turnstileToken,
+        }),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
