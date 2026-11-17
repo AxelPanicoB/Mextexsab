@@ -3,11 +3,31 @@ import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
-import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight, ShieldCheck } from '@phosphor-icons/react';
+import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight, ShieldCheck, MapPin } from '@phosphor-icons/react';
+
+// Los 32 estados, con el nombre con el que se escriben en una guía de paquetería.
+const ESTADOS = [
+  'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua',
+  'Ciudad de México', 'Coahuila', 'Colima', 'Durango', 'Estado de México', 'Guanajuato', 'Guerrero',
+  'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla',
+  'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas',
+  'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas',
+];
+
+const EMPTY_FORM = {
+  name: '', email: '', phone: '',
+  street: '', zip: '', colony: '', city: '', state: '',
+  notes: '', website: '',
+};
+
+// El servidor recibe la dirección en un solo texto (máx. 300 caracteres); los campos tienen topes
+// que suman menos que eso.
+const buildAddress = (f) =>
+  `${f.street.trim()}, Col. ${f.colony.trim()}, ${f.city.trim()}, ${f.state}, C.P. ${f.zip.trim()}`;
 
 function CartBar() {
   const { cart, remove, clear, panelOpen, openPanel, closePanel, hintDismissed } = useCart();
-  const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', notes: '', website: '' });
+  const [form, setForm] = useState(EMPTY_FORM);
   const [turnstileToken, setTurnstileToken] = useState('');
   const [turnstileKey, setTurnstileKey] = useState(0);
   const [status, setStatus] = useState(null);
@@ -36,7 +56,7 @@ function CartBar() {
           name: form.name,
           email: form.email,
           phone: form.phone,
-          address: form.address,
+          address: buildAddress(form),
           notes: form.notes,
           website: form.website,
           turnstileToken,
@@ -56,7 +76,7 @@ function CartBar() {
     closePanel();
     if (status === 'ok') {
       setStatus(null);
-      setForm({ name: '', email: '', phone: '', address: '', notes: '', website: '' });
+      setForm(EMPTY_FORM);
       setTurnstileToken('');
       setTurnstileKey(k => k + 1);
     }
@@ -192,16 +212,69 @@ function CartBar() {
                   value={form.phone}
                   onChange={set('phone')}
                 />
-                <textarea
+
+                <p className="cart-panel-label">
+                  <MapPin size={24} weight="bold" />
+                  Dirección de envío de las muestras
+                </p>
+                <input
                   required
-                  rows={2}
-                  placeholder="Dirección de envío de las muestras *"
-                  value={form.address}
-                  onChange={set('address')}
+                  type="text"
+                  name="street"
+                  autoComplete="address-line1"
+                  maxLength={100}
+                  placeholder="Calle y número *"
+                  value={form.street}
+                  onChange={set('street')}
                 />
+                <div className="cart-panel-row">
+                  <input
+                    required
+                    type="text"
+                    name="zip"
+                    inputMode="numeric"
+                    autoComplete="postal-code"
+                    maxLength={5}
+                    pattern="[0-9]{5}"
+                    title="El código postal tiene 5 números, por ejemplo 76000."
+                    placeholder="C.P. *"
+                    value={form.zip}
+                    onChange={(e) => setForm((f) => ({ ...f, zip: e.target.value.replace(/\D/g, '') }))}
+                  />
+                  <input
+                    required
+                    type="text"
+                    name="colony"
+                    maxLength={60}
+                    placeholder="Colonia *"
+                    value={form.colony}
+                    onChange={set('colony')}
+                  />
+                </div>
+                <input
+                  required
+                  type="text"
+                  name="city"
+                  autoComplete="address-level2"
+                  maxLength={60}
+                  placeholder="Municipio o ciudad *"
+                  value={form.city}
+                  onChange={set('city')}
+                />
+                <select
+                  required
+                  name="state"
+                  autoComplete="address-level1"
+                  aria-label="Estado"
+                  value={form.state}
+                  onChange={set('state')}
+                >
+                  <option value="" disabled>Estado *</option>
+                  {ESTADOS.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
                 <textarea
                   rows={3}
-                  placeholder="Notas adicionales (opcional)"
+                  placeholder="Notas o referencias para la entrega (opcional)"
                   value={form.notes}
                   onChange={set('notes')}
                 />

@@ -8684,3 +8684,29 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
 .cta-privacy svg { flex-shrink: 0; }
 .cta-privacy a { color: #2e7b19; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 .cta-privacy a:hover { color: #1e5c0a; }
+
+/* Dirección de envío en campos separados (panel de muestras) */
+.cart-panel-form select {
+  padding: 0.62rem 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  color: #0d1b24;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cart-panel-form select:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(92,184,69,0.15);
+}
+/* mientras no se elige estado, el texto se ve como el de un placeholder */
+.cart-panel-form select:invalid { color: #6b7280; }
+.cart-panel-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 0.6rem;
+}

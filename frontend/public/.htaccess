@@ -53,6 +53,9 @@ RewriteRule . /index.html [L]
 # Permite: acceso directo (sin referer), el propio dominio,
 # y www. Bloquea cualquier otro sitio que intente incrustar
 # nuestras imágenes directamente.
+# Las imágenes de /img/email/ (el logo de los correos de aviso) quedan fuera de la protección: los
+# programas de correo y el webmail las piden desde otras direcciones y se verían rotas.
+RewriteCond %{REQUEST_URI} !^/img/email/
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^https?://([a-z0-9-]+\.)?metexsab\.com [NC]
 RewriteCond %{HTTP_REFERER} !^https?://(www\.)?localhost [NC]

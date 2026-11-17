@@ -18,4 +18,10 @@ return [
 
     // Orígenes permitidos, separados por coma. Vacío = no se valida el Origin.
     'ALLOWED_ORIGIN' => 'https://metexsab.com,https://www.metexsab.com',
+
+    // Dirección del sitio, de donde los correos de aviso cargan su logo (/img/email/logo-metexsab.png).
+    // Producción: https://www.metexsab.com (es el valor por defecto; no hace falta ponerlo).
+    // Sitio de pruebas: poner la dirección del subdominio, por ejemplo https://nuevo.metexsab.com.
+    // (Si ese sitio tiene contraseña, el logo no se verá en el correo: los programas de correo no la tienen.)
+    // 'SITE_URL' => 'https://www.metexsab.com',
 ];
