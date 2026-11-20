@@ -74,5 +74,19 @@ for (const route of ROUTES) {
   count++;
 }
 
+// 404.html: la página de "no encontrado". Apache la entrega con código 404 (ErrorDocument del .htaccess)
+// y GitHub Pages la usa para cualquier dirección que no existe. Va con noindex y sin canonical.
+{
+  const route = '/pagina-no-encontrada'; // no existe en el sitio: el enrutador cae en la ruta "*"
+  let html = template;
+  html = replaceOnce(html, /<title>[\s\S]*?<\/title>/, '<title>Página no encontrada | Metexsab</title>', '<title>');
+  html = replaceOnce(html, /<meta name="robots"[^>]*>/, '<meta name="robots" content="noindex, follow" />', 'meta robots');
+  html = replaceOnce(html, /<link rel="canonical"[^>]*>\s*/, '', 'canonical');
+  html = replaceOnce(html, /<meta property="og:url"[^>]*>\s*/, '', 'og:url');
+  html = replaceOnce(html, /<div id="root"><\/div>/, `<div id="root">${render(route)}</div>`, '<div id="root">');
+  fs.writeFileSync(path.join(dist, '404.html'), html);
+  console.log('  ✓ 404.html (página de error, noindex)');
+}
+
 fs.rmSync(distSsr, { recursive: true, force: true });
 console.log(`prerender: ${count} páginas generadas.`);

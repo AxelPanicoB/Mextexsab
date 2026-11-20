@@ -419,7 +419,8 @@ function email_footer(): string
   <tr><td style="background:#f0f7ed;border:1px solid #d8e8d2;border-top:none;border-radius:0 0 18px 18px;padding:26px 36px;">
     <div style="font-size:15px;color:#4f7a4a;line-height:1.8;">
       <strong style="color:#1e5c0a;">Metexsab</strong> &middot; Mexicana de Textura y Sabor<br>
-      &#128205; Quer&eacute;taro, M&eacute;xico &nbsp;&middot;&nbsp; &#128222; 442 279-4146 &nbsp;&middot;&nbsp; ventas@metexsab.com
+      &#128205; Quer&eacute;taro, M&eacute;xico &nbsp;&middot;&nbsp; &#128222; 442 218-9635 &nbsp;&middot;&nbsp; WhatsApp 442 279-4146<br>
+      ventas@metexsab.com
     </div>
     <div style="font-size:12px;color:#8aa886;margin-top:14px;line-height:1.6;">
       Aviso generado autom&aacute;ticamente desde el formulario de metexsab.com.
@@ -452,7 +453,7 @@ function email_wrap(string $innerRows, string $preheader = ''): string
 
 // ── CORREO: SOLICITUD DE MUESTRAS ───────────────────────────────────────
 // $products: lista de ['name' => , 'sku' => , 'selectedFlavors' => [...]]
-function samples_email_html(string $name, string $email, string $phone, string $address, string $notes, array $products): string
+function samples_email_html(string $name, string $company, string $email, string $phone, string $address, string $notes, array $products): string
 {
     $count  = count($products);
     $plural = $count !== 1 ? 's' : '';
@@ -494,7 +495,7 @@ function samples_email_html(string $name, string $email, string $phone, string $
     $lines = [
         'Hola ' . first_name($name) . ',',
         '',
-        'Gracias por tu interés en Metexsab. Recibimos tu solicitud de muestras:',
+        'Gracias por tu interés en Metexsab. Recibimos tu solicitud de muestras para ' . $company . ':',
         '',
         'Productos:',
     ];
@@ -519,6 +520,7 @@ function samples_email_html(string $name, string $email, string $phone, string $
       <tr><td style="background:#f2fbed;border-left:5px solid #3d9618;padding:22px 26px;border-radius:0 12px 12px 0;">
         ' . email_label('Solicitante') . '
         <div style="font-size:28px;font-weight:800;color:#1a2733;line-height:1.2;">' . esc($name) . '</div>
+        <div style="font-size:18px;font-weight:600;color:#4f7a4a;margin-top:6px;">' . esc($company) . '</div>
         <div style="margin-top:14px;font-size:16px;line-height:1.9;color:#3b5a3f;">
           <a href="mailto:' . esc($email) . '" style="color:#1e5c0a;font-weight:600;text-decoration:none;">&#9993;&nbsp; ' . esc($email) . '</a><br>
           ' . $phoneHtml . '

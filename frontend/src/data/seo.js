@@ -45,6 +45,9 @@ LANDINGS.forEach((l) => {
 // "/productos/" y "/productos" son la misma página
 export const normalizePath = (pathname) => pathname.replace(/\/+$/, '') || '/';
 
+// ¿Existe esta dirección en el sitio? (si no, se muestra la página 404)
+export const isKnownPath = (pathname) => normalizePath(pathname) in PAGES;
+
 export const pageFor = (pathname) => PAGES[normalizePath(pathname)] || PAGES['/'];
 export const urlFor = (pathname) => {
   const path = normalizePath(pathname);

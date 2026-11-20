@@ -1,0 +1,33 @@
+# Metexsab
+
+> Metexsab (Mexicana de Textura y Sabor S.A. de C.V.) es una empresa queretana, fundada en 2007, que suministra aditivos e ingredientes alimentarios a la industria láctea y alimentaria de México: saborizantes, estabilizantes, texturizantes, gomas, colorantes y auxiliares de proceso para quesos, cremas, yogurt, helados, bebidas lácteas y postres. Ofrece soluciones a la medida y muestras gratuitas para pruebas en planta.
+
+Ubicación: Querétaro, México. Atiende a clientes industriales (B2B) en todo el país.
+Contacto: ventas@metexsab.com · Teléfono 442 218 9635 · WhatsApp 442 279 4146
+
+## Páginas principales
+
+- [Inicio](https://www.metexsab.com/): quiénes son, cómo trabajan (análisis, propuesta, muestras gratuitas y seguimiento) y formulario de contacto.
+- [Productos](https://www.metexsab.com/productos): catálogo completo de saborizantes, estabilizantes, texturizantes, colorantes y auxiliares de proceso, con solicitud de muestras gratuitas.
+- [Nosotros](https://www.metexsab.com/nosotros): quién es Metexsab: empresa fundada en 2007, ingredientes de calidad, soluciones a la medida y servicio eficiente.
+
+## Soluciones por producto
+
+- [Saborizantes para quesos](https://www.metexsab.com/saborizantes-para-quesos): perfiles de sabor en polvo y líquidos para quesos análogos, semi-análogos y naturales.
+- [Texturizantes para quesos](https://www.metexsab.com/texturizantes-para-quesos): texturizantes y estabilizantes para quesos.
+- [Aditivos para cremas](https://www.metexsab.com/aditivos-para-cremas): estabilizantes y saborizantes para cremas.
+- [Aditivos para yogurt](https://www.metexsab.com/aditivos-para-yogurt): estabilizantes y saborizantes para yogurt.
+- [Aditivos para helados](https://www.metexsab.com/aditivos-para-helados): estabilizantes y saborizantes para helados y nieves.
+- [Aditivos para bebidas lácteas](https://www.metexsab.com/aditivos-para-bebidas-lacteas): estabilizantes y saborizantes para bebidas lácteas.
+- [Aditivos para postres lácteos](https://www.metexsab.com/aditivos-para-postres-lacteos): gelificantes y saborizantes para postres lácteos.
+- [Retenedor de humedad para tortillas](https://www.metexsab.com/aditivos-para-tortillas): para tortillas de anaquel.
+- [Colorantes para lácteos](https://www.metexsab.com/colorantes-para-lacteos): annatto y blanco para quesos y lácteos.
+
+## Datos
+
+- [Catálogo en formato JSON](https://www.metexsab.com/products.json): lista de productos con códigos y descripciones.
+- [Mapa del sitio](https://www.metexsab.com/sitemap.xml)
+
+## Cómo pedir información
+
+Los clientes pueden solicitar muestras gratuitas desde la página de productos o escribir por WhatsApp; un asesor técnico responde con una propuesta de formulación.

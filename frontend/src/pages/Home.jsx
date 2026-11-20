@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
+import { track } from '../utils/analytics.js';
 import {
   Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
   PaperPlane, CircleNotch, CheckCircle, WarningCircle, EnvelopeOpen, Envelope, ShieldCheck,
@@ -30,6 +31,7 @@ function Home() {
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
+      track('generate_lead', { form: 'inicio' });
       setCtaStatus({ type: 'success', text: 'Te contacteremos pronto' });
       setCtaForm({ name: '', email: '', phone: '' });
     } catch (err) {
@@ -338,6 +340,13 @@ function Home() {
                 <p>Te enviamos muestras sin costo alguno para que pruebes en condiciones reales de producción y valides los resultados.</p>
               </div>
             </div>
+            <div className="timeline-item">
+              <div className="timeline-node"><span>4</span></div>
+              <div className="timeline-body">
+                <h3>Seguimiento Continuo</h3>
+                <p>Damos seguimiento a tus resultados, ajustamos la formulación contigo y te apoyamos en pedidos y nuevos desarrollos.</p>
+              </div>
+            </div>
           </div>
           <div className="process-samples-action">
             <Link to="/productos" className="samples-cta-btn">
@@ -409,13 +418,6 @@ function Home() {
               {' '}{ctaStatus.text}
             </p>
           )}
-        </div>
-      </section>
-
-      {/* ── 6. TAGLINE BANNER ─────────────────────────────────── */}
-      <section className="tagline-banner">
-        <div className="contenedor">
-          <p className="tagline-text">¡Un mundo de ideas brillantes para sus productos alimenticios!</p>
         </div>
       </section>
     </>

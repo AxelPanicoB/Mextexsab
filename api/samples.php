@@ -19,6 +19,7 @@ verify_turnstile($body);
 
 // ── VALIDACIÓN (espejo de samplesSchema) ───────────────────────────────
 $name    = clean_str($body['name'] ?? null, 100, 2);
+$company = clean_str($body['company'] ?? null, 150, 2);
 $email   = valid_email($body['email'] ?? null);
 $phone   = valid_phone($body['phone'] ?? null);
 $address = clean_str($body['address'] ?? null, 300, 8);
@@ -26,6 +27,7 @@ $notes   = clean_str($body['notes'] ?? '', 1000);
 
 $errors = [];
 if ($name === null)    $errors[] = ['field' => 'name',    'message' => 'Nombre inválido (2–100 caracteres).'];
+if ($company === null) $errors[] = ['field' => 'company', 'message' => 'Nombre de la empresa inválido (2–150 caracteres).'];
 if ($email === null)   $errors[] = ['field' => 'email',   'message' => 'Correo electrónico inválido.'];
 if ($phone === null)   $errors[] = ['field' => 'phone',   'message' => 'Teléfono inválido.'];
 if ($address === null) $errors[] = ['field' => 'address', 'message' => 'Dirección de envío inválida (mín. 8 caracteres).'];
@@ -75,7 +77,7 @@ if ($errors) {
 // ── PLANTILLA HTML (vive en _lib.php: samples_email_html) ──────────────
 $count = count($products);
 $plural = $count !== 1 ? 's' : '';
-$html = samples_email_html($name, $email, $phone, $address, $notes, $products);
+$html = samples_email_html($name, $company, $email, $phone, $address, $notes, $products);
 
 // ── ENVÍO ──────────────────────────────────────────────────────────────
 $subject = "Solicitud de muestras — $name ($count producto$plural)";

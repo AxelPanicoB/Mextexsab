@@ -6,8 +6,14 @@
 
 Options -Indexes
 
-# ── 1. HTTPS forzado ─────────────────────────────────────────
+# ── 1. Una sola dirección: https://www.metexsab.com ─────────
+# Sin esto, Google vería metexsab.com y www.metexsab.com como dos sitios iguales. La redirección
+# pasa de una vez a https (un solo salto). No afecta a subdominios como nuevo.metexsab.com.
 RewriteEngine On
+RewriteCond %{HTTP_HOST} ^metexsab\.com$ [NC]
+RewriteRule ^ https://www.metexsab.com%{REQUEST_URI} [L,R=301]
+
+# HTTPS forzado
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
@@ -44,10 +50,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
 
-# Cualquier otra ruta: la app de React la resuelve
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
+# Cualquier otra dirección no existe: se muestra la página 404.html CON código 404 (así Google no la
+# toma por una página válida). Todas las páginas reales ya están prerenderizadas arriba.
+ErrorDocument 404 /404.html
 
 # ── 3. HOTLINK PROTECTION — imágenes y assets ─────────────────
 # Permite: acceso directo (sin referer), el propio dominio,

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useCart } from '../context/CartContext';
 import Turnstile from './Turnstile';
+import { track } from '../utils/analytics.js';
 import { Gift, X, CheckCircle, TestTube, Flask, Trash, User, WarningCircle, PaperPlaneRight, ShieldCheck, MapPin } from '@phosphor-icons/react';
 
 // Los 32 estados, con el nombre con el que se escriben en una guía de paquetería.
@@ -15,7 +16,7 @@ const ESTADOS = [
 ];
 
 const EMPTY_FORM = {
-  name: '', email: '', phone: '',
+  name: '', company: '', email: '', phone: '',
   street: '', zip: '', colony: '', city: '', state: '',
   notes: '', website: '',
 };
@@ -54,6 +55,7 @@ function CartBar() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.name,
+          company: form.company,
           email: form.email,
           phone: form.phone,
           address: buildAddress(form),
@@ -64,6 +66,7 @@ function CartBar() {
         }),
       });
       if (!res.ok) throw new Error();
+      track('generate_lead', { form: 'muestras' });
       setStatus('ok');
       clear();
     } catch {
@@ -197,6 +200,16 @@ function CartBar() {
                   placeholder="Nombre completo *"
                   value={form.name}
                   onChange={set('name')}
+                />
+                <input
+                  required
+                  type="text"
+                  name="organization"
+                  autoComplete="organization"
+                  maxLength={150}
+                  placeholder="Nombre de la empresa *"
+                  value={form.company}
+                  onChange={set('company')}
                 />
                 <input
                   required

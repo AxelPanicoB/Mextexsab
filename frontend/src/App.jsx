@@ -8,6 +8,7 @@ import NavBar from './components/NavBar.jsx';
 import Footer from './components/Footer.jsx';
 import CartBar from './components/CartBar.jsx';
 import RouteSeo from './components/RouteSeo.jsx';
+import NotFound from './pages/NotFound.jsx';
 import ContactModal from './components/ContactModal.jsx';
 import ScrollToTopBtn from './components/ScrollToTopBtn.jsx';
 import RouteProgress from './components/RouteProgress.jsx';
@@ -71,6 +72,7 @@ export function AppShell() {
             {LANDINGS.map((l) => (
               <Route key={l.slug} path={`/${l.slug}`} element={<Landing landing={l} />} />
             ))}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

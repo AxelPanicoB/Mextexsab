@@ -1,10 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="17.5 16.5 65 65">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 12 224 224">
   <title>Metexsab</title>
   <style>
     .hat { fill: #2e7b19; }
     @media (prefers-color-scheme: dark) { .hat { fill: #77d069; } }
   </style>
-  <g class="hat"><circle cx="33" cy="42" r="14"/><circle cx="50" cy="35" r="17"/><circle cx="67" cy="42" r="14"/>
-    <rect x="29" y="42" width="42" height="24"/>
-    <rect x="29" y="69" width="42" height="11" rx="3"/></g>
+  <g class="hat"><path d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,13.72-24.23Zm-90.08-42.91c-15.91-8.05-31.05-12.32-45.22-12.81l24.47-40.8A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167C171.4,169.34,154.29,168.34,131.61,156.86Z"/></g>
 </svg>

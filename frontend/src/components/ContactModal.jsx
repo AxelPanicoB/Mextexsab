@@ -8,6 +8,7 @@ import {
   Clock, ShieldCheck, CircleNotch, CheckCircle,
 } from '@phosphor-icons/react';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
+import { track } from '../utils/analytics.js';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -101,6 +102,7 @@ function ContactModal() {
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
+      track('generate_lead', { form: 'contacto' });
       setStatus({ type: 'success', text: '¡Listo! Te contactamos pronto.' });
       setForm({ name: '', email: '', phone: '', message: '', website: '' });
       setInterests([]);

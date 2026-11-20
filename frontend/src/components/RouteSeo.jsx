@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { pageFor, urlFor } from '../data/seo.js';
+import { pageFor, urlFor, isKnownPath } from '../data/seo.js';
 
 // Al navegar dentro del sitio, actualiza el título y las etiquetas de la página.
 // (La primera carga ya trae las etiquetas correctas porque se prerenderizan al compilar;
@@ -15,6 +15,12 @@ function RouteSeo() {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // Dirección que no existe: título propio y fuera de los buscadores (el HTML ya llega con noindex)
+    if (!isKnownPath(pathname)) {
+      document.title = 'Página no encontrada | Metexsab';
+      return;
+    }
+
     const page = pageFor(pathname);
     const url = urlFor(pathname);
 
