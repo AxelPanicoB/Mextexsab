@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import spanishValidation from '../utils/spanishValidation.js';
 import { useContactModal } from '../context/ContactModalContext';
 import { track } from '../utils/analytics.js';
+import Turnstile from '../components/Turnstile';
 import {
   Star, ArrowRight, Cheese, Drop, Jar, Snowflake, Cake, Medal,
   PaperPlane, CircleNotch, CheckCircle, WarningCircle, EnvelopeOpen, Envelope, ShieldCheck,
@@ -14,6 +15,8 @@ function Home() {
   const { openContactModal } = useContactModal();
   const [ctaForm, setCtaForm] = useState({ name: '', email: '', phone: '' });
   const [ctaStatus, setCtaStatus] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [turnstileKey, setTurnstileKey] = useState(0);
 
   const handleCtaChange = (e) => {
     const { name, value } = e.target;
@@ -22,12 +25,17 @@ function Home() {
 
   const handleCta = async (e) => {
     e.preventDefault();
+    // La verificación de Cloudflare es automática y tarda un instante; si aún no termina, se pide reintentar
+    if (import.meta.env.VITE_TURNSTILE_SITE_KEY && !turnstileToken) {
+      setCtaStatus({ type: 'error', text: 'Un momento, estamos verificando que eres una persona real. Intenta de nuevo.' });
+      return;
+    }
     setCtaStatus({ type: 'loading', text: 'Enviando...' });
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...ctaForm, interest: 'Consulta General' })
+        body: JSON.stringify({ ...ctaForm, interest: 'Consulta General', turnstileToken })
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || 'Error al enviar.');
@@ -36,6 +44,10 @@ function Home() {
       setCtaForm({ name: '', email: '', phone: '' });
     } catch (err) {
       setCtaStatus({ type: 'error', text: err.message });
+    } finally {
+      // el token sirve una sola vez: se pide uno nuevo para el siguiente envío
+      setTurnstileToken('');
+      setTurnstileKey((k) => k + 1);
     }
   };
 
@@ -401,6 +413,7 @@ function Home() {
               )}
             </button>
           </form>
+          <Turnstile onVerify={setTurnstileToken} resetKey={turnstileKey} appearance="interaction-only" />
           <p className="cta-privacy">
             <ShieldCheck size={16} weight="regular" aria-hidden="true" />
             <span>

@@ -2,6 +2,7 @@
 // conectan Google Analytics 4, el Pixel de Meta, Google Ads, etc. sin volver a publicar el sitio.
 //
 // Está APAGADO mientras no exista VITE_GTM_ID (por ejemplo, en frontend/.env.local: VITE_GTM_ID=GTM-XXXXXXX).
+// Acepta varios contenedores separados por coma (VITE_GTM_ID=GTM-AAAA,GTM-BBBB); todos reciben los mismos eventos.
 // Sin ese ID no se carga ningún script externo ni se guarda nada del visitante.
 //
 // Solo mide el sitio real (metexsab.com). El contenedor es el de producción, así que en nuevo.metexsab.com,
@@ -13,11 +14,11 @@
 //   generate_lead   → un formulario se envió bien (form: 'contacto' | 'inicio' | 'muestras')
 //   whatsapp_click  → clic a un enlace de WhatsApp
 
-const GTM_ID = import.meta.env.VITE_GTM_ID;
+const GTM_IDS = String(import.meta.env.VITE_GTM_ID || '').split(',').map((id) => id.trim()).filter(Boolean);
 const PRODUCTION_HOSTS = ['www.metexsab.com', 'metexsab.com'];
 
 function enabled() {
-  if (!GTM_ID || typeof window === 'undefined') return false;
+  if (GTM_IDS.length === 0 || typeof window === 'undefined') return false;
   return PRODUCTION_HOSTS.includes(window.location.hostname) || /[?&]gtm_debug=/.test(window.location.search);
 }
 
@@ -33,10 +34,12 @@ export function initAnalytics() {
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_ID)}`;
-  document.head.appendChild(script);
+  for (const id of GTM_IDS) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(id)}`;
+    document.head.appendChild(script);
+  }
 
   // Un solo escuchador para todos los enlaces de WhatsApp del sitio
   document.addEventListener('click', (e) => {

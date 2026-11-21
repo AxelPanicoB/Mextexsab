@@ -30,15 +30,20 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteBase /
 
 # ── 2b. Redirecciones desde las direcciones del sitio anterior ─
-# Google ya conoce estas URLs (estaban en su sitemap). Con redirección permanente (301) la página nueva
-# hereda lo que ya tenían, en vez de perderlo con un error 404.
-RewriteRule ^html/nosotros\.html$ /nosotros [R=301,L]
-RewriteRule ^html/productos\.html$ /productos [R=301,L]
-RewriteRule ^html/aplicaciones\.html$ /productos [R=301,L]
-RewriteRule ^contacto\.html$ / [R=301,L]
+# Google ya conoce estas URLs (estaban en su sitemap y en sus resultados, con y sin ".html"). Con redirección
+# permanente (301) la página nueva hereda lo que ya tenían, en vez de perderlo con un error 404.
+RewriteRule ^html/nosotros(\.html)?/?$ /nosotros [R=301,L]
+RewriteRule ^html/productos(\.html)?/?$ /productos [R=301,L]
+RewriteRule ^html/aplicaciones(\.html)?/?$ /productos [R=301,L]
+RewriteRule ^contacto(\.html)?/?$ / [R=301,L]
 # /index.html → / (solo cuando lo piden desde fuera; evita un ciclo con el índice del directorio)
 RewriteCond %{THE_REQUEST} \s/index\.html[\s?]
 RewriteRule ^index\.html$ / [R=301,L]
+# /productos.html, /nosotros.html y las páginas por tema también existen como archivo; si alguien las pide
+# con ".html", se mandan a la dirección limpia (sin duplicar páginas). Se salvan los archivos de verificación
+# de Google y la página 404.
+RewriteCond %{THE_REQUEST} \s/(?!google|404|index)([^\s?]+)\.html[\s?]
+RewriteRule ^(.+)\.html$ /%1 [R=301,L]
 
 RewriteRule ^index\.html$ - [L]
 

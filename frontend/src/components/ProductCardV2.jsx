@@ -245,6 +245,7 @@ function ProductCardV2({ product }) {
               title="Preguntar por WhatsApp"
             >
               <WhatsAppIcon size={22} />
+              <span className="btn-solution-wa-label">WhatsApp</span>
             </button>
           </div>
         </div>

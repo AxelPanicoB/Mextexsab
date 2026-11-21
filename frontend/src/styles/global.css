@@ -8681,7 +8681,21 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
 }
 
 /* ─── PÁGINA 404 ─────────────────────────────────────────── */
-.not-found { text-align: center; padding: 5rem 1.5rem 6rem; }
+.not-found { text-align: center; padding: 4rem 1.5rem 6rem; }
+/* "4 [matraz] 4": el matraz del favicon hace de cero */
+.not-found-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.04em;
+  font-size: clamp(5.5rem, 17vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--green-dark);
+  margin-bottom: 1.4rem;
+}
+.not-found-flask { width: 0.92em; height: 0.92em; color: var(--green); flex-shrink: 0; }
 .not-found h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
@@ -8690,5 +8704,62 @@ button.btn-solution-contact { font-family: inherit; cursor: pointer; }
   line-height: 1.15;
   margin: 0.9rem 0 1rem;
 }
-.not-found p { max-width: 520px; margin: 0 auto 2rem; color: var(--gray-500); font-size: 1.1rem; line-height: 1.7; }
+.not-found p { max-width: 540px; margin: 0 auto 2rem; color: var(--gray-500); font-size: 1.1rem; line-height: 1.7; }
 .not-found-actions { display: flex; gap: 0.9rem; justify-content: center; flex-wrap: wrap; }
+.not-found-wa { display: inline-flex; align-items: center; gap: 0.5rem; }
+.not-found-popular { margin: 3.2rem auto 0; max-width: 640px; }
+.not-found .not-found-popular-title {
+  max-width: none;
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+}
+.not-found-popular ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 560px) {
+  .not-found-popular ul { grid-template-columns: 1fr; }
+  .not-found-actions { flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; }
+  .not-found-actions > * { justify-content: center; }
+}
+.not-found-popular a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem 1.1rem;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 0.9rem;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: left;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.not-found-popular a:hover { border-color: var(--green); box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.not-found-popular a svg { color: var(--green-dark); flex-shrink: 0; }
+
+/* WhatsApp de la tarjeta de producto: en escritorio es solo el ícono; en celular es un botón completo, con su
+   nombre y del mismo ancho que los otros dos (antes quedaba como una pastilla chica y suelta en una fila aparte) */
+.btn-solution-wa-label { display: none; }
+@media (max-width: 768px) {
+  .solution-card-v2 .btn-solution-wa {
+    flex: 1 1 100%;
+    width: auto;
+    gap: 0.5rem;
+    padding: 0.7rem 1.1rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .btn-solution-wa-label { display: inline; }
+}

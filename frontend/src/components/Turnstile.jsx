@@ -2,7 +2,9 @@ import { useEffect, useRef } from 'react';
 
 const SITEKEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
-export default function Turnstile({ onVerify, resetKey = 0 }) {
+// appearance: 'always' (se ve el recuadro) o 'interaction-only' (invisible; solo aparece si Cloudflare pide
+// una comprobación). El formulario corto del inicio usa la invisible para no recargar el diseño.
+export default function Turnstile({ onVerify, resetKey = 0, appearance = 'always' }) {
   const containerRef = useRef(null);
   const widgetIdRef = useRef(null);
 
@@ -28,6 +30,7 @@ export default function Turnstile({ onVerify, resetKey = 0 }) {
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey: SITEKEY,
         theme: 'light',
+        appearance,
         callback: (token) => onVerify(token),
         'expired-callback': () => onVerify(''),
         'error-callback': () => onVerify(''),
@@ -53,5 +56,5 @@ export default function Turnstile({ onVerify, resetKey = 0 }) {
 
   // Don't render anything if not configured (dev without keys)
   if (!SITEKEY) return null;
-  return <div ref={containerRef} style={{ margin: '10px 0 2px' }} />;
+  return <div ref={containerRef} style={{ margin: appearance === 'always' ? '10px 0 2px' : 0 }} />;
 }
