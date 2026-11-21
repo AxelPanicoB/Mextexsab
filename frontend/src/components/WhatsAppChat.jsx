@@ -4,6 +4,7 @@ import { X, PaperPlaneRight, Gift } from '@phosphor-icons/react';
 import { useCart } from '../context/CartContext';
 import { useWhatsAppChat } from '../context/WhatsAppChatContext';
 import WhatsAppIcon from './WhatsAppIcon.jsx';
+import { track } from '../utils/analytics.js';
 
 const PHONE = '524422794146';
 const BASE = import.meta.env.BASE_URL;
@@ -84,6 +85,8 @@ function WhatsAppChat() {
     let text = message.trim() || (attach ? 'Hola, me gustaría solicitar una cotización.' : defaultMessage(pathname));
     if (attach) text += `\n\nProductos:\n${productList(cart)}`;
     const url = `https://wa.me/${PHONE}/?text=${encodeURIComponent(text)}`;
+    // El chat abre WhatsApp con window.open (no es un enlace), así que el evento se manda aquí
+    track('whatsapp_click', { origin: 'chat' });
     window.open(url, '_blank', 'noopener,noreferrer');
     setMessage('');
     setIncludeProducts(false);
