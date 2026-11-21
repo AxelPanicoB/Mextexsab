@@ -8,6 +8,7 @@ import {
 } from '@phosphor-icons/react';
 import WhatsAppIcon from '../components/WhatsAppIcon.jsx';
 import SamplesCta from '../components/SamplesCta.jsx';
+import MolField from '../components/MolField.jsx';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -35,21 +36,9 @@ function About() {
   return (
     <>
       <section className="about-hero about-molecule-bg">
+        <MolField />
         <div className="about-hero-shell">
           <div className="about-hero-copy">
-            <div className="unified-mol-field" aria-hidden="true">
-              <svg className="m-svg m-svg-1" viewBox="0 0 80 92" fill="none"><polygon points="40,3 77,23 77,69 40,89 3,69 3,23" stroke="rgba(119,208,105,0.18)" strokeWidth="1.5"/><circle cx="40" cy="46" r="5" fill="rgba(92,184,69,0.12)"/><circle cx="40" cy="3" r="3" fill="rgba(119,208,105,0.2)"/><circle cx="77" cy="23" r="3" fill="rgba(119,208,105,0.15)"/><circle cx="40" cy="89" r="3" fill="rgba(119,208,105,0.2)"/><circle cx="3" cy="23" r="3" fill="rgba(119,208,105,0.12)"/></svg>
-              <svg className="m-svg m-svg-4" viewBox="0 0 70 70" fill="none"><circle cx="35" cy="35" r="31" stroke="rgba(119,208,105,0.06)" strokeWidth="1" strokeDasharray="5 5"/><circle cx="35" cy="35" r="10" stroke="rgba(119,208,105,0.16)" strokeWidth="1.5"/><circle cx="35" cy="4" r="3.5" fill="rgba(92,184,69,0.15)"/><circle cx="66" cy="35" r="3.5" fill="rgba(92,184,69,0.10)"/><circle cx="35" cy="66" r="3.5" fill="rgba(92,184,69,0.12)"/><line x1="35" y1="7" x2="35" y2="25" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><line x1="63" y1="35" x2="45" y2="35" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/></svg>
-              <svg className="m-svg m-svg-7" viewBox="0 0 70 80" fill="none"><polygon points="35,3 67,20 67,60 35,77 3,60 3,20" stroke="rgba(119,208,105,0.16)" strokeWidth="1.4"/><circle cx="35" cy="40" r="14" stroke="rgba(119,208,105,0.10)" strokeWidth="1"/><circle cx="35" cy="40" r="4" fill="rgba(92,184,69,0.18)"/></svg>
-              <svg className="m-svg m-svg-9" viewBox="0 0 130 50" fill="none"><circle cx="12" cy="25" r="9" stroke="rgba(119,208,105,0.15)" strokeWidth="1.3"/><line x1="21" y1="22" x2="37" y2="14" stroke="rgba(119,208,105,0.12)" strokeWidth="1.2"/><line x1="21" y1="28" x2="37" y2="36" stroke="rgba(119,208,105,0.12)" strokeWidth="1.2"/><circle cx="44" cy="11" r="7" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/><circle cx="44" cy="39" r="7" stroke="rgba(119,208,105,0.12)" strokeWidth="1"/><line x1="51" y1="11" x2="73" y2="25" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><line x1="51" y1="39" x2="73" y2="25" stroke="rgba(119,208,105,0.1)" strokeWidth="1"/><circle cx="79" cy="25" r="9" stroke="rgba(119,208,105,0.15)" strokeWidth="1.3"/></svg>
-              <div className="m-dot m-dot-1"/><div className="m-dot m-dot-2"/><div className="m-dot m-dot-3"/>
-              <div className="m-dot m-dot-4"/><div className="m-dot m-dot-5"/>
-            </div>
-            <div className="about-carbon-field" aria-hidden="true">
-              {Array.from({ length: 15 }).map((_, index) => (
-                <span key={index}></span>
-              ))}
-            </div>
             <span className="about-pill">Orgullosamente Queretanos</span>
             <h1>
               Mexicana de <span>Textura y Sabor</span>
