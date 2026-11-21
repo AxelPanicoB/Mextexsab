@@ -9,7 +9,7 @@ import LANDINGS from './landings.js';
 export const SITE = 'https://www.metexsab.com';
 
 // Imagen de la vista previa por defecto (1200×630)
-const DEFAULT_IMAGE = `${SITE}/img/og-image.png`;
+const DEFAULT_IMAGE = `${SITE}/img/og-marca.png`;
 
 export const PAGES = {
   '/': {
